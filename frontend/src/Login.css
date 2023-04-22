@@ -1,0 +1,51 @@
+.LoginForm{
+    width: 25vw;
+    /* 上右下左 */
+    margin:0% 37.5% 0% 34%;
+    padding: 2vw;
+    border-style: solid;
+    border-width: 1%;
+    border-color: rgb(0, 0, 0);
+    border-radius: 2vw
+}
+
+.webName {
+    margin:3% 41% 0% 37%;
+}
+
+.LoginFormTitle {
+    font-size: 4vw;
+    width: 20vw;
+    /* 上右下左 */
+    /* margin:3% 41% 0% 37%; */
+    padding: 2vw;
+    text-align: center;
+}
+
+.account input{
+    padding: 0vw 0vw 0vw 0vw;
+    width: 24vw;
+}
+
+.password input{
+    padding: 0vw 0vw 0vw 0vw;
+    width: 24vw;
+}
+
+.account label{
+    font-size: 0.5vw;
+}
+
+.password label{
+    font-size: 0.5vw;
+}
+
+.createAccountBtn{
+    width: 24vw;
+    margin: 5% 0% 0%;
+}
+
+.loginBtn{
+    width: 24vw;
+    margin: 5% 0% 0%;
+}
