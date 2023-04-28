@@ -2,26 +2,197 @@ import ReactDOM from 'react-dom/client';
 import './Login.css';
 import React from 'react';
 import Blog from './Blog';
+import {  Input, Tabs, Form, Checkbox, Button  } from 'antd';
+import userIcon from './icon/userIcon.png'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const onFinish = (values) => {
+  console.log('Success:', values);
+};
+const onFinishFailed = (errorInfo) => {
+  console.log('Failed:', errorInfo);
+};
+
+function SignIn() {
+  return (
+    <div>
+      <Form
+    name="basic"
+    labelCol={{
+      span: 8,
+    }}
+    wrapperCol={{
+      span: 16,
+    }}
+    style={{
+      maxWidth: 600,
+    }}
+    initialValues={{
+      remember: true,
+    }}
+    onFinish={onFinish}
+    onFinishFailed={onFinishFailed}
+    autoComplete="off"
+  >
+    <Form.Item
+      label="account"
+      name="account"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your account!',
+        },
+      ]}
+    >
+      <Input />
+    </Form.Item>
+
+    <Form.Item
+      label="Password"
+      name="password"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your password!',
+        },
+      ]}
+    >
+      <Input.Password />
+    </Form.Item>
+
+    <Form.Item
+      name="remember"
+      valuePropName="checked"
+      wrapperCol={{
+        offset: 8,
+        span: 16,
+      }}
+    >
+      <Checkbox>Remember me</Checkbox>
+    </Form.Item>
+
+    <Form.Item>
+      <Button type="primary" htmlType="submit" className="submitBtn">
+        Submit
+      </Button>
+    </Form.Item>
+  </Form>
+    </div>
+  );
+}
+
+function SignUp() {
+  return (
+    <div>
+      <Form
+    name="basic"
+    labelCol={{
+      span: 8,
+    }}
+    wrapperCol={{
+      span: 16,
+    }}
+    style={{
+      maxWidth: 600,
+    }}
+    initialValues={{
+      remember: true,
+    }}
+    onFinish={onFinish}
+    onFinishFailed={onFinishFailed}
+    autoComplete="off"
+  >
+    <Form.Item
+      label="account"
+      name="account"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your account!',
+        },
+      ]}
+    >
+      <Input />
+    </Form.Item>
+
+    <Form.Item
+      label="UserName"
+      name="userName"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your UserName!',
+        },
+      ]}
+    >
+      <Input />
+    </Form.Item>
+
+    <Form.Item
+      label="Password"
+      name="password"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your password!',
+        },
+      ]}
+    >
+      <Input.Password />
+    </Form.Item>
+
+    <Form.Item
+      label="PasswordCheck"
+      name="PasswordCheck"
+      rules={[
+        {
+          required: true,
+          message: 'Please input your PasswordCheck!',
+        },
+      ]}
+    >
+      <Input.Password />
+    </Form.Item>
+
+    <Form.Item
+      wrapperCol={{
+        offset: 8,
+        span: 16,
+      }}
+    >
+      <Button type="primary" htmlType="submit" className="submitBtn">
+        Submit
+      </Button>
+    </Form.Item>
+  </Form>
+    </div>
+  );
+}
 
 export default function LoginPage() {
   return (
     <div calss="container">
-      <div className="webName">
-          <label>My Blog</label><br/>
-      </div>
       <div className="LoginForm">
-        <div className="account">
-            <label for="account">account</label><br></br>
-            <input  type="text" id="account" name="name" autoFocus />
+        <div className="webName">
+            <label>My Blog</label><br/>
         </div>
-        <div className="password">
-            <label for="password">password</label><br></br>
-            <input  type="text" id="password" name="name" autoFocus />
-        </div>
-        <input className="createAccountBtn" type="button" value="建立帳戶" /><br/>
-        <input className="loginBtn" type="button" value="登入" onClick={login} />
+        <Tabs
+          defaultActiveKey="1"
+          centered
+          items={[
+               {
+                label: `sign in`,
+                key: 1,
+                children: <SignIn />,
+              },
+              {
+                label: `sign up`,
+                key: 2,
+                children: <SignUp />,
+              }
+          ]}
+        />
       </div>
     </div>
   );
@@ -35,5 +206,3 @@ function login() {
     </React.StrictMode>
   )
 }
-
-
