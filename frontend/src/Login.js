@@ -19,15 +19,7 @@ function SignIn() {
     <div>
       <Form
     name="basic"
-    labelCol={{
-      span: 8,
-    }}
-    wrapperCol={{
-      span: 16,
-    }}
-    style={{
-      maxWidth: 600,
-    }}
+    layout='vertical'
     initialValues={{
       remember: true,
     }}
@@ -64,16 +56,12 @@ function SignIn() {
     <Form.Item
       name="remember"
       valuePropName="checked"
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
     >
       <Checkbox>Remember me</Checkbox>
     </Form.Item>
 
     <Form.Item>
-      <Button type="primary" htmlType="submit" className="submitBtn">
+      <Button type="primary" htmlType="submit" className="submitBtn" block>
         Submit
       </Button>
     </Form.Item>
@@ -87,12 +75,6 @@ function SignUp() {
     <div>
       <Form
     name="basic"
-    labelCol={{
-      span: 8,
-    }}
-    wrapperCol={{
-      span: 16,
-    }}
     style={{
       maxWidth: 600,
     }}
@@ -104,7 +86,7 @@ function SignUp() {
     autoComplete="off"
   >
     <Form.Item
-      label="account"
+      label="Password"
       name="account"
       rules={[
         {
@@ -113,11 +95,10 @@ function SignUp() {
         },
       ]}
     >
-      <Input />
+      <Input size="large" placeholder="account" />
     </Form.Item>
 
     <Form.Item
-      label="UserName"
       name="userName"
       rules={[
         {
@@ -130,7 +111,6 @@ function SignUp() {
     </Form.Item>
 
     <Form.Item
-      label="Password"
       name="password"
       rules={[
         {
@@ -143,7 +123,6 @@ function SignUp() {
     </Form.Item>
 
     <Form.Item
-      label="PasswordCheck"
       name="PasswordCheck"
       rules={[
         {
