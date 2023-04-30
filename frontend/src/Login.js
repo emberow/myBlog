@@ -28,12 +28,12 @@ function SignIn() {
     autoComplete="off"
   >
     <Form.Item
-      label="account"
-      name="account"
+      label="UserName"
+      name="userName"
       rules={[
         {
           required: true,
-          message: 'Please input your account!',
+          message: 'Please input your UserName!',
         },
       ]}
     >
@@ -46,7 +46,7 @@ function SignIn() {
       rules={[
         {
           required: true,
-          message: 'Please input your password!',
+          message: 'Please input your Password!',
         },
       ]}
     >
@@ -81,24 +81,14 @@ function SignUp() {
     initialValues={{
       remember: true,
     }}
+    layout='vertical'
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
     autoComplete="off"
   >
-    <Form.Item
-      label="Password"
-      name="account"
-      rules={[
-        {
-          required: true,
-          message: 'Please input your account!',
-        },
-      ]}
-    >
-      <Input size="large" placeholder="account" />
-    </Form.Item>
 
     <Form.Item
+      label="UserName"
       name="userName"
       rules={[
         {
@@ -111,11 +101,12 @@ function SignUp() {
     </Form.Item>
 
     <Form.Item
+      label="Password"
       name="password"
       rules={[
         {
           required: true,
-          message: 'Please input your password!',
+          message: 'Please input your Password!',
         },
       ]}
     >
@@ -123,6 +114,7 @@ function SignUp() {
     </Form.Item>
 
     <Form.Item
+      label="PasswordCheck"
       name="PasswordCheck"
       rules={[
         {
