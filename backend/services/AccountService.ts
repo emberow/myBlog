@@ -1,23 +1,13 @@
-import { getRepository, getConnection } from 'typeorm';
-import { account } from '../entity/Account';
+import { CommonError } from '../middleware/errorHandler';
+import * as AccountModel from '../model/AccountModel';
 
-
-
-export const getAllAccount = async () => {
-  const postRepository = getRepository(account);
-  const accounts: account[] = await postRepository.find();
-  console.log(accounts)
-  return accounts;
-};
-
-export const addAccount = async (name:string, password:string) => {
-  const accountRepository = getRepository(account);
-  await accountRepository.save({name, password});
-  return true;
-};
-
-export const deleteAccount = async (name:string, password:string) => {
-  const accountRepository = getRepository(account);
-  await accountRepository.delete({name, password});
-  return true;
+export const addAccount = async (userName: string, password: string) => {
+  if (!userName) {
+    throw new CommonError("INVALID_USERNAME");
+  }
+  if (!password) {
+    throw new CommonError("INVALID_PASSWORD");
+  }
+  
+  return AccountModel.addAccount();
 };

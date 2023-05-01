@@ -1,12 +1,10 @@
-import { IRouteItem } from '../utils/type/route';
 import * as AccountController from '../controller/AccountController';
+import { Router } from 'express';
+import * as express from 'express';
 
-export const AccountRoutes: IRouteItem[] = [
-    {
-        path: '',
-        method: 'get',
-        middlewares: [
-            AccountController.getAccount,
-        ],
-    }
-]
+const AccountRoutes: Router = express.Router();
+
+AccountRoutes.route('/account')
+    .post(AccountController.addAccount);
+
+export default AccountRoutes;

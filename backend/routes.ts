@@ -1,7 +1,8 @@
-import { AccountRoutes } from './routes/AccountRoute';
-import { IRouteItem } from './utils/type/route';
+import { Router } from 'express';
+import * as express from 'express';
+import AccountRoutes from './routes/AccountRoute';
 
-export const AppRoutes: IRouteItem[] = [
-  ...AccountRoutes,
-];
-  
+const router: Router = express.Router();
+router.use('/', AccountRoutes);
+
+export default router;

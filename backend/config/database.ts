@@ -1,13 +1,11 @@
-import { ConnectionOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
 
-
-
-const dbconfig: ConnectionOptions = {
+const PostgresDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
-  port: 5432,
-  username: "postgres",
-  password: "32865417",
+  host: process.env.DB_HOST,
+  port: Number(process.env.DB_PORT),
+  username: process.env.DB_USER_NAME,
+  password: process.env.DB_PASSWORD,
   database: "blog",
   
   migrationsRun: false,
@@ -17,6 +15,6 @@ const dbconfig: ConnectionOptions = {
   entities: [
     "out/entity/*.js"
   ],
-};
+})
 
-export default dbconfig;
+export default PostgresDataSource;

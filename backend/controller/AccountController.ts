@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import {getAllAccount, addAccount, deleteAccount} from '../services/AccountService';
+import * as AccountService from '../services/AccountService';
 
-export const getAccount = async (req: Request, res: Response, next: NextFunction) => {
+export const addAccount = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.send("test");
+    const userName = req.body.userName;
+    const password = req.body.password;
+    res.send(await AccountService.addAccount(userName, password));
   } catch (err) {
     next(err);
   }

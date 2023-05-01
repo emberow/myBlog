@@ -1,14 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
-import logger from '../utils/logger/logger';
 
 const errorHandler = (err: Error, req: Request, res: Response, next: NextFunction) => {
+  let statusCode: number = null;
   if (err instanceof UserError) {
-    res.status(401).json({
+    statusCode = 401;
+  } else if (err instanceof LoginError) {
+    statusCode = 403;
+  } else if (err instanceof CommonError) {
+    statusCode = 400;
+  }
+
+  if (statusCode) {
+    res.status(statusCode).json({
       message: err.message,
     });
-  } else if (err instanceof CommonError) {
-    logger.error(`COMMON - ${err.message}`);
-    res.status(400).json(err.message);
   } else {
     res.status(500).json({message: 'SYSTEM_ERROR'});
   }
@@ -16,16 +21,18 @@ const errorHandler = (err: Error, req: Request, res: Response, next: NextFunctio
 
 export default errorHandler;
 
-export class UserError extends Error {
+export class ErrorObject extends Error {
   constructor(message) {
     super();
     this.message = message;
   }
 }
 
-export class CommonError extends Error {
-  constructor(message) {
-    super();
-    this.message = message;
-  }
+export class UserError extends ErrorObject {
+}
+
+export class LoginError extends ErrorObject {
+}
+
+export class CommonError extends ErrorObject {
 }
