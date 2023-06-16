@@ -1,6 +1,9 @@
 import PostgresDataSource from "../config/database";
-import { account } from "../entity/Account";
+import { Account } from "../entity/Account";
+import { Account as Iaccount } from '../utils/interfaces/Account';
 
-export const addAccount = async () => {
-    return "test";
+export const addAccount = async (account: Iaccount) => {
+    return await PostgresDataSource
+        .getRepository(Account)
+        .save(account);
 }

@@ -9,7 +9,7 @@ const PostgresDataSource = new DataSource({
   database: "blog",
   
   migrationsRun: false,
-  synchronize: false,
+  synchronize: true,
   logging: ['error'],
   maxQueryExecutionTime: 5000,
   entities: [

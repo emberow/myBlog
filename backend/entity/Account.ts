@@ -1,12 +1,18 @@
 
-import { EntitySchema, Entity, PrimaryGeneratedColumn, Column, PrimaryColumn } from 'typeorm';
+import { EntitySchema, Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, Timestamp } from 'typeorm';
 
 @Entity()
-export class account {
+export class Account {
 
-  @PrimaryColumn()
-  public name: string;
+  @PrimaryGeneratedColumn('increment')
+  public id: number;
+
+  @Column({ unique: true })
+  public userName: string;
 
   @Column()
   public password: string;
+
+  @Column({ type: 'timestamptz' , default: 'NOW()'})
+  public updateTime: Date;
 }
