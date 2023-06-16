@@ -4,8 +4,7 @@ import { httpHandler } from '../middleware/httpHandler';
 
 export const addAccount = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const userName = req.body.userName;
-    const password = req.body.password;
+    const { userName, password } = req.body;
     if (!userName) {
       httpHandler(res, 400, null, 'INVALID_USERNAME');
     }
