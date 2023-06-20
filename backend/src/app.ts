@@ -7,7 +7,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import * as swaggerJSDoc from 'swagger-jsdoc';
 import swaggerConfig from './config/swagger';
 import DataSource from './config/database';
-import router from './routes';
+import router from '../routes';
 
 (async () => {
     await DataSource.initialize();

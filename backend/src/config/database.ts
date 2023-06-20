@@ -1,4 +1,10 @@
 import { DataSource } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import 'dotenv/config';
+
+const resolveFilePath = (): string => {
+  return process.env.NODE_ENV === 'production' ? './out/src/entity/*.js' : './*src/entity/*.ts';
+};
 
 const PostgresDataSource = new DataSource({
   type: "postgres",
@@ -7,14 +13,12 @@ const PostgresDataSource = new DataSource({
   username: process.env.DB_USER_NAME,
   password: process.env.DB_PASSWORD,
   database: "blog",
-  
+  namingStrategy: new SnakeNamingStrategy(),
   migrationsRun: false,
   synchronize: true,
   logging: ['error'],
   maxQueryExecutionTime: 5000,
-  entities: [
-    "out/entity/*.js"
-  ],
+  entities: [resolveFilePath()],
 })
 
 export default PostgresDataSource;
