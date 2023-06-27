@@ -3,7 +3,6 @@ import './Login.css';
 import React from 'react';
 import Blog from './Blog';
 import {  Input, Tabs, Form, Checkbox, Button  } from 'antd';
-import userIcon from './icon/userIcon.png'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
