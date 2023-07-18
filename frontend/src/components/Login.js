@@ -3,13 +3,26 @@ import './Login.css';
 import React from 'react';
 import Blog from './Blog';
 import {  Input, Tabs, Form, Checkbox, Button  } from 'antd';
+import { PostRequest, GetRequest } from '../utils/request';
+import 'dotenv/config';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const onFinish = (values) => {
+const onFinish = async (values) => {
+  console.log('REACT_APP_BACKEND_URL', process.env.REACT_APP_BACKEND_URL);
+  console.log('REACT_APP_PORT', process.env.REACT_APP_PORT);
+  const a = await PostRequest({
+    url: "/api/login",
+    params: {
+      "userName": "emberow",
+      "password": "123456"
+    }
+  })
   console.log('Success:', values);
 };
 const onFinishFailed = (errorInfo) => {
+  console.log('REACT_APP_BACKEND_URL', process.env.REACT_APP_BACKEND_URL);
+  console.log('REACT_APP_PORT', process.env.REACT_APP_PORT);
   console.log('Failed:', errorInfo);
 };
 
