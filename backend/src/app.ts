@@ -12,10 +12,15 @@ import router from '../routes';
 (async () => {
     await DataSource.initialize();
     const app = express();
+    const corsOptions = {
+        origin: 'http://localhost:8000',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
+        optionsSuccessStatus: 200,
+    };
     app.use(
-        cors({
-            origin: ['http://localhost'],
-        }),
+        cors(corsOptions),
     );
 
     app.use(bodyParser.json());
