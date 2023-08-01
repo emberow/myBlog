@@ -3,15 +3,15 @@ import './Login.css';
 import React from 'react';
 import Blog from './Blog';
 import {  Input, Tabs, Form, Checkbox, Button  } from 'antd';
-import 'dotenv/config';
 import * as account from '../api/account';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const onFinish = async (values) => {
-  console.log('Success:', values);
-  account.userLoginCheck(values);
+  const token = await account.userLoginCheck(values);
+  localStorage.setItem('authorization', token);
 };
+
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };

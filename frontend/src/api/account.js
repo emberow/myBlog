@@ -1,11 +1,8 @@
 import { PostRequest } from "../utils/request";
 
-export const userLoginCheck = async (userName, password) => {
-  return await PostRequest({
+export const userLoginCheck = async (values) => {
+  return (await PostRequest({
     url: "/api/login",
-    data: {
-      userName,
-      password
-    }
-  })
+    data: values,
+  })).data.data;
 }

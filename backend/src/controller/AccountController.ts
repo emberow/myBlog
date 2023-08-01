@@ -12,14 +12,15 @@ export const verifyAccount = async (req: Request, res: Response, next: NextFunct
       httpHandler(res, 400, null, 'INVALID_PASSWORD');
     }
 
-    const isExist = await AccountService.verifyAccount(userName, password);
+    const jwtToken = await AccountService.verifyAccount(userName, password);
     
-    if (!isExist) {
+    if (!jwtToken) {
       httpHandler(res, 401, null, 'LOGIN_ERROR');
     } else {
-      httpHandler(res, 200, isExist, null);
+      httpHandler(res, 200, jwtToken, null);
     }
   } catch (err) {
+    console.log(err);
     httpHandler(res, 500, null, 'Internal Server Error');
   }
 };
@@ -37,6 +38,7 @@ export const addAccount = async (req: Request, res: Response, next: NextFunction
     const data = await AccountService.addAccount(userName, password);
     httpHandler(res, 200, data, null);
   } catch (err) {
+    console.log(err);
     httpHandler(res, 500, null, 'Internal Server Error');
   }
 };
@@ -61,6 +63,7 @@ export const changePassword = async (req: Request, res: Response, next: NextFunc
       httpHandler(res, 401, data, 'CHANGE_PASSWORD_ERROR');
     }
   } catch (err) {
+    console.log(err);
     httpHandler(res, 500, null, 'Internal Server Error');
   }
 };
