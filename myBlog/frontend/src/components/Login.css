@@ -1,0 +1,67 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginForm{
+    width: 25vw;
+    height: auto;
+    /* 上右下左 */
+    margin: 50vh auto 0 auto;
+    transform: translateY(-25vh);
+    padding: 2vw 2vw 0vw 2vw;
+    border-style: solid;
+    border-width: 1%;
+    border-color: rgb(0, 0, 0);
+    border-radius: 2vw
+}
+
+.webName {
+    margin:0% auto 0% auto;
+    text-align:center
+}
+
+.LoginFormTitle {
+    font-size: 4vw;
+    width: 20vw;
+    /* 上右下左 */
+    /* margin:3% 41% 0% 37%; */
+    padding: 2vw;
+    text-align: center;
+}
+
+.account input{
+    margin: 0 0.5vw 0 0;
+    width: 24vw;
+}
+
+.password input{
+    margin: 0 0.5vw 0 0;
+    width: 24vw;
+}
+
+.account label{
+    font-size: 0.5vw;
+}
+
+.password label{
+    font-size: 0.5vw;
+}
+
+.createAccountBtn{
+    width: 24vw;
+    margin: 5% 0% 0%;
+}
+
+.loginBtn{
+    width: 24vw;
+    margin: 2vh 0% 0%;
+}
+
+/* .submitBtn{
+    width: 80px;
+    justify-content: center;
+} */
