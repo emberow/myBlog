@@ -6,3 +6,10 @@ export const userLoginCheck = async (values) => {
     data: values,
   })).data.data;
 }
+
+export const userSingUp = async (values) => {
+  return (await PostRequest({
+    url: "/api/account",
+    data: values,
+  })).data.data;
+}

@@ -16,7 +16,18 @@ const signIn = async (values) => {
   return;
 };
 
-const signInFail = (errorInfo) => {
+const signUp = async (values) => {
+  try {
+    await account.userSingUp(values);
+    window.alert('Registration successful');
+    window.location.href = "/";
+  } catch (err) {
+    window.alert('sign up failed');
+  }
+  return;
+};
+
+const apiFail = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 
@@ -30,7 +41,7 @@ function SignIn() {
       remember: true,
     }}
     onFinish={signIn}
-    onFinishFailed={signInFail}
+    onFinishFailed={apiFail}
     autoComplete="off"
   >
     <Form.Item
@@ -88,8 +99,8 @@ function SignUp() {
       remember: true,
     }}
     layout='vertical'
-    onFinish={signIn}
-    onFinishFailed={signInFail}
+    onFinish={signUp}
+    onFinishFailed={apiFail}
     autoComplete="off"
   >
 
@@ -132,13 +143,8 @@ function SignUp() {
       <Input.Password />
     </Form.Item>
 
-    <Form.Item
-      wrapperCol={{
-        offset: 8,
-        span: 16,
-      }}
-    >
-      <Button type="primary" htmlType="submit" className="submitBtn">
+    <Form.Item>
+      <Button type="primary" htmlType="submit" className="submitBtn" block>
         Submit
       </Button>
     </Form.Item>
