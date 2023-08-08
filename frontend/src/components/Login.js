@@ -1,18 +1,22 @@
-import ReactDOM from 'react-dom/client';
 import './Login.css';
 import React from 'react';
 import Blog from './Blog';
 import {  Input, Tabs, Form, Checkbox, Button  } from 'antd';
 import * as account from '../api/account';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-
-const onFinish = async (values) => {
-  const token = await account.userLoginCheck(values);
-  localStorage.setItem('authorization', token);
+const signIn = async (values) => {
+  let token;
+  try {
+    token = await account.userLoginCheck(values);
+    localStorage.setItem('accessToken', token);
+    window.location.href = "/";
+  } catch (err) {
+    window.alert('login failed');
+  }
+  return;
 };
 
-const onFinishFailed = (errorInfo) => {
+const signInFail = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 
@@ -25,8 +29,8 @@ function SignIn() {
     initialValues={{
       remember: true,
     }}
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
+    onFinish={signIn}
+    onFinishFailed={signInFail}
     autoComplete="off"
   >
     <Form.Item
@@ -84,8 +88,8 @@ function SignUp() {
       remember: true,
     }}
     layout='vertical'
-    onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
+    onFinish={signIn}
+    onFinishFailed={signInFail}
     autoComplete="off"
   >
 
@@ -173,7 +177,7 @@ export default function LoginPage() {
 
 
 function login() {
-  return root.render(
+  return (
     <React.StrictMode>
       <Blog />
     </React.StrictMode>

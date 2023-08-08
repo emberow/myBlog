@@ -1,8 +1,4 @@
-import ReactDOM from 'react-dom/client';
 import React from 'react';
-import LoginPage from './Login';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
 export default function Blog() {
     return (
@@ -14,9 +10,7 @@ export default function Blog() {
 }
 
 function logOut() {
-    return root.render(
-        <React.StrictMode>
-            <LoginPage />
-        </React.StrictMode>
-    )
+    localStorage.removeItem('accessToken');
+    window.location.href = "/login";
+    return;
 }
