@@ -1,37 +1,27 @@
 import './Login.css';
 import React from 'react';
-import Blog from './Blog';
-import {  Input, Tabs, Form, Checkbox, Button  } from 'antd';
+import {  Input, Tabs, Form, Checkbox, Button, message } from 'antd';
 import * as account from '../api/account';
 
-const signIn = async (values) => {
-  let token;
-  try {
-    token = await account.userLoginCheck(values);
-    localStorage.setItem('accessToken', token);
-    window.location.href = "/";
-  } catch (err) {
-    window.alert('login failed');
-  }
-  return;
-};
-
-const signUp = async (values) => {
-  try {
-    await account.userSingUp(values);
-    window.alert('Registration successful');
-    window.location.href = "/";
-  } catch (err) {
-    window.alert('sign up failed');
-  }
-  return;
-};
 
 const apiFail = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 
 function SignIn() {
+  const signIn = async (values) => {
+    let token;
+    try {
+      token = await account.userLoginCheck(values);
+      localStorage.setItem('accessToken', token);
+      await message.success('login successed', 1);
+      window.location.href = "/";
+    } catch (err) {
+      message.error('login failed', 3);
+    }
+    return;
+  };
+
   return (
     <div>
       <Form
@@ -88,6 +78,21 @@ function SignIn() {
 }
 
 function SignUp() {
+  const signUp = async (values) => {
+    try {
+      if (values.passwordCheck === values.password) {
+        await account.userSingUp(values);
+        await message.success('registration successful', 1);
+        window.location.href = "/";
+      } else {
+        message.error('password check not match', 3);
+      }
+    } catch (err) {
+      message.error('sign up failed', 3);
+    }
+    return;
+  };
+
   return (
     <div>
       <Form
@@ -132,7 +137,7 @@ function SignUp() {
 
     <Form.Item
       label="PasswordCheck"
-      name="PasswordCheck"
+      name="passwordCheck"
       rules={[
         {
           required: true,
@@ -179,13 +184,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
-
-
-function login() {
-  return (
-    <React.StrictMode>
-      <Blog />
-    </React.StrictMode>
-  )
 }
