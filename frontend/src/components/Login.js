@@ -15,6 +15,11 @@ function SignIn() {
       token = await account.userLoginCheck(values);
       localStorage.setItem('accessToken', token);
       await message.success('login successed', 1);
+      if (values.remember === true) {
+        localStorage.setItem('accessToken', token);
+      } else {
+        localStorage.removeItem('accessToken');
+      }
       window.location.href = "/";
     } catch (err) {
       message.error('login failed', 3);
@@ -64,7 +69,7 @@ function SignIn() {
       name="remember"
       valuePropName="checked"
     >
-      <Checkbox>Remember me</Checkbox>
+      <Checkbox>keep login</Checkbox>
     </Form.Item>
 
     <Form.Item>

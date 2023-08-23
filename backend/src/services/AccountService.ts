@@ -5,7 +5,7 @@ import { Account } from '../utils/interfaces/Account';
 export const verifyAccount = async (userName: string, password: string) => {
   // if account and password correct, then sign jwt token.
   if (await AccountModel.verifyAccount(userName, password)) {
-    return await signJwt({userName, password});
+    return await signJwt({ userName });
   } else {
     return null;
   }
