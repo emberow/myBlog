@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Layout, Menu, theme } from "antd";
+import { Input, Layout, Menu, theme, Col, Row, Dropdown, Button } from "antd";
 import {
   DesktopOutlined,
   FileOutlined,
@@ -45,18 +45,18 @@ export default function Blog() {
   } = theme.useToken();
   return (
     <Layout>
-      <Header style={{  height: "8vh", display: "flex", alignItems: "center", backgroundColor: "white" }}>
-        <div className="demo-logo" />
-        <Menu
-          mode="horizontal"
-          items={[{
-            "key": "1",
-            "label": "userinfo"
-          }, {
-            "key": "2",
-            "label": "login"
-          }]}
-        />
+      <Header style={{ backgroundColor: "white" }}>
+        <Row style={{  height: "8vh" }}>
+          <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}></Col>
+          <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
+            <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} />
+          </Col>
+          <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Dropdown menu={{ items }} placement="bottomLeft" arrow>
+              <Button>menu</Button>
+            </Dropdown>
+          </Col>
+        </Row>
       </Header>
       <Content>
         <Layout style={{ height: "92vh" }}>
@@ -66,7 +66,6 @@ export default function Blog() {
             collapsed={collapsed}
             onCollapse={(value) => setCollapsed(value)}
           >
-            <div className="demo-logo-vertical" />
             <Menu
               defaultSelectedKeys={["1"]}
               mode="inline"
