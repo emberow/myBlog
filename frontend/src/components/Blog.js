@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Input, Layout, Menu, theme, Col, Row, Dropdown, Button } from "antd";
+import { Input, Layout, Menu, theme, Col, Row, Dropdown, Button, Typography } from "antd";
 import {
   DesktopOutlined,
   FileOutlined,
@@ -7,8 +7,10 @@ import {
   TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import "@fontsource/caveat";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
+const { Text } = Typography;
 
 const onSearch = () => {
   return;
@@ -21,6 +23,17 @@ function getItem(label, key, icon, children) {
     children,
     label,
   };
+}
+
+function logOut() {
+  localStorage.removeItem("accessToken");
+  window.location.href = "/login";
+  return;
+}
+
+function home() {
+  window.location.href = "/";
+  return;
 }
 
 const items = [
@@ -47,11 +60,14 @@ export default function Blog() {
     <Layout>
       <Header style={{ backgroundColor: "white" }}>
         <Row style={{  height: "8vh" }}>
-          <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}></Col>
+          <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Text style={{ fontFamily: "Caveat", fontSize: "5vh", cursor: "pointer"}} onClick={home}>Blog</Text>
+          </Col>
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
             <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} />
           </Col>
-          <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Col span={3} />
+          <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Dropdown menu={{ items }} placement="bottomLeft" arrow>
               <Button>menu</Button>
             </Dropdown>
@@ -76,16 +92,4 @@ export default function Blog() {
       </Content>
     </Layout>
   );
-  // return (
-  //     <div calss="container">
-  //         <label>文章列表</label><br></br>
-  //         <input className="loginOutBtn" type="button" value="登出" onClick={logOut}/>
-  //     </div>
-  // );
-}
-
-function logOut() {
-  localStorage.removeItem("accessToken");
-  window.location.href = "/login";
-  return;
 }
