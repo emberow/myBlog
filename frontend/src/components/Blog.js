@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Input, Layout, Menu, theme, Col, Row, Dropdown, Button, Typography } from "antd";
+import { Input, Layout, Menu, Col, Row, Dropdown, Button, Typography } from "antd";
 import {
   DesktopOutlined,
-  FileOutlined,
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
@@ -25,18 +24,20 @@ function getItem(label, key, icon, children) {
   };
 }
 
+function linkToMyArticle() {
+  window.location.href = "/login";
+}
+
 function logOut() {
   localStorage.removeItem("accessToken");
   window.location.href = "/login";
-  return;
 }
 
 function home() {
   window.location.href = "/";
-  return;
 }
 
-const items = [
+const sideBarItems = [
   getItem("Option 1", "1", <PieChartOutlined />),
   getItem("Option 2", "2", <DesktopOutlined />),
   getItem("User", "sub1", <UserOutlined />, [
@@ -48,14 +49,29 @@ const items = [
     getItem("Team 1", "6"),
     getItem("Team 2", "8"),
   ]),
-  getItem("Files", "9", <FileOutlined />),
+];
+
+const items = [
+  {
+    key: '1',
+    label: (
+      <Text onClick={linkToMyArticle}>
+        <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> my aritcles
+      </Text>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <Text onClick={logOut}>
+        <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
+      </Text>
+    ),
+  },
 ];
 
 export default function Blog() {
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   return (
     <Layout>
       <Header style={{ backgroundColor: "white" }}>
@@ -85,7 +101,7 @@ export default function Blog() {
             <Menu
               defaultSelectedKeys={["1"]}
               mode="inline"
-              items={items}
+              items={sideBarItems}
             />
           </Sider>
         </Layout>

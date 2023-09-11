@@ -174,7 +174,7 @@ export default function LoginPage() {
           defaultActiveKey="1"
           centered
           items={[
-               {
+              {
                 label: `sign in`,
                 key: 1,
                 children: <SignIn />,
