@@ -1,31 +1,18 @@
-import React, { useState } from "react";
-import { Input, Layout, Menu, Col, Row, Dropdown, Button, Typography } from "antd";
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import React from "react";
+import { Input, Layout, Col, Row, Dropdown, Button, Typography } from "antd";
 import "@fontsource/caveat";
+import MyArticles from './MyArticles';
+import { Route } from "react-router-dom";
 
-const { Header, Content, Sider } = Layout;
+const { Header, Content } = Layout;
 const { Text } = Typography;
 
 const onSearch = () => {
   return;
 }
 
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-
 function linkToMyArticle() {
-  window.location.href = "/login";
+  window.location.href = "/myarticles";
 }
 
 function logOut() {
@@ -36,20 +23,6 @@ function logOut() {
 function home() {
   window.location.href = "/";
 }
-
-const sideBarItems = [
-  getItem("Option 1", "1", <PieChartOutlined />),
-  getItem("Option 2", "2", <DesktopOutlined />),
-  getItem("User", "sub1", <UserOutlined />, [
-    getItem("Tom", "3"),
-    getItem("Bill", "4"),
-    getItem("Alex", "5"),
-  ]),
-  getItem("Team", "sub2", <TeamOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
-  ]),
-];
 
 const items = [
   {
@@ -71,7 +44,6 @@ const items = [
 ];
 
 export default function Blog() {
-  const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout>
       <Header style={{ backgroundColor: "white" }}>
@@ -91,20 +63,7 @@ export default function Blog() {
         </Row>
       </Header>
       <Content>
-        <Layout style={{ height: "92vh" }}>
-          <Sider
-            theme="light"
-            collapsible
-            collapsed={collapsed}
-            onCollapse={(value) => setCollapsed(value)}
-          >
-            <Menu
-              defaultSelectedKeys={["1"]}
-              mode="inline"
-              items={sideBarItems}
-            />
-          </Sider>
-        </Layout>
+        <Route path="/myarticles" component={MyArticles} />
       </Content>
     </Layout>
   );
