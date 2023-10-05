@@ -12,7 +12,7 @@ const PostgresDataSource = new DataSource({
   port: Number(process.env.DB_PORT),
   username: process.env.DB_USER_NAME,
   password: process.env.DB_PASSWORD,
-  database: "blog",
+  database: process.env.DB_DATABASE,
   namingStrategy: new SnakeNamingStrategy(),
   migrationsRun: false,
   synchronize: true,
