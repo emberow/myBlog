@@ -8,6 +8,7 @@ import * as swaggerJSDoc from 'swagger-jsdoc';
 import swaggerConfig from './config/swagger';
 import DataSource from './config/database';
 import router from '../routes';
+import { errorHandler } from './middleware/errors';
 
 (async () => {
     await DataSource.initialize();
@@ -27,6 +28,7 @@ import router from '../routes';
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use('/api', router);
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(swaggerConfig)));
+    app.use(errorHandler);
 
     app.listen(process.env.PORT, () => {
         console.log(`Express server listening on port ${process.env.PORT}`);

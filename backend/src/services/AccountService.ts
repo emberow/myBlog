@@ -1,17 +1,32 @@
 import { signJwt } from '../utils/jwt/jwt';
 import * as AccountModel from '../model/AccountModel';
 import { Account } from '../utils/interfaces/Account';
+import { CustomError } from 'src/middleware/errors';
 
 export const verifyAccount = async (userName: string, password: string) => {
+  if (!userName) {
+    throw new CustomError(400, 'INVALID_USERNAME');
+  }
+  if (!password) {
+    throw new CustomError(400, 'INVALID_PASSWORD');
+  }
+
   // if account and password correct, then sign jwt token.
   if (await AccountModel.verifyAccount(userName, password)) {
     return await signJwt({ userName });
   } else {
-    return null;
+    throw new CustomError(401, 'INVALID_USERNAME_OR_PASSWORD');
   }
 };
 
 export const addAccount = async (userName: string, password: string) => {
+  if (!userName) {
+    throw new CustomError(400, 'INVALID_USERNAME');
+  }
+  if (!password) {
+    throw new CustomError(400, 'INVALID_PASSWORD');
+  }
+
   const account: Account = {
     userName, 
     password,
@@ -20,9 +35,18 @@ export const addAccount = async (userName: string, password: string) => {
 };
 
 export const changePassword = async (userName: string, password: string, newPassword: string) => {
+  if (!userName) {
+    throw new CustomError(400, 'INVALID_USERNAME');
+  }
+  if (!password) {
+    throw new CustomError(400, 'INVALID_PASSWORD');
+  }
+  if (!newPassword) {
+    throw new CustomError(400, 'INVALID_NEWPASSWORD');
+  }
+
   if (password !== newPassword && (await verifyAccount(userName, password))) {
     return AccountModel.changePassword(userName, newPassword);
-  } else {
-    return null;
   }
+  throw new CustomError(400, 'CHANGE_PASSWORD_ERROR');
 };
