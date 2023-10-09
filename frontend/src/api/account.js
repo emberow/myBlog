@@ -11,5 +11,5 @@ export const userSingUp = async (values) => {
   return (await PostRequest({
     url: "/api/account",
     data: values,
-  })).data.data;
+  }));
 }

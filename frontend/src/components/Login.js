@@ -90,10 +90,10 @@ function SignUp() {
         await message.success('registration successful', 1);
         window.location.href = "/";
       } else {
-        message.error('password check not match', 3);
+        message.error('PASSWORD_CHECK_NOT_MATCH', 3);
       }
     } catch (err) {
-      message.error('sign up failed', 3);
+      message.error(err.response.data.message, 3);
     }
     return;
   };
