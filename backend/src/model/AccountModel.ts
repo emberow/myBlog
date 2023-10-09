@@ -2,6 +2,14 @@ import PostgresDataSource from "../config/database";
 import { Account } from "../entity/Account";
 import { Account as Iaccount } from '../utils/interfaces/Account';
 
+export const isAccountExist = async (userName: string) => {
+    return (await PostgresDataSource
+        .getRepository(Account)
+        .createQueryBuilder("account")
+        .where("account.userName = :userName", { userName })
+        .getOne());
+}
+
 export const verifyAccount = async (userName: string, password: string) => {
     return (await PostgresDataSource
         .getRepository(Account)

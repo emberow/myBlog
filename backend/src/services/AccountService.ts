@@ -1,7 +1,7 @@
 import { signJwt } from '../utils/jwt/jwt';
 import * as AccountModel from '../model/AccountModel';
 import { Account } from '../utils/interfaces/Account';
-import { CustomError } from 'src/middleware/errors';
+import { CustomError } from '../middleware/errors';
 
 export const verifyAccount = async (userName: string, password: string) => {
   if (!userName) {
@@ -25,6 +25,9 @@ export const addAccount = async (userName: string, password: string) => {
   }
   if (!password) {
     throw new CustomError(400, 'INVALID_PASSWORD');
+  }
+  if (await AccountModel.isAccountExist(userName)) {
+    throw new CustomError(400, 'ACCOUNT_EXISTS');
   }
 
   const account: Account = {
