@@ -8,7 +8,7 @@ import "@fontsource/caveat";
 const { Sider } = Layout;
 const { Text } = Typography;
 
-function getItem(label, key, icon, children) {
+const getItem = (label, key, icon, children) => {
   return {
     key,
     icon,

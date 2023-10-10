@@ -8,7 +8,7 @@ const apiFail = (errorInfo) => {
   console.log('Failed:', errorInfo);
 };
 
-function SignIn() {
+const SignIn = () => {
   const signIn = async (values) => {
     let token;
     try {
@@ -82,7 +82,7 @@ function SignIn() {
   );
 }
 
-function SignUp() {
+const SignUp = () => {
   const signUp = async (values) => {
     try {
       if (values.passwordCheck === values.password) {

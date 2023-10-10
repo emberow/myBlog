@@ -11,37 +11,54 @@ const onSearch = () => {
   return;
 }
 
-function linkToMyArticle() {
+const linkToMyArticle = () => {
   window.location.href = "/myarticles";
 }
 
-function logOut() {
+const linkToArticleList = () => {
+  window.location.href = "/";
+}
+
+const logOut = () => {
   localStorage.removeItem("accessToken");
   window.location.href = "/login";
 }
 
-function home() {
-  window.location.href = "/";
+const returnDrowDownItems = () => {
+  const items = [
+    {
+      key: '2',
+      label: (
+        <Text onClick={logOut}>
+          <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
+        </Text>
+      ),
+    },
+  ];
+  if (window.location.pathname === '/') {
+    items.unshift({
+      key: '1',
+      label: (
+        <Text onClick={linkToMyArticle}>
+          <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> My Aritcles
+        </Text>
+      ),
+    });
+  } else {
+    items.unshift({
+      key: '1',
+      label: (
+        <Text onClick={linkToArticleList}>
+          <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> Article List
+        </Text>
+      ),
+    });
+  }
+  
+  return {items};
 }
 
-const items = [
-  {
-    key: '1',
-    label: (
-      <Text onClick={linkToMyArticle}>
-        <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> my aritcles
-      </Text>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <Text onClick={logOut}>
-        <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
-      </Text>
-    ),
-  },
-];
+
 
 export default function Blog() {
   return (
@@ -49,14 +66,14 @@ export default function Blog() {
       <Header style={{ backgroundColor: "white" }}>
         <Row style={{  height: "8vh" }}>
           <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontFamily: "Caveat", fontSize: "5vh", cursor: "pointer"}} onClick={home}>Blog</Text>
+            <Text style={{ fontFamily: "Caveat", fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</Text>
           </Col>
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
             <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} />
           </Col>
           <Col span={3} />
           <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Dropdown menu={{ items }} placement="bottomLeft" arrow>
+            <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" arrow>
               <Button>menu</Button>
             </Dropdown>
           </Col>
