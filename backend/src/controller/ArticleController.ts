@@ -25,6 +25,18 @@ export const addArticleFolder = async (req: Request, res: Response, next: NextFu
   }
 };
 
+export const updateArticleFolder = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const token = req.headers.authorization;
+    const {userName} = await verifyAccount(token);
+    const {folderName, id} = req.body;
+    await ArticleService.updateArticleFolder(userName, id, folderName);
+    res.status(200).json({ data: "OK" });
+  } catch (err) {
+    next(err);
+  }
+};
+
 export const deleteArticleFolder = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization;

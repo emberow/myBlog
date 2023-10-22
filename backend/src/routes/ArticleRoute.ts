@@ -7,6 +7,7 @@ const MyArticleRoute: Router = express.Router();
 MyArticleRoute.route('/folder')
     .get(MyArticleController.getArticleFolder)
     .post(MyArticleController.addArticleFolder)
+    .put(MyArticleController.updateArticleFolder)
     .delete(MyArticleController.deleteArticleFolder)
 
 export default MyArticleRoute;
