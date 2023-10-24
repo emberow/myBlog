@@ -5,6 +5,7 @@ import { Article } from './Article';
 @Entity()
 export class ArticleFolder {
 
+  @OneToMany(() => ArticleFolder, (ArticleFolder) => ArticleFolder.id)
   @PrimaryGeneratedColumn('increment')
   public id: number;
 

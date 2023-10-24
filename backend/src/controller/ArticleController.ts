@@ -48,3 +48,51 @@ export const deleteArticleFolder = async (req: Request, res: Response, next: Nex
     next(err);
   }
 };
+
+export const getArticle = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const token = req.headers.authorization;
+    const {userName} = await verifyAccount(token);
+    const id = req.query.id as string;
+    const folderInfo = await ArticleService.getArticle(userName, id);
+    res.status(200).json({ data: folderInfo });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const addArticle = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const token = req.headers.authorization;
+    const {userName} = await verifyAccount(token);
+    const {folderId, articleName} = req.body;
+    const article = await ArticleService.addArticle(userName, folderId, articleName);
+    res.status(200).json({ data: article });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const updateArticle = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const token = req.headers.authorization;
+    const {userName} = await verifyAccount(token);
+    const {name, id} = req.body;
+    const article = await ArticleService.updateArticle(userName, id, name);
+    res.status(200).json({ data: article });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const deleteArticle = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const token = req.headers.authorization;
+    const {userName} = await verifyAccount(token);
+    const id = req.query.id as string;
+    await ArticleService.deleteArticle(userName, id);
+    res.status(200).json({ data: "OK" });
+  } catch (err) {
+    next(err);
+  }
+};

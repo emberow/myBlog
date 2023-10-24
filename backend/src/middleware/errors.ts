@@ -26,6 +26,7 @@ export const errorHandler = (err: Error, req: Request, res: Response, next: Next
     return res.status(statusCode).send({ message: errors.message });
   }
 
+  console.log(err);
   // Unhandled errors
   console.error(JSON.stringify(err, null, 2));
   return res.status(500).send({ message: "Something went wrong" });

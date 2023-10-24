@@ -5,16 +5,19 @@ import { ArticleFolder } from './ArticleFolder';
 @Entity()
 export class Article {
 
-  @ManyToOne(() => ArticleFolder, (ArticleFolder) => ArticleFolder.id)
   @PrimaryGeneratedColumn('increment')
   public id: number;
 
   @Column()
-  public Name: string;
+  public name: string;
 
-  @Column()
+  @Column({nullable: true})
   public content: string;
 
   @Column({ type: 'timestamptz' , default: 'NOW()'})
   public updateTime: Date;
+
+  @ManyToOne(() => ArticleFolder, (ArticleFolder) => ArticleFolder.id)
+  public articleFolder: ArticleFolder
+
 }

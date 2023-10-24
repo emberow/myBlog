@@ -45,3 +45,56 @@ export const deleteArticleFolder = async (id: string, userName: string) => {
   }
   ArticleModel.deleteArticleFolder(id, userName);
 };
+
+export const getArticle = async (userName: string, id: string) => {
+  if (!userName) {
+    throw new CustomError(400, 'INVALID_USERNAME');
+  }
+  if (!id) {
+    throw new CustomError(400, 'INVALID_ID');
+  }
+
+  return ArticleModel.getArticle(Number(id), userName);
+};
+
+export const addArticle = async (userName: string, folderId: string, articleName: string) => {
+  if (!userName) {
+    throw new CustomError(400, 'INVALID_USERNAME');
+  }
+  if (!folderId) {
+    throw new CustomError(400, 'INVALID_FOLDERID');
+  }
+  if (!articleName) {
+    throw new CustomError(400, 'INVALID_ARTICLENAME');
+  }
+  const article = {
+    name: articleName,
+    articleFolder: {
+      id: folderId,
+    }
+  }
+  return ArticleModel.addArticle(article);
+};
+
+export const updateArticle = async (userName: string, id: string, name: string) => {
+  if (!userName) {
+    throw new CustomError(400, 'INVALID_USERNAME');
+  }
+  if (!id) {
+    throw new CustomError(400, 'INVALID_ID');
+  }
+  if (!name) {
+    throw new CustomError(400, 'INVALID_NAME');
+  }
+  return ArticleModel.updateArticle(id, name);
+};
+
+export const deleteArticle = async (userName: string, id: string) => {
+  if (!userName) {
+    throw new CustomError(400, 'INVALID_USERNAME');
+  }
+  if (!id) {
+    throw new CustomError(400, 'INVALID_Id');
+  }
+  ArticleModel.deleteArticle(id);
+};

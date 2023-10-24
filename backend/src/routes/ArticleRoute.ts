@@ -10,4 +10,10 @@ MyArticleRoute.route('/folder')
     .put(MyArticleController.updateArticleFolder)
     .delete(MyArticleController.deleteArticleFolder)
 
+MyArticleRoute.route('/article')
+    .get(MyArticleController.getArticle)
+    .post(MyArticleController.addArticle)
+    .put(MyArticleController.updateArticle)
+    .delete(MyArticleController.deleteArticle)
+
 export default MyArticleRoute;
