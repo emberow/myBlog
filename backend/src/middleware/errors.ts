@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-export type CustomErrorContent = {
+export interface CustomErrorContent {
   message: string,
   context?: { [key: string]: any }
 };
