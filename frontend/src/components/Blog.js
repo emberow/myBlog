@@ -29,28 +29,28 @@ const returnDrowDownItems = () => {
     {
       key: '2',
       label: (
-        <Text onClick={logOut}>
+        <a onClick={logOut}>
           <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
-        </Text>
-      ),
+        </a>
+      )
     },
   ];
   if (window.location.pathname === '/') {
     items.unshift({
       key: '1',
       label: (
-        <Text onClick={linkToMyArticle}>
+        <a onClick={linkToMyArticle}>
           <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> My Aritcles
-        </Text>
+        </a>
       ),
     });
   } else {
     items.unshift({
       key: '1',
       label: (
-        <Text onClick={linkToArticleList}>
+        <a onClick={linkToArticleList}>
           <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> Article List
-        </Text>
+        </a>
       ),
     });
   }
@@ -73,7 +73,7 @@ export default function Blog() {
           </Col>
           <Col span={3} />
           <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" arrow>
+            <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" onClick={(event)=>{console.log(event)}} arrow>
               <Button>menu</Button>
             </Dropdown>
           </Col>
