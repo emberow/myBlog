@@ -16,7 +16,7 @@ const PostgresDataSource = new DataSource({
   namingStrategy: new SnakeNamingStrategy(),
   migrationsRun: false,
   synchronize: true,
-  logging: ['error'],
+  logging: ['error', 'query'],
   maxQueryExecutionTime: 5000,
   entities: [resolveFilePath()],
 })

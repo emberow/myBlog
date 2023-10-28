@@ -55,22 +55,26 @@ export const addArticle = async (article) => {
         .save(article);
 }
 
-export const updateArticle = async (id: string, articleName: string) => {
+export const updateArticle = async (id: string, articleName: string, userName: string) => {
     return PostgresDataSource
         .getRepository(Article)
-        .createQueryBuilder()
+        .createQueryBuilder('article')
+        .leftJoin('article.articleFolder', 'folder')
         .update()
         .set({name: articleName})
         .where('id = :id', {id})
+        .andWhere('folder.userName = :userName', {userName})
         .execute();
 }
 
-export const deleteArticle = async (id: string) => {
+export const deleteArticle = async (id: string, userName: string) => {
     return PostgresDataSource
         .getRepository(Article)
-        .createQueryBuilder()
+        .createQueryBuilder('article')
+        .leftJoin('article.articleFolder', 'folder')
         .delete()
         .where('id = :id', {id})
+        .andWhere('folder.userName = :userName', {userName})
         .execute();
 }
 

@@ -86,7 +86,7 @@ export const updateArticle = async (userName: string, id: string, name: string) 
   if (!name) {
     throw new CustomError(400, 'INVALID_NAME');
   }
-  return ArticleModel.updateArticle(id, name);
+  return ArticleModel.updateArticle(id, name, userName);
 };
 
 export const deleteArticle = async (userName: string, id: string) => {
@@ -96,5 +96,5 @@ export const deleteArticle = async (userName: string, id: string) => {
   if (!id) {
     throw new CustomError(400, 'INVALID_Id');
   }
-  ArticleModel.deleteArticle(id);
+  ArticleModel.deleteArticle(id, userName);
 };
