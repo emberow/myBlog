@@ -1,3 +1,4 @@
+import { ArticleFolder } from '../entity/ArticleFolder';
 import { CustomError } from '../middleware/errors';
 import * as ArticleModel from "../model/ArticleModel";
 
@@ -5,8 +6,11 @@ export const getArticleFolder = async (userName: string) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
-
-  return ArticleModel.getArticleFolder(userName);
+  const articleFolders: ArticleFolder[] = await ArticleModel.getArticleFolder(userName)
+  for (const articleFolder of articleFolders) {
+    articleFolder.articles = await ArticleModel.getArticleByFolderId(articleFolder.id);
+  }
+  return articleFolders;
 };
 
 export const addArticleFolder = async (userName: string, folderName: string) => {

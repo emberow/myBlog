@@ -1,8 +1,20 @@
-import { PostRequest } from "../utils/request";
+import { GetRequest, PostRequest } from "../utils/request";
 
-export const userAddFolder = async (folderName) => {
+export const getFolder = async (folderName) => {
+  return (await GetRequest({
+    url: "/api/folder",
+    headers: {
+      Authorization: localStorage.getItem('accessToken'),
+    }
+  })).data.data;
+}
+
+export const addFolder = async (folderName) => {
   return (await PostRequest({
     url: "/api/folder",
     data: {folderName},
-  })).data.data;
+    headers: {
+      Authorization: localStorage.getItem('accessToken'),
+    }
+  }));
 }

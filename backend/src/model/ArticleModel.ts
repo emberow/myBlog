@@ -5,9 +5,17 @@ import { ArticleFolder } from "../entity/ArticleFolder";
 export const getArticleFolder = async (userName) => {
     return PostgresDataSource
         .getRepository(ArticleFolder)
-        .find({where: {
-            userName
-        }});
+        .createQueryBuilder('articleFolder')
+        .where('user_name = :userName', { userName })
+        .getMany();
+}
+
+export const getArticleByFolderId = async (folderId: number) => {
+    return PostgresDataSource
+        .getRepository(Article)
+        .createQueryBuilder('article')
+        .where('article.article_folder_id = :folderId', { folderId })
+        .getMany();
 }
 
 export const addArticleFolder = async (articleFolder) => {
