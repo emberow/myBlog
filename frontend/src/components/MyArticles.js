@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Input, Layout, Menu, Typography, Modal, Button, message } from "antd";
+import { Input, Layout, Menu, Typography, Modal, Button, message, Col, Row } from "antd";
 import "@fontsource/caveat";
 import * as myArticle from "../api/myArticle";
 
@@ -21,6 +21,7 @@ const AddFolder = (prop) => {
     if (folderName) {
       prop.setIsModalOpen(false);
       await myArticle.addFolder(folderName);
+      document.location.reload();
     } else {
       message.error('folder name is empty', 3);
     }
@@ -52,15 +53,19 @@ const getSideBarItems = (setIsModalOpen, setSideBarItems) => {
       setSideBarItems(
         () => {
           let sideBarItems = [];
+          sideBarItems.push(getItem(<a onClick={()=>{setIsModalOpen(true);}} style={{ fontWeight: "bold", fontSize: "1vw"}}></a>, "folder_0", <img src="./add.png" alt="" style={{width: "1vw", left: "40%", position: "relative"}}/>))
           folderList.map((folder)=>{
             const articleItems = []
             folder.articles.map((article) => {
               articleItems.push(getItem(article.name, 'aritcle_' + article.id));
             });
-            articleItems.push(getItem(<a style={{ fontWeight: "bold", fontSize: "1vw"}}>Add Article</a>, "folder_" + folder.id, <img src="./add.png" alt="" style={{width: "1vw"}}/>))
-            sideBarItems.push(getItem(folder.name, folder.id, <img src="./addArticles.png" alt="" style={{width: "1vw"}}/>, articleItems));
+            sideBarItems.push(getItem(
+              <Row><Col span={20}>{folder.name}</Col></Row>,
+              folder.id, 
+              <div style={{width: "1vw"}} />, 
+              articleItems
+            ));
           })
-          sideBarItems.push(getItem(<a onClick={()=>{setIsModalOpen(true);}} style={{ fontWeight: "bold", fontSize: "1vw"}}>Add Folder</a>, "folder_0", <img src="./add.png" alt="" style={{width: "1vw"}}/>))
           return sideBarItems;
         }
       )
