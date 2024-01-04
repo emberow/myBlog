@@ -11,3 +11,9 @@ export const GetRequest = axios.create({
   timeout: 20000, // 延迟时间
   method: "GET",
 });
+
+export const DeleteRequest = axios.create({
+  baseURL: process.env.REACT_APP_BACKEND_URL,
+  timeout: 20000, // 延迟时间
+  method: "DELETE",
+});

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Input, Layout, Menu, Typography, Modal, Button, message, Col, Row } from "antd";
+import { Input, Layout, Menu, Modal, Button, message, Col, Row } from "antd";
 import "@fontsource/caveat";
 import * as myArticle from "../api/myArticle";
 
 const { Sider } = Layout;
-const { Text } = Typography;
 
 const getItem = (label, key, icon, children) => {
   return {
@@ -48,6 +47,16 @@ const AddFolder = (prop) => {
 }
 
 const getSideBarItems = (setIsModalOpen, setSideBarItems) => {
+
+  const handleMouseEnter = () => {
+    // 在這裡執行 hover 開始時的操作
+    console.log("hi");
+  };
+
+  const handleMouseLeave = () => {
+    // 在這裡執行 hover 結束時的操作
+  };
+
   myArticle.getFolder().then(
     (folderList) => {
       setSideBarItems(
@@ -55,13 +64,29 @@ const getSideBarItems = (setIsModalOpen, setSideBarItems) => {
           let sideBarItems = [];
           sideBarItems.push(getItem(<a onClick={()=>{setIsModalOpen(true);}} style={{ fontWeight: "bold", fontSize: "1vw"}}></a>, "folder_0", <img src="./add.png" alt="" style={{width: "1vw", left: "40%", position: "relative"}}/>))
           folderList.map((folder)=>{
+
+            // 文章
             const articleItems = []
             folder.articles.map((article) => {
               articleItems.push(getItem(article.name, 'aritcle_' + article.id));
             });
+
+            // 資料夾
             sideBarItems.push(getItem(
-              <Row><Col span={20}>{folder.name}</Col></Row>,
-              folder.id, 
+              <div>
+                <Row>
+                  <Col span={16} style={{ justifyContent: "center", alignItems: "center" }}>
+                    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>{folder.name}</div>
+                  </Col>
+                  <Col span={4}>
+                    <img style={{width: "1vw"}} onClick={()=> console.log(folder.id)} src="./add2.png" alt="" />
+                  </Col>
+                  <Col span={4}>
+                    <img style={{width: "1vw"}} onClick={()=> myArticle.delFolder(folder.id)} src="./delete.png" alt="" />
+                  </Col>
+                </Row>
+              </div>,
+              folder.id,
               <div style={{width: "1vw"}} />, 
               articleItems
             ));
