@@ -21,8 +21,7 @@ export const addFolder = async (folderName) => {
 
 export const delFolder = async (folderId) => {
   return (await DeleteRequest({
-    url: "/api/folder",
-    data: {folderId},
+    url: `/api/folder?id=${folderId}`,
     headers: {
       Authorization: localStorage.getItem('accessToken'),
     }

@@ -46,7 +46,33 @@ const AddFolder = (prop) => {
   );
 }
 
-const getSideBarItems = (setIsModalOpen, setSideBarItems) => {
+const DelFolder = (props) => {
+  const handleYes = async () => {
+    myArticle.delFolder(props.delModalProps.id);
+    console.log(props)
+    document.location.reload();
+  };
+
+  const handleNo = () => {
+    props.setIsModalOpen(false);
+  };
+  return (
+    <>
+      <Modal open={props.isModalOpen} onCancel={handleNo} footer={[
+          <Button key="No" onClick={handleNo}>
+            No
+          </Button>,
+          <Button key="Yes" type="primary" onClick={handleYes}>
+            Yes
+          </Button>,
+        ]}>
+        <p>Do you want to delete the folder?</p>
+      </Modal>
+    </>
+  );
+}
+
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps) => {
 
   const handleMouseEnter = () => {
     // 在這裡執行 hover 開始時的操作
@@ -62,7 +88,7 @@ const getSideBarItems = (setIsModalOpen, setSideBarItems) => {
       setSideBarItems(
         () => {
           let sideBarItems = [];
-          sideBarItems.push(getItem(<a onClick={()=>{setIsModalOpen(true);}} style={{ fontWeight: "bold", fontSize: "1vw"}}></a>, "folder_0", <img src="./add.png" alt="" style={{width: "1vw", left: "40%", position: "relative"}}/>))
+          sideBarItems.push(getItem(<a onClick={()=>{setIsAddfolderModalOpen(true);}} style={{ fontWeight: "bold", fontSize: "1vw"}}></a>, "folder_0", <img src="./add.png" alt="" style={{width: "1vw", left: "40%", position: "relative"}}/>))
           folderList.map((folder)=>{
 
             // 文章
@@ -82,7 +108,10 @@ const getSideBarItems = (setIsModalOpen, setSideBarItems) => {
                     <img style={{width: "1vw"}} onClick={()=> console.log(folder.id)} src="./add2.png" alt="" />
                   </Col>
                   <Col span={4}>
-                    <img style={{width: "1vw"}} onClick={()=> myArticle.delFolder(folder.id)} src="./delete.png" alt="" />
+                    <img style={{width: "1vw"}} onClick={()=> {
+                      setDelModalProps({ id: folder.id });
+                      setIsDelfolderModalOpen(true);
+                      }} src="./delete.png" alt="" />
                   </Col>
                 </Row>
               </div>,
@@ -100,10 +129,12 @@ const getSideBarItems = (setIsModalOpen, setSideBarItems) => {
 
 export default function MyArticles() {
   const [collapsed, setCollapsed] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddfolderModalOpen, setIsAddfolderModalOpen] = useState(false);
+  const [isDelfolderModalOpen, setIsDelfolderModalOpen] = useState(false);
   const [sideBarItems, setSideBarItems] = useState([]);
+  const [delModalProps, setDelModalProps] = useState({ id: 0 });
   useEffect(() => {
-    getSideBarItems(setIsModalOpen, setSideBarItems);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps);
   },[]);
 
   return (
@@ -119,7 +150,8 @@ export default function MyArticles() {
           mode="inline"
           items={sideBarItems}
         />
-        <AddFolder isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+        <AddFolder isModalOpen={isAddfolderModalOpen} setIsModalOpen={setIsAddfolderModalOpen} />
+        <DelFolder isModalOpen={isDelfolderModalOpen} setIsModalOpen={setIsDelfolderModalOpen} delModalProps={delModalProps} />
       </Sider>
     </Layout>
   );
