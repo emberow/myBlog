@@ -7,6 +7,7 @@ export const getArticleFolder = async (userName) => {
         .getRepository(ArticleFolder)
         .createQueryBuilder('articleFolder')
         .where('user_name = :userName', { userName })
+        .orderBy('articleFolder.update_time', "DESC")
         .getMany();
 }
 
