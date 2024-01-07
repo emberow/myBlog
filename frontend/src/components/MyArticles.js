@@ -72,7 +72,39 @@ const DelFolder = (props) => {
   );
 }
 
-const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps) => {
+const AddArticle = (props) => {
+  const handleSave = async () => {
+    const articleName = document.getElementById("articleName").value;
+    if (articleName) {
+      props.setIsModalOpen(false);
+      await myArticle.addArticle(props.addArticleModalProps.id, articleName);
+      document.location.reload();
+    } else {
+      message.error('article name is empty', 3);
+    }
+  };
+
+  const handleCancel = () => {
+    props.setIsModalOpen(false);
+  };
+  return (
+    <>
+      <Modal open={props.isModalOpen} onCancel={handleCancel} footer={[
+          <Button key="cancel" onClick={handleCancel}>
+            Cancel
+          </Button>,
+          <Button key="save" type="primary" onClick={handleSave}>
+            Save
+          </Button>,
+        ]}>
+        <p>Folder Name</p>
+          <Input id="articleName" />
+      </Modal>
+    </>
+  );
+}
+
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps, setIsAddArticleModalOpen, setAddArticleModalProps) => {
 
   const handleMouseEnter = () => {
     // 在這裡執行 hover 開始時的操作
@@ -105,7 +137,10 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolde
                     <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>{folder.name}</div>
                   </Col>
                   <Col span={4}>
-                    <img style={{width: "1vw"}} onClick={()=> console.log(folder.id)} src="./add2.png" alt="" />
+                    <img style={{width: "1vw"}} onClick={()=> {
+                      setAddArticleModalProps({ id: folder.id });
+                      setIsAddArticleModalOpen(true);
+                      }} src="./add2.png" alt="" />
                   </Col>
                   <Col span={4}>
                     <img style={{width: "1vw"}} onClick={()=> {
@@ -131,10 +166,12 @@ export default function MyArticles() {
   const [collapsed, setCollapsed] = useState(false);
   const [isAddfolderModalOpen, setIsAddfolderModalOpen] = useState(false);
   const [isDelfolderModalOpen, setIsDelfolderModalOpen] = useState(false);
+  const [isAddArticleModalOpen, setIsAddArticleModalOpen] = useState(false);
   const [sideBarItems, setSideBarItems] = useState([]);
   const [delModalProps, setDelModalProps] = useState({ id: 0 });
+  const [addArticleModalProps, setAddArticleModalProps] = useState({ id: 0 });
   useEffect(() => {
-    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps, setIsAddArticleModalOpen, setAddArticleModalProps);
   },[]);
 
   return (
@@ -146,12 +183,13 @@ export default function MyArticles() {
         onCollapse={(value) => setCollapsed(value)}
       >
         <Menu
-          defaultSelectedKeys={["1"]}
+          defaultOpenKeys={["32"]}
           mode="inline"
           items={sideBarItems}
         />
         <AddFolder isModalOpen={isAddfolderModalOpen} setIsModalOpen={setIsAddfolderModalOpen} />
         <DelFolder isModalOpen={isDelfolderModalOpen} setIsModalOpen={setIsDelfolderModalOpen} delModalProps={delModalProps} />
+        <AddArticle isModalOpen={isAddArticleModalOpen} setIsModalOpen={setIsAddArticleModalOpen} addArticleModalProps={addArticleModalProps} />
       </Sider>
     </Layout>
   );

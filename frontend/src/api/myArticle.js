@@ -27,3 +27,16 @@ export const delFolder = async (folderId) => {
     }
   }));
 }
+
+export const addArticle = async (folderId, articleName) => {
+  return (await PostRequest({
+    url: "/api/article",
+    data: {
+      folderId,
+      articleName
+    },
+    headers: {
+      Authorization: localStorage.getItem('accessToken'),
+    }
+  }));
+}
