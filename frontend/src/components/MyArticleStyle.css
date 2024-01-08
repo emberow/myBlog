@@ -1,0 +1,7 @@
+.ant-menu-submenu .icon {
+    display: none;
+}
+
+.ant-menu-submenu-title:hover .icon {
+    display: inline;
+}

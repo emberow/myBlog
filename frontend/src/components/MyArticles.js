@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Input, Layout, Menu, Modal, Button, message, Col, Row } from "antd";
 import "@fontsource/caveat";
 import * as myArticle from "../api/myArticle";
+import "./MyArticleStyle.css";
 
 const { Sider } = Layout;
 
@@ -97,7 +98,7 @@ const AddArticle = (props) => {
             Save
           </Button>,
         ]}>
-        <p>Folder Name</p>
+        <p>Article Name</p>
           <Input id="articleName" />
       </Modal>
     </>
@@ -105,15 +106,6 @@ const AddArticle = (props) => {
 }
 
 const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps, setIsAddArticleModalOpen, setAddArticleModalProps) => {
-
-  const handleMouseEnter = () => {
-    // 在這裡執行 hover 開始時的操作
-    console.log("hi");
-  };
-
-  const handleMouseLeave = () => {
-    // 在這裡執行 hover 結束時的操作
-  };
 
   myArticle.getFolder().then(
     (folderList) => {
@@ -134,16 +126,16 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolde
               <div>
                 <Row>
                   <Col span={16} style={{ justifyContent: "center", alignItems: "center" }}>
-                    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>{folder.name}</div>
+                    <div>{folder.name} </div>
                   </Col>
                   <Col span={4}>
-                    <img style={{width: "1vw"}} onClick={()=> {
+                    <img className="icon" style={{width: "1vw"}} onClick={()=> {
                       setAddArticleModalProps({ id: folder.id });
                       setIsAddArticleModalOpen(true);
                       }} src="./add2.png" alt="" />
                   </Col>
                   <Col span={4}>
-                    <img style={{width: "1vw"}} onClick={()=> {
+                    <img className="icon" style={{width: "1vw"}} onClick={()=> {
                       setDelModalProps({ id: folder.id });
                       setIsDelfolderModalOpen(true);
                       }} src="./delete.png" alt="" />
