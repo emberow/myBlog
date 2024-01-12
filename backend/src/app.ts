@@ -30,7 +30,30 @@ import { errorHandler } from './middleware/errors';
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerJSDoc(swaggerConfig)));
     app.use(errorHandler);
 
-    app.listen(process.env.PORT, () => {
+    const server = app.listen(process.env.PORT, () => {
         console.log(`Express server listening on port ${process.env.PORT}`);
+    });
+
+
+    // 處理中斷服務 (ctrl+c)
+    process.on('SIGTERM', () => {
+        console.log('Received SIGTERM. Shutting down gracefully...');
+
+        // 停止接收新的請求
+        server.close(() => {
+        console.log('Server closed. Exiting process...');
+        process.exit(0);
+        });
+    });
+
+    // request program shutdown
+    process.on('SIGINT', () => {
+        console.log('Received SIGINT. Shutting down gracefully...');
+
+        // 停止接收新的請求
+        server.close(() => {
+        console.log('Server closed. Exiting process...');
+        process.exit(0);
+        });
     });
 })();

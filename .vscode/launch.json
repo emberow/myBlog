@@ -13,7 +13,8 @@
       "runtimeArgs": ["-r", "tsconfig-paths/register"],
       "args": ["${workspaceRoot}/backend/src/app.ts"],
       "restart": true,
-      "env": { "NODE_ENV": "dev" }
+      "env": { "NODE_ENV": "dev" },
+      "console": "integratedTerminal",
     }
   ]
 }
