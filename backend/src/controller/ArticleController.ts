@@ -41,7 +41,7 @@ export const deleteArticleFolder = async (req: Request, res: Response, next: Nex
   try {
     const token = req.headers.authorization;
     const {userName} = await verifyAccount(token);
-    const id = req.query.id as string;
+    const id: number = req.query.id as any;
     await ArticleService.deleteArticleFolder(id, userName);
     res.status(200).json({ data: "OK" });
   } catch (err) {
@@ -53,7 +53,7 @@ export const getArticle = async (req: Request, res: Response, next: NextFunction
   try {
     const token = req.headers.authorization;
     const {userName} = await verifyAccount(token);
-    const id = req.query.id as string;
+    const id: number = req.query.id as any;
     const folderInfo = await ArticleService.getArticle(userName, id);
     res.status(200).json({ data: folderInfo });
   } catch (err) {
@@ -89,7 +89,7 @@ export const deleteArticle = async (req: Request, res: Response, next: NextFunct
   try {
     const token = req.headers.authorization;
     const {userName} = await verifyAccount(token);
-    const id = req.query.id as string;
+    const id: number  = req.query.id as any;
     await ArticleService.deleteArticle(userName, id);
     res.status(200).json({ data: "OK" });
   } catch (err) {

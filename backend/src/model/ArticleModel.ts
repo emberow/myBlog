@@ -11,11 +11,13 @@ export const getArticleFolder = async (userName) => {
         .getMany();
 }
 
-export const getArticleByFolderId = async (folderId: number) => {
+export const getArticleByFolderId = async (folderId: number, userName: String) => {
     return PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
+        .leftJoin('article.articleFolder', 'folder')
         .where('article.article_folder_id = :folderId', { folderId })
+        .andWhere('folder.user_name = :userName', { userName })
         .getMany();
 }
 
@@ -25,7 +27,7 @@ export const addArticleFolder = async (articleFolder) => {
         .save(articleFolder);
 }
 
-export const updateArticleFolder = async (userName: string, id: string, folderName: string) => {
+export const updateArticleFolder = async (userName: string, id: number, folderName: string) => {
     return PostgresDataSource
         .getRepository(ArticleFolder)
         .createQueryBuilder()
@@ -36,7 +38,7 @@ export const updateArticleFolder = async (userName: string, id: string, folderNa
         .execute();
 }
 
-export const deleteArticleFolder = async (id: string, userName: string) => {
+export const deleteArticleFolder = async (id: number, userName: string) => {
     return PostgresDataSource
         .getRepository(ArticleFolder)
         .createQueryBuilder()
@@ -64,7 +66,7 @@ export const addArticle = async (article) => {
         .save(article);
 }
 
-export const updateArticle = async (id: string, articleName: string, userName: string) => {
+export const updateArticle = async (id: number, articleName: string, userName: string) => {
     return PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
@@ -72,19 +74,16 @@ export const updateArticle = async (id: string, articleName: string, userName: s
         .update()
         .set({name: articleName})
         .where('id = :id', {id})
-        .andWhere('folder.userName = :userName', {userName})
+        .andWhere('folder.user_name = :userName', {userName})
         .execute();
 }
 
-export const deleteArticle = async (id: string, userName: string) => {
+export const deleteArticles = async (ids: number[], userName: string) => {
     return PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
-        .leftJoin('article.articleFolder', 'folder')
         .delete()
-        .where('id = :id', {id})
-        .andWhere('folder.userName = :userName', {userName})
+        .where('id in (:...ids)', {ids})
         .execute();
 }
-
 

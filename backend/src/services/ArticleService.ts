@@ -1,3 +1,4 @@
+import { Article } from 'src/entity/Article';
 import { ArticleFolder } from '../entity/ArticleFolder';
 import { CustomError } from '../middleware/errors';
 import * as ArticleModel from "../model/ArticleModel";
@@ -8,7 +9,7 @@ export const getArticleFolder = async (userName: string) => {
   }
   const articleFolders: ArticleFolder[] = await ArticleModel.getArticleFolder(userName)
   for (const articleFolder of articleFolders) {
-    articleFolder.articles = await ArticleModel.getArticleByFolderId(articleFolder.id);
+    articleFolder.articles = await ArticleModel.getArticleByFolderId(articleFolder.id, userName);
   }
   return articleFolders;
 };
@@ -24,10 +25,10 @@ export const addArticleFolder = async (userName: string, folderName: string) => 
     name: folderName,
     userName: userName,
   }
-  ArticleModel.addArticleFolder(article);
+  await ArticleModel.addArticleFolder(article);
 };
 
-export const updateArticleFolder = async (userName: string, id: string, folderName: string) => {
+export const updateArticleFolder = async (userName: string, id: number, folderName: string) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
@@ -37,20 +38,25 @@ export const updateArticleFolder = async (userName: string, id: string, folderNa
   if (!folderName) {
     throw new CustomError(400, 'INVALID_FOLDERNAME');
   }
-  ArticleModel.updateArticleFolder(userName, id, folderName);
+  await ArticleModel.updateArticleFolder(userName, id, folderName);
 };
 
-export const deleteArticleFolder = async (id: string, userName: string) => {
+export const deleteArticleFolder = async (id: number, userName: string) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
   if (!id) {
     throw new CustomError(400, 'INVALID_Id');
   }
-  ArticleModel.deleteArticleFolder(id, userName);
+  let articles: Article[] = await ArticleModel.getArticleByFolderId(id, userName);
+  let articleIds: number[] = articles.map(item => item.id);
+  if (articleIds.length != 0) {
+    await ArticleModel.deleteArticles(articleIds, userName);
+  }
+  await ArticleModel.deleteArticleFolder(id, userName);
 };
 
-export const getArticle = async (userName: string, id: string) => {
+export const getArticle = async (userName: string, id: number) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
@@ -61,7 +67,7 @@ export const getArticle = async (userName: string, id: string) => {
   return ArticleModel.getArticle(Number(id), userName);
 };
 
-export const addArticle = async (userName: string, folderId: string, articleName: string) => {
+export const addArticle = async (userName: string, folderId: number, articleName: string) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
@@ -80,7 +86,7 @@ export const addArticle = async (userName: string, folderId: string, articleName
   return ArticleModel.addArticle(article);
 };
 
-export const updateArticle = async (userName: string, id: string, name: string) => {
+export const updateArticle = async (userName: string, id: number, name: string) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
@@ -93,12 +99,12 @@ export const updateArticle = async (userName: string, id: string, name: string) 
   return ArticleModel.updateArticle(id, name, userName);
 };
 
-export const deleteArticle = async (userName: string, id: string) => {
+export const deleteArticle = async (userName: string, id: number) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
   if (!id) {
     throw new CustomError(400, 'INVALID_Id');
   }
-  ArticleModel.deleteArticle(id, userName);
+  await ArticleModel.deleteArticles([id], userName);
 };
