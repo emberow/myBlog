@@ -50,16 +50,15 @@ const AddFolder = (prop) => {
 const DelFolder = (props) => {
   const handleYes = async () => {
     myArticle.delFolder(props.delModalProps.id);
-    console.log(props)
     document.location.reload();
   };
 
   const handleNo = () => {
-    props.setIsModalOpen(false);
+    props.setDelFolderModalProps({ isModalOpen: false });
   };
   return (
     <>
-      <Modal open={props.isModalOpen} onCancel={handleNo} footer={[
+      <Modal open={props.delModalProps.isModalOpen} onCancel={handleNo} footer={[
           <Button key="No" onClick={handleNo}>
             No
           </Button>,
@@ -77,8 +76,8 @@ const AddArticle = (props) => {
   const handleSave = async () => {
     const articleName = document.getElementById("articleName").value;
     if (articleName) {
-      props.setIsModalOpen(false);
       await myArticle.addArticle(props.addArticleModalProps.id, articleName);
+      props.setAddArticleModalProps({ isModalOpen: false })
       document.location.reload();
     } else {
       message.error('article name is empty', 3);
@@ -86,11 +85,11 @@ const AddArticle = (props) => {
   };
 
   const handleCancel = () => {
-    props.setIsModalOpen(false);
+    props.setAddArticleModalProps({ isModalOpen: false })
   };
   return (
     <>
-      <Modal open={props.isModalOpen} onCancel={handleCancel} footer={[
+      <Modal open={props.addArticleModalProps.isModalOpen} onCancel={handleCancel} footer={[
           <Button key="cancel" onClick={handleCancel}>
             Cancel
           </Button>,
@@ -105,7 +104,7 @@ const AddArticle = (props) => {
   );
 }
 
-const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps, setIsAddArticleModalOpen, setAddArticleModalProps) => {
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps) => {
 
   myArticle.getFolder().then(
     (folderList) => {
@@ -130,14 +129,12 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolde
                   </Col>
                   <Col span={4}>
                     <img className="icon" style={{width: "1vw"}} onClick={()=> {
-                      setAddArticleModalProps({ id: folder.id });
-                      setIsAddArticleModalOpen(true);
+                      setAddArticleModalProps({ id: folder.id, isModalOpen: true });
                       }} src="./add2.png" alt="" />
                   </Col>
                   <Col span={4}>
                     <img className="icon" style={{width: "1vw"}} onClick={()=> {
-                      setDelModalProps({ id: folder.id });
-                      setIsDelfolderModalOpen(true);
+                      setDelModalProps({ id: folder.id, isModalOpen: true });
                       }} src="./delete.png" alt="" />
                   </Col>
                 </Row>
@@ -155,15 +152,13 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setIsDelfolde
 }
 
 export default function MyArticles() {
+  const [sideBarItems, setSideBarItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
   const [isAddfolderModalOpen, setIsAddfolderModalOpen] = useState(false);
-  const [isDelfolderModalOpen, setIsDelfolderModalOpen] = useState(false);
-  const [isAddArticleModalOpen, setIsAddArticleModalOpen] = useState(false);
-  const [sideBarItems, setSideBarItems] = useState([]);
-  const [delModalProps, setDelModalProps] = useState({ id: 0 });
-  const [addArticleModalProps, setAddArticleModalProps] = useState({ id: 0 });
+  const [delFolderModalProps, setDelFolderModalProps] = useState({ id: 0, isModalOpen: false });
+  const [addArticleModalProps, setAddArticleModalProps] = useState({ id: 0, isModalOpen: false });
   useEffect(() => {
-    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setIsDelfolderModalOpen, setDelModalProps, setIsAddArticleModalOpen, setAddArticleModalProps);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps);
   },[]);
 
   return (
@@ -180,8 +175,8 @@ export default function MyArticles() {
           items={sideBarItems}
         />
         <AddFolder isModalOpen={isAddfolderModalOpen} setIsModalOpen={setIsAddfolderModalOpen} />
-        <DelFolder isModalOpen={isDelfolderModalOpen} setIsModalOpen={setIsDelfolderModalOpen} delModalProps={delModalProps} />
-        <AddArticle isModalOpen={isAddArticleModalOpen} setIsModalOpen={setIsAddArticleModalOpen} addArticleModalProps={addArticleModalProps} />
+        <DelFolder delModalProps={delFolderModalProps} setDelFolderModalProps={setDelFolderModalProps} />
+        <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
     </Layout>
   );
