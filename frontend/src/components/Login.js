@@ -1,7 +1,7 @@
 import './Login.css';
 import React from 'react';
 import {  Input, Tabs, Form, Checkbox, Button, message } from 'antd';
-import * as account from '../api/account';
+import * as account from '../api/account.js';
 
 
 const apiFail = (errorInfo) => {

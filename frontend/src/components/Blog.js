@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Layout, Col, Row, Dropdown, Button, Typography } from "antd";
 import "@fontsource/caveat";
-import MyArticles from './MyArticles';
+import MyArticles from './MyArticles.js';
 import { Route } from "react-router-dom";
 
 const { Header, Content } = Layout;
@@ -57,8 +57,6 @@ const returnDrowDownItems = () => {
   
   return {items};
 }
-
-
 
 export default function Blog() {
   return (

@@ -1,4 +1,4 @@
-import { GetRequest, PostRequest, DeleteRequest } from "../utils/request";
+import { GetRequest, PostRequest, DeleteRequest } from "../utils/request.js";
 
 export const getFolder = async () => {
   return (await GetRequest({

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Input, Layout, Menu, Modal, Button, message, Col, Row } from "antd";
 import "@fontsource/caveat";
-import * as myArticle from "../api/myArticle";
+import * as myArticle from "../api/myArticle.js";
 import "./MyArticleStyle.css";
+import { Content } from "antd/es/layout/layout.js";
+import MDEditor from '@uiw/react-md-editor';
 
 const { Sider } = Layout;
 
@@ -157,6 +159,7 @@ export default function MyArticles() {
   const [isAddfolderModalOpen, setIsAddfolderModalOpen] = useState(false);
   const [delFolderModalProps, setDelFolderModalProps] = useState({ id: 0, isModalOpen: false });
   const [addArticleModalProps, setAddArticleModalProps] = useState({ id: 0, isModalOpen: false });
+  const [value, setValue] = React.useState("**Hello world!!!**");
   useEffect(() => {
     getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps);
   },[]);
@@ -178,6 +181,15 @@ export default function MyArticles() {
         <DelFolder delModalProps={delFolderModalProps} setDelFolderModalProps={setDelFolderModalProps} />
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
+      <Content>
+        <div className="container">
+          <MDEditor
+            value={value}
+            onChange={setValue}
+          />
+          <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
+        </div>
+      </Content>
     </Layout>
   );
 }
