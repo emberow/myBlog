@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Input, Layout, Menu, Modal, Button, message, Col, Row } from "antd";
 import "@fontsource/caveat";
 import * as myArticle from "../api/myArticle.js";
 import "./MyArticleStyle.css";
-import { Content } from "antd/es/layout/layout.js";
-import MDEditor from '@uiw/react-md-editor';
+import { Content, Header } from "antd/es/layout/layout.js";
+import MDEditor, { EditorContext }  from '@uiw/react-md-editor';
 
 const { Sider } = Layout;
 
@@ -153,6 +153,39 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
   );
 }
 
+const PreviewButton = () => {
+  const { preview, dispatch } = useContext(EditorContext);
+  const click = () => {
+    dispatch({
+      preview: preview === "edit" ? "preview" : "edit"
+    });
+  };
+  // if (preview === "edit") {
+  //   return (
+  //     <svg width="12" height="12" viewBox="0 0 520 520" onClick={click}>
+  //       <polygon
+  //         fill="currentColor"
+  //         points="0 71.293 0 122 319 122 319 397 0 397 0 449.707 372 449.413 372 71.293"
+  //       />
+  //       <polygon
+  //         fill="currentColor"
+  //         points="429 71.293 520 71.293 520 122 481 123 481 396 520 396 520 449.707 429 449.413"
+  //       />
+  //     </svg>
+  //   );
+  // }
+  return (
+    <Button onClick={click}>preview</Button>
+  );
+};
+
+// const codePreview = {
+//   name: "preview",
+//   keyCommand: "preview",
+//   value: "preview",
+//   icon: <Button2 />
+// };
+
 export default function MyArticles() {
   const [sideBarItems, setSideBarItems] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
@@ -182,13 +215,23 @@ export default function MyArticles() {
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
       <Content>
-        <div className="container">
-          <MDEditor
-            value={value}
-            onChange={setValue}
-          />
-          <MDEditor.Markdown source={value} style={{ whiteSpace: 'pre-wrap' }} />
-        </div>
+        <Layout style={{ height: "92vh", margin:"0.5vw"}}>
+          <Header style={{ background: "white" }}>
+            <Button style={{ margin:"0.5vw"}}>publish</Button>
+            <PreviewButton style={{ margin:"0.5vw"}}>preview</PreviewButton>
+            <Button style={{ margin:"0.5vw"}}>save</Button>
+            <Button style={{ margin:"0.5vw"}}>cancel</Button>
+          </Header>
+          <Content>
+            <div className="container" data-color-mode="light">
+              <MDEditor
+                value={value}
+                preview="edit"
+                onChange={(val) => setValue(val)}
+              />
+            </div>
+          </Content>
+        </Layout>
       </Content>
     </Layout>
   );
