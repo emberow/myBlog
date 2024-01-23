@@ -4,7 +4,7 @@ import "@fontsource/caveat";
 import * as myArticle from "../api/myArticle.js";
 import "./MyArticleStyle.css";
 import { Content, Header } from "antd/es/layout/layout.js";
-import MDEditor, { EditorContext }  from '@uiw/react-md-editor';
+import MDEditor, { EditorContext, commands }  from '@uiw/react-md-editor';
 
 const { Sider } = Layout;
 
@@ -22,8 +22,14 @@ const AddFolder = (prop) => {
     const folderName = document.getElementById("folderName").value;
     if (folderName) {
       prop.setIsModalOpen(false);
-      await myArticle.addFolder(folderName);
-      document.location.reload();
+      try {
+        await myArticle.addFolder(folderName);
+        document.location.reload();
+      } catch {
+        localStorage.removeItem('accessToken');
+        await message.error('authentication failed', 1);
+        window.location.href = "/login";
+      }
     } else {
       message.error('folder name is empty', 3);
     }
@@ -51,8 +57,14 @@ const AddFolder = (prop) => {
 
 const DelFolder = (props) => {
   const handleYes = async () => {
-    myArticle.delFolder(props.delModalProps.id);
-    document.location.reload();
+    try {
+      myArticle.delFolder(props.delModalProps.id);
+      document.location.reload();
+    } catch {
+      localStorage.removeItem('accessToken');
+      await message.error('authentication failed', 1);
+      window.location.href = "/login";
+    }
   };
 
   const handleNo = () => {
@@ -78,9 +90,15 @@ const AddArticle = (props) => {
   const handleSave = async () => {
     const articleName = document.getElementById("articleName").value;
     if (articleName) {
-      await myArticle.addArticle(props.addArticleModalProps.id, articleName);
-      props.setAddArticleModalProps({ isModalOpen: false })
-      document.location.reload();
+      try {
+        await myArticle.addArticle(props.addArticleModalProps.id, articleName);
+        props.setAddArticleModalProps({ isModalOpen: false })
+        document.location.reload();
+      } catch {
+        localStorage.removeItem('accessToken');
+        await message.error('authentication failed', 1);
+        window.location.href = "/login";
+      }
     } else {
       message.error('article name is empty', 3);
     }
@@ -150,7 +168,11 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
         }
       )
     }
-  );
+  ).catch(async ()=> {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  });
 }
 
 const PreviewButton = () => {
@@ -228,6 +250,8 @@ export default function MyArticles() {
                 value={value}
                 preview="edit"
                 onChange={(val) => setValue(val)}
+                commands={[...commands.getCommands()]}
+                extraCommands={[]}
               />
             </div>
           </Content>
