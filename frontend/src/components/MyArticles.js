@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Input, Layout, Menu, Modal, Button, message, Col, Row } from "antd";
 import "@fontsource/caveat";
 import * as myArticle from "../api/myArticle.js";
@@ -175,38 +175,28 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
   });
 }
 
-const PreviewButton = () => {
-  const { preview, dispatch } = useContext(EditorContext);
+const PreviewButton = (props) => {
+  let dispatch;
+  let preview;
+  let editorInstance;
+  const [buttonValue, setButtonValue] = useState("preview");
+
   const click = () => {
+    editorInstance = props.editorRef.current;
+    if (editorInstance) {
+      dispatch = editorInstance.dispatch;
+      preview = editorInstance.preview;
+    }
+    setButtonValue(preview);
     dispatch({
       preview: preview === "edit" ? "preview" : "edit"
     });
   };
-  // if (preview === "edit") {
-  //   return (
-  //     <svg width="12" height="12" viewBox="0 0 520 520" onClick={click}>
-  //       <polygon
-  //         fill="currentColor"
-  //         points="0 71.293 0 122 319 122 319 397 0 397 0 449.707 372 449.413 372 71.293"
-  //       />
-  //       <polygon
-  //         fill="currentColor"
-  //         points="429 71.293 520 71.293 520 122 481 123 481 396 520 396 520 449.707 429 449.413"
-  //       />
-  //     </svg>
-  //   );
-  // }
   return (
-    <Button onClick={click}>preview</Button>
+    <Button onClick={click}>{buttonValue}</Button>
   );
 };
 
-// const codePreview = {
-//   name: "preview",
-//   keyCommand: "preview",
-//   value: "preview",
-//   icon: <Button2 />
-// };
 
 export default function MyArticles() {
   const [sideBarItems, setSideBarItems] = useState([]);
@@ -215,6 +205,8 @@ export default function MyArticles() {
   const [delFolderModalProps, setDelFolderModalProps] = useState({ id: 0, isModalOpen: false });
   const [addArticleModalProps, setAddArticleModalProps] = useState({ id: 0, isModalOpen: false });
   const [value, setValue] = React.useState("**Hello world!!!**");
+  const editorRef = useRef();
+  
   useEffect(() => {
     getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps);
   },[]);
@@ -240,13 +232,14 @@ export default function MyArticles() {
         <Layout style={{ height: "92vh", margin:"0.5vw"}}>
           <Header style={{ background: "white" }}>
             <Button style={{ margin:"0.5vw"}}>publish</Button>
-            <PreviewButton style={{ margin:"0.5vw"}}>preview</PreviewButton>
+            <PreviewButton style={{ margin:"0.5vw"}} editorRef={editorRef} />
             <Button style={{ margin:"0.5vw"}}>save</Button>
             <Button style={{ margin:"0.5vw"}}>cancel</Button>
           </Header>
           <Content>
             <div className="container" data-color-mode="light">
               <MDEditor
+                ref={editorRef}
                 value={value}
                 preview="edit"
                 onChange={(val) => setValue(val)}
