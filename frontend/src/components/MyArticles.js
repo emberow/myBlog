@@ -193,7 +193,7 @@ const PreviewButton = (props) => {
     });
   };
   return (
-    <Button onClick={click}>{buttonValue}</Button>
+    <Button style={{ margin:"0.5vw", display: props.isEditMode ? "inline" : "None", width:"6vw"}} onClick={click}>{buttonValue}</Button>
   );
 };
 
@@ -206,6 +206,7 @@ export default function MyArticles() {
   const [addArticleModalProps, setAddArticleModalProps] = useState({ id: 0, isModalOpen: false });
   const [value, setValue] = React.useState("**Hello world!!!**");
   const editorRef = useRef();
+  const [isEditMode, setIsEditMode] = useState(false);
   
   useEffect(() => {
     getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps);
@@ -231,13 +232,21 @@ export default function MyArticles() {
       <Content>
         <Layout style={{ height: "92vh", margin:"0.5vw"}}>
           <Header style={{ background: "white" }}>
-            <Button style={{ margin:"0.5vw"}}>publish</Button>
-            <PreviewButton style={{ margin:"0.5vw"}} editorRef={editorRef} />
-            <Button style={{ margin:"0.5vw"}}>save</Button>
-            <Button style={{ margin:"0.5vw"}}>cancel</Button>
+            <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline", width:"6vw" }}>publish</Button>
+            <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{setIsEditMode(true)}}>edit</Button>
+            <PreviewButton style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
+            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{setIsEditMode(false)}}>save</Button>
+            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{setIsEditMode(false)}}>cancel</Button>
           </Header>
           <Content>
-            <div className="container" data-color-mode="light">
+            <div className="container" style={{ display: isEditMode ? "None" : "inline" }}  data-color-mode="light">
+              <MDEditor
+                value={value}
+                preview="preview"
+                hideToolbar={true}
+              />
+            </div>
+            <div className="container" style={{ display: isEditMode ? "inline" : "None" }}  data-color-mode="light">
               <MDEditor
                 ref={editorRef}
                 value={value}
