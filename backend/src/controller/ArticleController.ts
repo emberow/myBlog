@@ -77,8 +77,8 @@ export const updateArticle = async (req: Request, res: Response, next: NextFunct
   try {
     const token = req.headers.authorization;
     const {userName} = await verifyAccount(token);
-    const {name, id} = req.body;
-    const article = await ArticleService.updateArticle(userName, id, name);
+    const {name, id, content, isPublish} = req.body;
+    const article = await ArticleService.updateArticle(userName, id, name, content, isPublish);
     res.status(200).json({ data: article });
   } catch (err) {
     next(err);

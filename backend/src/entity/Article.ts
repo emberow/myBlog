@@ -20,4 +20,7 @@ export class Article {
   @ManyToOne(() => ArticleFolder, (ArticleFolder) => ArticleFolder.id)
   public articleFolder: ArticleFolder
 
+  @Column({nullable: true})
+  public isPublish: Boolean;
+
 }
