@@ -1,4 +1,4 @@
-import { GetRequest, PostRequest, DeleteRequest } from "../utils/request.js";
+import { GetRequest, PostRequest, DeleteRequest, PatchRequest } from "../utils/request.js";
 
 export const getFolder = async () => {
   return (await GetRequest({
@@ -35,6 +35,25 @@ export const addArticle = async (folderId, articleName) => {
       folderId,
       articleName
     },
+    headers: {
+      Authorization: localStorage.getItem('accessToken'),
+    }
+  }));
+}
+
+export const getArticle = async (articleId) => {
+  return (await GetRequest({
+    url: `/api/article/?id=${articleId}`,
+    headers: {
+      Authorization: localStorage.getItem('accessToken'),
+    }
+  })).data.data;
+}
+
+export const patchArticle = async (article) => {
+  return (await PatchRequest({
+    url: "/api/article",
+    data: article,
     headers: {
       Authorization: localStorage.getItem('accessToken'),
     }

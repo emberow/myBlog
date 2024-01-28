@@ -17,3 +17,9 @@ export const DeleteRequest = axios.create({
   timeout: 20000, // 延迟时间
   method: "DELETE",
 });
+
+export const PatchRequest = axios.create({
+  baseURL: process.env.REACT_APP_BACKEND_URL,
+  timeout: 20000, // 延迟时间
+  method: "PATCH",
+});

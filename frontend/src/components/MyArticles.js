@@ -124,7 +124,7 @@ const AddArticle = (props) => {
   );
 }
 
-const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps) => {
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle) => {
 
   myArticle.getFolder().then(
     (folderList) => {
@@ -137,7 +137,9 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
             // 文章
             const articleItems = []
             folder.articles.map((article) => {
-              articleItems.push(getItem(article.name, 'aritcle_' + article.id));
+              articleItems.push(getItem(<div onClick={async() => {
+                setArticle(await myArticle.getArticle(article.id));
+              }}>{article.name}</div>, 'aritcle_' + article.id));
             });
 
             // 資料夾
@@ -207,9 +209,16 @@ export default function MyArticles() {
   const [value, setValue] = React.useState("**Hello world!!!**");
   const editorRef = useRef();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [article, setArticle] = useState({
+    "id": null,
+    "name": null,
+    "content": "",
+    "updateTime": null,
+    "isPublish": null
+});
   
   useEffect(() => {
-    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle);
   },[]);
 
   return (
@@ -230,9 +239,9 @@ export default function MyArticles() {
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
       <Content>
-        <Layout style={{ height: "92vh", margin:"0.5vw"}}>
+        <Layout style={{ display: (article.id != null) ? "inline" : "None", height: "92vh"}}>
           <Header style={{ background: "white" }}>
-            <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline", width:"6vw" }}>publish</Button>
+            <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline", width:"6vw" }} onClick={()=>{myArticle.patchArticle({id: 12, isPublish: false})}}>publish</Button>
             <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{setIsEditMode(true)}}>edit</Button>
             <PreviewButton style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
             <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{setIsEditMode(false)}}>save</Button>
@@ -241,7 +250,7 @@ export default function MyArticles() {
           <Content>
             <div className="container" style={{ display: isEditMode ? "None" : "inline" }}  data-color-mode="light">
               <MDEditor
-                value={value}
+                value={article.content}
                 preview="preview"
                 hideToolbar={true}
               />
@@ -249,9 +258,13 @@ export default function MyArticles() {
             <div className="container" style={{ display: isEditMode ? "inline" : "None" }}  data-color-mode="light">
               <MDEditor
                 ref={editorRef}
-                value={value}
+                value={article.content}
                 preview="edit"
-                onChange={(val) => setValue(val)}
+                onChange={(val) => {
+                  let tempArticle = article;
+                  tempArticle.content = val;
+                  setValue(tempArticle);
+                }}
                 commands={[...commands.getCommands()]}
                 extraCommands={[]}
               />

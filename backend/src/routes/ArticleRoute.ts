@@ -13,7 +13,7 @@ MyArticleRoute.route('/folder')
 MyArticleRoute.route('/article')
     .get(MyArticleController.getArticle)
     .post(MyArticleController.addArticle)
-    .put(MyArticleController.updateArticle)
+    .patch(MyArticleController.updateArticle)
     .delete(MyArticleController.deleteArticle)
 
 export default MyArticleRoute;

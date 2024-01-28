@@ -14,13 +14,11 @@ export const getArticleByFolderId = async (folderId: number, userName: String) =
 export const getArticle = async (id: number, userName: string) => {
     return PostgresDataSource
         .getRepository(Article)
-        .find({where: {
-                id,
-                articleFolder: {
-                    userName: userName,
-                }
-            }
-        });
+        .createQueryBuilder('article')
+        .leftJoin('article.articleFolder', 'folder')
+        .where('article.id = :id', { id })
+        .andWhere('folder.user_name = :userName', { userName })
+        .getOne();
 }
 
 export const addArticle = async (article) => {
