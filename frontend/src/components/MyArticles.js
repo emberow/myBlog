@@ -22,14 +22,8 @@ const AddFolder = (prop) => {
     const folderName = document.getElementById("folderName").value;
     if (folderName) {
       prop.setIsModalOpen(false);
-      try {
-        await myArticle.addFolder(folderName);
-        document.location.reload();
-      } catch {
-        localStorage.removeItem('accessToken');
-        await message.error('authentication failed', 1);
-        window.location.href = "/login";
-      }
+      await myArticle.addFolder(folderName);
+      document.location.reload();
     } else {
       message.error('folder name is empty', 3);
     }
@@ -57,14 +51,8 @@ const AddFolder = (prop) => {
 
 const DelFolder = (props) => {
   const handleYes = async () => {
-    try {
-      myArticle.delFolder(props.delModalProps.id);
-      document.location.reload();
-    } catch {
-      localStorage.removeItem('accessToken');
-      await message.error('authentication failed', 1);
-      window.location.href = "/login";
-    }
+    myArticle.delFolder(props.delModalProps.id);
+    document.location.reload();
   };
 
   const handleNo = () => {
@@ -90,15 +78,9 @@ const AddArticle = (props) => {
   const handleSave = async () => {
     const articleName = document.getElementById("articleName").value;
     if (articleName) {
-      try {
-        await myArticle.addArticle(props.addArticleModalProps.id, articleName);
-        props.setAddArticleModalProps({ isModalOpen: false })
-        document.location.reload();
-      } catch {
-        localStorage.removeItem('accessToken');
-        await message.error('authentication failed', 1);
-        window.location.href = "/login";
-      }
+      await myArticle.addArticle(props.addArticleModalProps.id, articleName);
+      props.setAddArticleModalProps({ isModalOpen: false })
+      document.location.reload();
     } else {
       message.error('article name is empty', 3);
     }
@@ -124,7 +106,7 @@ const AddArticle = (props) => {
   );
 }
 
-const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle) => {
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle, setValue) => {
 
   myArticle.getFolder().then(
     (folderList) => {
@@ -138,7 +120,9 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
             const articleItems = []
             folder.articles.map((article) => {
               articleItems.push(getItem(<div onClick={async() => {
-                setArticle(await myArticle.getArticle(article.id));
+                const tempArticle = await myArticle.getArticle(article.id)
+                setArticle(tempArticle);
+                setValue(tempArticle.content);
               }}>{article.name}</div>, 'aritcle_' + article.id));
             });
 
@@ -170,11 +154,7 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
         }
       )
     }
-  ).catch(async ()=> {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
-  });
+  );
 }
 
 const PreviewButton = (props) => {
@@ -199,6 +179,15 @@ const PreviewButton = (props) => {
   );
 };
 
+const saveButton = (setIsEditMode, id, content) => {
+  const article = {
+    "id": id,
+    "content": content,
+  }
+  myArticle.patchArticle(article);
+  setIsEditMode(false);
+}
+
 
 export default function MyArticles() {
   const [sideBarItems, setSideBarItems] = useState([]);
@@ -218,7 +207,7 @@ export default function MyArticles() {
 });
   
   useEffect(() => {
-    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle, setValue);
   },[]);
 
   return (
@@ -244,13 +233,13 @@ export default function MyArticles() {
             <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline", width:"6vw" }} onClick={()=>{myArticle.patchArticle({id: 12, isPublish: false})}}>publish</Button>
             <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{setIsEditMode(true)}}>edit</Button>
             <PreviewButton style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
-            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{setIsEditMode(false)}}>save</Button>
+            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{saveButton(setIsEditMode, article.id, value)}}>save</Button>
             <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{setIsEditMode(false)}}>cancel</Button>
           </Header>
           <Content>
             <div className="container" style={{ display: isEditMode ? "None" : "inline" }}  data-color-mode="light">
               <MDEditor
-                value={article.content}
+                value={value}
                 preview="preview"
                 hideToolbar={true}
               />
@@ -258,12 +247,10 @@ export default function MyArticles() {
             <div className="container" style={{ display: isEditMode ? "inline" : "None" }}  data-color-mode="light">
               <MDEditor
                 ref={editorRef}
-                value={article.content}
+                value={value}
                 preview="edit"
                 onChange={(val) => {
-                  let tempArticle = article;
-                  tempArticle.content = val;
-                  setValue(tempArticle);
+                  setValue(val);
                 }}
                 commands={[...commands.getCommands()]}
                 extraCommands={[]}

@@ -1,61 +1,97 @@
 import { GetRequest, PostRequest, DeleteRequest, PatchRequest } from "../utils/request.js";
-
+import { message } from "antd";
 export const getFolder = async () => {
-  return (await GetRequest({
-    url: "/api/folder",
-    headers: {
-      Authorization: localStorage.getItem('accessToken'),
-    }
-  })).data.data;
+  try {
+    return (await GetRequest({
+      url: "/api/folder",
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      }
+    })).data.data;
+  } catch {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  }
 }
 
 export const addFolder = async (folderName) => {
-  return (await PostRequest({
-    url: "/api/folder",
-    data: {folderName},
-    headers: {
-      Authorization: localStorage.getItem('accessToken'),
-    }
-  }));
+  try{
+    return (await PostRequest({
+      url: "/api/folder",
+      data: {folderName},
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      }
+    }));
+  } catch {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  }
 }
 
 export const delFolder = async (folderId) => {
-  return (await DeleteRequest({
-    url: `/api/folder?id=${folderId}`,
-    headers: {
-      Authorization: localStorage.getItem('accessToken'),
-    }
-  }));
+  try{
+    return (await DeleteRequest({
+      url: `/api/folder?id=${folderId}`,
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      }
+    }));
+  } catch {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  }
 }
 
 export const addArticle = async (folderId, articleName) => {
-  return (await PostRequest({
-    url: "/api/article",
-    data: {
-      folderId,
-      articleName
-    },
-    headers: {
-      Authorization: localStorage.getItem('accessToken'),
-    }
-  }));
+  try{
+    return (await PostRequest({
+      url: "/api/article",
+      data: {
+        folderId,
+        articleName
+      },
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      }
+    }));
+  } catch {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  }
 }
 
 export const getArticle = async (articleId) => {
-  return (await GetRequest({
-    url: `/api/article/?id=${articleId}`,
-    headers: {
-      Authorization: localStorage.getItem('accessToken'),
-    }
-  })).data.data;
+  try{
+    return (await GetRequest({
+      url: `/api/article/?id=${articleId}`,
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      }
+    })).data.data;
+  } catch {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  }
 }
 
 export const patchArticle = async (article) => {
-  return (await PatchRequest({
-    url: "/api/article",
-    data: article,
-    headers: {
-      Authorization: localStorage.getItem('accessToken'),
-    }
-  }));
+  try{
+    return (await PatchRequest({
+      url: "/api/article",
+      data: article,
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      }
+    }));
+  } catch {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  }
 }
