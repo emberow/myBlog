@@ -5,3 +5,11 @@
 .ant-menu-submenu-title:hover .icon {
     display: inline;
 }
+
+.ant-menu-item-only-child .articleIcon {
+    display: none;
+}
+
+.ant-menu-item-only-child:hover .articleIcon {
+    display: inline;
+}

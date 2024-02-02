@@ -74,6 +74,31 @@ const DelFolder = (props) => {
   );
 }
 
+const DelArticle = (props) => {
+  const handleYes = async () => {
+    myArticle.delArticle(props.delArticleProps.id);
+    document.location.reload();
+  };
+
+  const handleNo = () => {
+    props.setDelArticleProps({ isModalOpen: false });
+  };
+  return (
+    <>
+      <Modal open={props.delArticleProps.isModalOpen} onCancel={handleNo} footer={[
+          <Button key="No" onClick={handleNo}>
+            No
+          </Button>,
+          <Button key="Yes" type="primary" onClick={handleYes}>
+            Yes
+          </Button>,
+        ]}>
+        <p>Do you want to delete the article?</p>
+      </Modal>
+    </>
+  );
+}
+
 const AddArticle = (props) => {
   const handleSave = async () => {
     const articleName = document.getElementById("articleName").value;
@@ -106,7 +131,7 @@ const AddArticle = (props) => {
   );
 }
 
-const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle, setValue) => {
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps) => {
 
   myArticle.getFolder().then(
     (folderList) => {
@@ -119,11 +144,23 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
             // 文章
             const articleItems = []
             folder.articles.map((article) => {
-              articleItems.push(getItem(<div onClick={async() => {
-                const tempArticle = await myArticle.getArticle(article.id)
-                setArticle(tempArticle);
-                setValue(tempArticle.content);
-              }}>{article.name}</div>, 'aritcle_' + article.id));
+              articleItems.push(getItem(
+                  <div onClick={async() => {
+                    const tempArticle = await myArticle.getArticle(article.id)
+                    setArticle(tempArticle);
+                    setValue(tempArticle.content);
+                  }}>
+                    <Row>
+                      <Col span={20}>{article.name}</Col>
+                      <Col span={4}>
+                        <img className="articleIcon" style={{width: "1vw"}} src="./delete.png" alt="" onClick={()=> {
+                          setDelArticleProps({ id: article.id, isModalOpen: true });
+                        }}/>
+                      </Col>
+                    </Row>
+                  </div>,
+                  'aritcle_' + article.id
+              ));
             });
 
             // 資料夾
@@ -198,16 +235,17 @@ export default function MyArticles() {
   const [value, setValue] = React.useState("**Hello world!!!**");
   const editorRef = useRef();
   const [isEditMode, setIsEditMode] = useState(false);
+  const [delArticleProps, setDelArticleProps] = useState(false);
   const [article, setArticle] = useState({
     "id": null,
     "name": null,
     "content": "",
     "updateTime": null,
     "isPublish": null
-});
+  });
   
   useEffect(() => {
-    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle, setValue);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps);
   },[]);
 
   return (
@@ -225,6 +263,7 @@ export default function MyArticles() {
         />
         <AddFolder isModalOpen={isAddfolderModalOpen} setIsModalOpen={setIsAddfolderModalOpen} />
         <DelFolder delModalProps={delFolderModalProps} setDelFolderModalProps={setDelFolderModalProps} />
+        <DelArticle delArticleProps={delArticleProps} setDelArticleProps={setDelArticleProps} />
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
       <Content>

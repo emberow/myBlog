@@ -95,3 +95,18 @@ export const patchArticle = async (article) => {
     window.location.href = "/login";
   }
 }
+
+export const delArticle = async (articleId) => {
+  try{
+    return (await DeleteRequest({
+      url: `/api/article/?id=${articleId}`,
+      headers: {
+        Authorization: localStorage.getItem('accessToken'),
+      }
+    })).data.data;
+  } catch {
+    localStorage.removeItem('accessToken');
+    await message.error('authentication failed', 1);
+    window.location.href = "/login";
+  }
+}
