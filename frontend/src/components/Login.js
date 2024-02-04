@@ -170,7 +170,7 @@ export default function LoginPage() {
         <div className="webName">
             <label>My Blog</label><br/>
         </div>
-        <Tabs
+        <Tabs style={{maxHeight: "100%"}}
           defaultActiveKey="1"
           centered
           items={[

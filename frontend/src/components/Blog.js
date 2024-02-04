@@ -60,11 +60,11 @@ const returnDrowDownItems = () => {
 
 export default function Blog() {
   return (
-    <Layout>
+    <Layout style={{ minHeight: "100vh", minWidth: "100vw" }}>
       <Header style={{ backgroundColor: "white" }}>
         <Row style={{  height: "8vh" }}>
           <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontFamily: "Caveat", fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</Text>
+            <Text style={{ fontFamily: 'Chakra Petch', fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</Text>
           </Col>
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
             <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} />
@@ -77,7 +77,7 @@ export default function Blog() {
           </Col>
         </Row>
       </Header>
-      <Content>
+      <Content style={{ display: "grid" }}>
         <Route path="/myarticles" component={MyArticles} />
       </Content>
     </Layout>

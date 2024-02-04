@@ -6,9 +6,8 @@
     transform: translateY(-25vh);
     padding: 2vw 2vw 0vw 2vw;
     border-style: solid;
-    border-width: 1%;
-    border-color: rgb(0, 0, 0);
-    border-radius: 2vw
+    border-width: 5%;
+    border-radius: 1vw
 }
 
 .webName {
@@ -53,7 +52,3 @@
     margin: 2vh 0% 0%;
 }
 
-/* .submitBtn{
-    width: 80px;
-    justify-content: center;
-} */

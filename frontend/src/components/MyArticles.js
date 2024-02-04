@@ -249,14 +249,16 @@ export default function MyArticles() {
   },[]);
 
   return (
-    <Layout style={{ height: "92vh" }}>
+    <Layout style={{ minHeight: "100%", minWidth: "100%", paddingTop: "0.8vh"}}>
       <Sider
+        style={{borderRadius: "10px 10px 10px 10px"}}
         theme="light"
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
         <Menu
+          style={{borderRadius: "10px 10px 10px 10px"}}
           defaultOpenKeys={["32"]}
           mode="inline"
           items={sideBarItems}
@@ -266,18 +268,24 @@ export default function MyArticles() {
         <DelArticle delArticleProps={delArticleProps} setDelArticleProps={setDelArticleProps} />
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
-      <Content>
-        <Layout style={{ display: (article.id != null) ? "inline" : "None", height: "92vh"}}>
-          <Header style={{ background: "white" }}>
+      <Content style={{ minHeight: "100%", minWidth: "100%", paddingLeft: "0.3vw" }}>
+        <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
+          <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline", width:"6vw" }} onClick={()=>{myArticle.patchArticle({id: 12, isPublish: false})}}>publish</Button>
             <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{setIsEditMode(true)}}>edit</Button>
             <PreviewButton style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
             <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{saveButton(setIsEditMode, article.id, value)}}>save</Button>
-            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{setIsEditMode(false)}}>cancel</Button>
+            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={async()=>{
+              setIsEditMode(false)
+              const tempArticle = await myArticle.getArticle(article.id)
+              setArticle(tempArticle);
+              setValue(tempArticle.content);
+            }}>cancel</Button>
           </Header>
           <Content>
             <div className="container" style={{ display: isEditMode ? "None" : "inline" }}  data-color-mode="light">
               <MDEditor
+                style={{ minHeight: "100%", borderRadius: "0 0 0 10px" }}
                 value={value}
                 preview="preview"
                 hideToolbar={true}
@@ -285,6 +293,7 @@ export default function MyArticles() {
             </div>
             <div className="container" style={{ display: isEditMode ? "inline" : "None" }}  data-color-mode="light">
               <MDEditor
+                style={{ minHeight: "100%", borderRadius: "0 0 0 10px" }}
                 ref={editorRef}
                 value={value}
                 preview="edit"
