@@ -212,7 +212,9 @@ const PreviewButton = (props) => {
     });
   };
   return (
-    <Button style={{ margin:"0.5vw", display: props.isEditMode ? "inline" : "None", width:"6vw"}} onClick={click}>{buttonValue}</Button>
+    
+    <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: props.isEditMode ? "inline" : "None", width:"6vw"}} onClick={click}>{buttonValue}</Button>
+    
   );
 };
 
@@ -241,7 +243,13 @@ export default function MyArticles() {
     "name": null,
     "content": "",
     "updateTime": null,
-    "isPublish": null
+    "isPublish": null,
+    "articleFolder": {
+      "id": null,
+      "name": null,
+      "userName": null,
+      "updateTime": null,
+    },
   });
   
   useEffect(() => {
@@ -268,19 +276,36 @@ export default function MyArticles() {
         <DelArticle delArticleProps={delArticleProps} setDelArticleProps={setDelArticleProps} />
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
-      <Content>
+      <Content style={{ paddingLeft: "0.3vw" }}>
         <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
-            <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline", width:"6vw" }} onClick={()=>{myArticle.patchArticle({id: 12, isPublish: false})}}>publish</Button>
-            <Button style={{ margin:"0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{setIsEditMode(true)}}>edit</Button>
-            <PreviewButton style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
-            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{saveButton(setIsEditMode, article.id, value)}}>save</Button>
-            <Button style={{ margin:"0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={async()=>{
-              setIsEditMode(false)
-              const tempArticle = await myArticle.getArticle(article.id)
-              setArticle(tempArticle);
-              setValue(tempArticle.content);
-            }}>cancel</Button>
+            <Row>
+              <Col span={3}>
+                author: {article.articleFolder.userName}
+              </Col>
+              <Col span={7}>
+                updateTime: {
+                  article?.updateTime?.substr(0, 10)
+                }
+              </Col>
+              <Col span={8}/>
+              <Col span={2}>
+                <PreviewButton style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
+              </Col>
+              <Col span={2}>
+                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw" , display: isEditMode ? "None" : "inline", width:"6vw" }} onClick={()=>{myArticle.patchArticle({id: 12, isPublish: false})}}>publish</Button>
+                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{saveButton(setIsEditMode, article.id, value)}}>save</Button>
+              </Col>
+              <Col span={2}>
+                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{setIsEditMode(true)}}>edit</Button>
+                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={async()=>{
+                  setIsEditMode(false)
+                  const tempArticle = await myArticle.getArticle(article.id)
+                  setArticle(tempArticle);
+                  setValue(tempArticle.content);
+                }}>cancel</Button>
+              </Col>
+            </Row>
           </Header>
           <Content>
             <div className="container" style={{ display: isEditMode ? "None" : "inline" }}  data-color-mode="light">
