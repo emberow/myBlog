@@ -15,7 +15,7 @@ export const getArticle = async (id: number, userName: string) => {
     return PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
-        .leftJoin('article.articleFolder', 'folder')
+        .leftJoinAndSelect('article.articleFolder', 'folder')
         .where('article.id = :id', { id })
         .andWhere('folder.user_name = :userName', { userName })
         .getOne();
