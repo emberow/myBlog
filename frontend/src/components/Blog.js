@@ -65,7 +65,7 @@ export default function Blog() {
       <Header style={{ backgroundColor: "white" }}>
         <Row style={{  height: "8vh" }}>
           <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontFamily: 'Chakra Petch', fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</Text>
+            <Text style={{ fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</Text>
           </Col>
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
             <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} />

@@ -280,19 +280,20 @@ export default function MyArticles() {
         <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Row>
-              <Col span={6}>
+              <Col span={5}>
                 <b>Article: {article.name}</b>
               </Col>
-              <Col span={6}>
+              <Col span={5}>
                 <b>Author: {article.articleFolder.userName}</b>
               </Col>
-              <Col span={6}>
+              <Col span={5}>
                 <b>
                   UpdateTime: {
                     article?.updateTime?.substr(0, 10)
                   }
                 </b>
               </Col>
+              <Col span={3} />
               <Col span={2}>
                 <PreviewButton style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
               </Col>
@@ -322,7 +323,7 @@ export default function MyArticles() {
             </div>
             <div className="container" style={{ display: isEditMode ? "inline" : "None" }}  data-color-mode="light">
               <MDEditor
-                style={{ minHeight: "100%", borderRadius: "0 0 0 10px" }}
+                style={{ minHeight: "100%", borderRadius: "0 0 0 10px"}}
                 ref={editorRef}
                 value={value}
                 preview="edit"
