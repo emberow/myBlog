@@ -2,7 +2,8 @@ import React from "react";
 import { Input, Layout, Col, Row, Dropdown, Button, Typography } from "antd";
 import "@fontsource/caveat";
 import MyArticles from './MyArticles.js';
-import { Route } from "react-router-dom";
+import { Route, BrowserRouter } from "react-router-dom";
+import Articles from "./Articles.js";
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
@@ -16,7 +17,7 @@ const linkToMyArticle = () => {
 }
 
 const linkToArticleList = () => {
-  window.location.href = "/";
+  window.location.href = "/articleList";
 }
 
 const logOut = () => {
@@ -35,7 +36,7 @@ const returnDrowDownItems = () => {
       )
     },
   ];
-  if (window.location.pathname === '/') {
+  if (window.location.pathname === '/articleList') {
     items.unshift({
       key: '1',
       label: (
@@ -78,6 +79,7 @@ export default function Blog() {
         </Row>
       </Header>
       <Content style={{ display: "grid" }}>
+        <Route path="/articleList" component={Articles} />
         <Route path="/myarticles" component={MyArticles} />
       </Content>
     </Layout>

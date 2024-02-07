@@ -280,15 +280,19 @@ export default function MyArticles() {
         <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Row>
-              <Col span={3}>
-                author: {article.articleFolder.userName}
+              <Col span={6}>
+                <b>Article: {article.name}</b>
               </Col>
-              <Col span={7}>
-                updateTime: {
-                  article?.updateTime?.substr(0, 10)
-                }
+              <Col span={6}>
+                <b>Author: {article.articleFolder.userName}</b>
               </Col>
-              <Col span={8}/>
+              <Col span={6}>
+                <b>
+                  UpdateTime: {
+                    article?.updateTime?.substr(0, 10)
+                  }
+                </b>
+              </Col>
               <Col span={2}>
                 <PreviewButton style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
               </Col>
