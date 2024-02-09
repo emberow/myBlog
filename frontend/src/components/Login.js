@@ -20,7 +20,7 @@ const SignIn = () => {
       } else {
         localStorage.removeItem('accessToken');
       }
-      window.location.href = "/";
+      window.location.href = "/articleList";
     } catch (err) {
       message.error('login failed', 3);
     }

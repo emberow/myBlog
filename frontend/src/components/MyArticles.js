@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Input, Layout, Menu, Modal, Button, message, Col, Row } from "antd";
+import { Input, Layout, Menu, Modal, Button, message, Col, Row, ConfigProvider } from "antd";
 import "@fontsource/caveat";
 import * as myArticle from "../api/myArticle.js";
 import "./MyArticleStyle.css";
@@ -153,7 +153,7 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
                     <Row>
                       <Col span={20}>{article.name}</Col>
                       <Col span={4}>
-                        <img className="articleIcon" style={{width: "1vw"}} src="./delete.png" alt="" onClick={()=> {
+                        <img className="articleIcon" style={{width: "0.8vw"}} src="./delete.png" alt="" onClick={()=> {
                           setDelArticleProps({ id: article.id, isModalOpen: true });
                         }}/>
                       </Col>
@@ -167,16 +167,16 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
             sideBarItems.push(getItem(
               <div>
                 <Row>
-                  <Col span={16} style={{ justifyContent: "center", alignItems: "center" }}>
+                  <Col span={16}>
                     <div>{folder.name} </div>
                   </Col>
                   <Col span={4}>
-                    <img className="icon" style={{width: "1vw"}} onClick={()=> {
+                    <img className="icon" style={{width: "0.8vw"}} onClick={()=> {
                       setAddArticleModalProps({ id: folder.id, isModalOpen: true });
                       }} src="./add2.png" alt="" />
                   </Col>
                   <Col span={4}>
-                    <img className="icon" style={{width: "1vw"}} onClick={()=> {
+                    <img className="icon" style={{width: "0.8vw"}} onClick={()=> {
                       setDelModalProps({ id: folder.id, isModalOpen: true });
                       }} src="./delete.png" alt="" />
                   </Col>
@@ -265,18 +265,29 @@ export default function MyArticles() {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
+      <ConfigProvider
+        theme={{
+          components: {
+            Menu: {
+              subMenuItemBg: "rgba(0, 0, 0, 0.03)"
+            },
+          },
+        }}
+      >
         <Menu
           style={{borderRadius: "10px 10px 10px 10px"}}
           defaultOpenKeys={["32"]}
           mode="inline"
           items={sideBarItems}
         />
+      </ConfigProvider>
         <AddFolder isModalOpen={isAddfolderModalOpen} setIsModalOpen={setIsAddfolderModalOpen} />
         <DelFolder delModalProps={delFolderModalProps} setDelFolderModalProps={setDelFolderModalProps} />
         <DelArticle delArticleProps={delArticleProps} setDelArticleProps={setDelArticleProps} />
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
       <Content style={{ paddingLeft: "0.3vw" }}>
+        <div style={{display: (article.id != null) ? "None" : "grid", background: "white", height: "100%", width: "100%", borderRadius: "10px 0 0 0" }}/>
         <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Row>
