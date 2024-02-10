@@ -131,7 +131,7 @@ const AddArticle = (props) => {
   );
 }
 
-const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps) => {
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps, setIsEditMode) => {
 
   myArticle.getFolder().then(
     (folderList) => {
@@ -147,6 +147,7 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
               articleItems.push(getItem(
                   <div onClick={async() => {
                     const tempArticle = await myArticle.getArticle(article.id)
+                    setIsEditMode(false);
                     setArticle(tempArticle);
                     setValue(tempArticle.content);
                   }}>
@@ -253,11 +254,11 @@ export default function MyArticles() {
   });
   
   useEffect(() => {
-    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps, setIsEditMode);
   },[]);
 
   return (
-    <Layout style={{ minHeight: "100%", minWidth: "100%", paddingTop: "0.8vh"}}>
+    <Layout style={{ minHeight: "100%", minWidth: "100%", paddingTop: "0.5vh"}}>
       <Sider
         style={{borderRadius: "10px 10px 10px 10px"}}
         theme="light"
@@ -286,13 +287,13 @@ export default function MyArticles() {
         <DelArticle delArticleProps={delArticleProps} setDelArticleProps={setDelArticleProps} />
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
-      <Content style={{ paddingLeft: "0.3vw" }}>
+      <Content style={{ paddingLeft: "0.5vh" }}>
         <div style={{display: (article.id != null) ? "None" : "grid", background: "white", height: "100%", width: "100%", borderRadius: "10px 0 0 0" }}/>
         <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Row>
               <Col span={5}>
-                <b>Article: {article.name}</b>
+                <b>ArticleName: {article.name}</b>
               </Col>
               <Col span={5}>
                 <b>Author: {article.articleFolder.userName}</b>
