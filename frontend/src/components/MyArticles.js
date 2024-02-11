@@ -213,19 +213,18 @@ const PreviewButton = (props) => {
     });
   };
   return (
-    
     <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: props.isEditMode ? "inline" : "None", width:"6vw"}} onClick={click}>{buttonValue}</Button>
-    
   );
 };
 
-const saveButton = (setIsEditMode, id, content) => {
+const saveButton = async (setIsEditMode, id, content) => {
   const article = {
     "id": id,
     "content": content,
   }
   myArticle.patchArticle(article);
   setIsEditMode(false);
+  await message.success('save article successed', 1);
 }
 
 
@@ -288,7 +287,9 @@ export default function MyArticles() {
         <AddArticle addArticleModalProps={addArticleModalProps} setAddArticleModalProps={setAddArticleModalProps} />
       </Sider>
       <Content style={{ paddingLeft: "0.5vh" }}>
-        <div style={{display: (article.id != null) ? "None" : "grid", background: "white", height: "100%", width: "100%", borderRadius: "10px 0 0 0" }}/>
+        <div style={{display: (article.id != null) ? "None" : "grid", background: "white", height: "100%", width: "100%", borderRadius: "10px 0 0 0", placeItems: "center" }}>
+          <img src="./box.png" alt="" style={{ width: "20vw", opacity: 0.05 }} />
+        </div>
         <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Row>
@@ -310,7 +311,15 @@ export default function MyArticles() {
                 <PreviewButton style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
               </Col>
               <Col span={2}>
-                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw" , display: isEditMode ? "None" : "inline", width:"6vw" }} onClick={()=>{myArticle.patchArticle({id: 12, isPublish: false})}}>publish</Button>
+                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw" , display: isEditMode ? "None" : "inline", width:"6vw"}} onClick={async ()=>{
+                  try {
+                    await myArticle.patchArticle({id: article.id, isPublish: (article.isPublish) ? false : true});
+                  setArticle({...article, isPublish: (article.isPublish) ? false : true});
+                  (article.isPublish) ? await message.success('unpublish successed', 1) : await message.success('publish successed', 1);
+                  } catch (error) {
+                    (article.isPublish) ? await message.error('unpublish failed', 1) : await message.error('publish failed', 1);
+                  }
+                  }}>{(article.isPublish) ? "unpublish": "publish"}</Button>
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{saveButton(setIsEditMode, article.id, value)}}>save</Button>
               </Col>
               <Col span={2}>

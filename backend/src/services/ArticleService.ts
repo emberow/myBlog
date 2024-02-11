@@ -25,6 +25,7 @@ export const addArticleFolder = async (userName: string, folderName: string) => 
   const article = {
     name: folderName,
     userName: userName,
+    updateTime: new Date(),
   }
   await ArticleFolderModel.addArticleFolder(article);
 };
@@ -80,6 +81,7 @@ export const addArticle = async (userName: string, folderId: number, articleName
   }
   const article = {
     name: articleName,
+    is_publish: false,
     articleFolder: {
       id: folderId,
     }
