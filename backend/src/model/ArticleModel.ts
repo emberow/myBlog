@@ -46,3 +46,14 @@ export const deleteArticles = async (ids: number[]) => {
         .execute();
 }
 
+export const getArticleList = async (limit: number, offset: number) => {
+    return PostgresDataSource
+        .getRepository(Article)
+        .createQueryBuilder('article')
+        .leftJoinAndSelect('article.articleFolder', 'folder')
+        .where('article.isPublish = true')
+        .limit(limit)
+        .offset(offset)
+        .getMany();
+}
+

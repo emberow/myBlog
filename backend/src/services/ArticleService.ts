@@ -123,3 +123,8 @@ export const deleteArticle = async (userName: string, id: number) => {
   }
   await ArticleModel.deleteArticles([id]);
 };
+
+export const getArticleList = async (limit: number, page: number) => {
+  const offset = limit * (page - 1)
+  return ArticleModel.getArticleList(limit, offset);
+};

@@ -16,4 +16,7 @@ MyArticleRoute.route('/article')
     .patch(MyArticleController.updateArticle)
     .delete(MyArticleController.deleteArticle)
 
+MyArticleRoute.route('/articleList')
+    .get(MyArticleController.getArticleList)
+
 export default MyArticleRoute;

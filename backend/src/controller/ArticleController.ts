@@ -96,3 +96,14 @@ export const deleteArticle = async (req: Request, res: Response, next: NextFunct
     next(err);
   }
 };
+
+export const getArticleList = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const page: number  = req.query.page as any;
+    const limit: number  = req.query.limit as any;
+    const result = await ArticleService.getArticleList(limit, page);
+    res.status(200).json({ data: result });
+  } catch (err) {
+    next(err);
+  }
+};
