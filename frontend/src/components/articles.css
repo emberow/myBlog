@@ -5,3 +5,7 @@
 .article {
     background-color: white;
 }
+
+.pageChange:hover {
+    cursor: pointer;
+}

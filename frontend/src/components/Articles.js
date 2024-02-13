@@ -3,8 +3,8 @@ import './articles.css';
 import React, { useEffect, useState } from "react";
 import { getArticleList } from "../api/articles.js";
 
-const initArticleList = async(setArticleList) => {
-  const result = await getArticleList();
+const initArticleList = async(page, setArticleList) => {
+  const result = await getArticleList(page);
   setArticleList(result);
 }
 
@@ -13,7 +13,7 @@ export default function Articles() {
   const [articleList, setArticleList] = useState({});
 
   useEffect(() => {
-    initArticleList(setArticleList);
+    initArticleList(1, setArticleList);
   },[]);
 
   return (
@@ -144,17 +144,25 @@ export default function Articles() {
             </div>
             <Row style={{ height: "9.2vh", backgroundColor: "rgb(245, 245, 245)", padding:"0 0.5vh 0 0.5vh" }}>
               <Col span={9} style={{backgroundColor: "white", borderRadius: "1vw 0 0 1vw"}} />
-              <Col span={2} style={{backgroundColor: "white"}}>
+              <Col className="pageChange" span={2} style={{backgroundColor: "white"}}>
                 <div style={{ height: "5vh", paddingTop: "2vh", textAlign: "center"}}>
-                  <img src="./left-arrow.png" style={{ width: "2vw" }}/>
+                  <img src="./left-arrow.png" style={{ width: "2vw" }} onClick={() => {
+                    if ((page - 1) > 0) {
+                      initArticleList(page - 1, setArticleList);
+                      setPage(page - 1);
+                    }
+                  }}/>
                 </div>
               </Col>
               <Col span={2} style={{backgroundColor: "white"}}>
-                <div style={{ paddingTop: "2vh", textAlign: "center", fontSize: "1.5vw" }}>1</div>
+                <div style={{ paddingTop: "2vh", textAlign: "center", fontSize: "1.5vw" }}>{page}</div>
               </Col>
-              <Col span={2} style={{backgroundColor: "white"}}>
+              <Col className="pageChange" span={2} style={{backgroundColor: "white"}}>
                 <div style={{ height: "5vh", paddingTop: "2vh", textAlign: "center"}}>
-                  <img src="./right-arrow.png" style={{ width: "2vw" }}/>
+                  <img src="./right-arrow.png" style={{ width: "2vw" }} onClick={() => {
+                    initArticleList(page + 1, setArticleList);
+                    setPage(page + 1);
+                  }}/>
                 </div>
               </Col>
               <Col span={9} style={{backgroundColor: "white", borderRadius: "0 1vw 1vw 0"}} />
