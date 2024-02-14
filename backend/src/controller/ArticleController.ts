@@ -102,7 +102,8 @@ export const getArticleList = async (req: Request, res: Response, next: NextFunc
     const page: number  = req.query.page as any;
     const limit: number  = req.query.limit as any;
     const result = await ArticleService.getArticleList(limit, page);
-    res.status(200).json({ data: result });
+    const maximumPages = await ArticleService.getArticleCount();
+    res.status(200).json({ data: { ...result, maximumPages } });
   } catch (err) {
     next(err);
   }

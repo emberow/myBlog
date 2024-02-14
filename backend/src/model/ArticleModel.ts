@@ -57,3 +57,10 @@ export const getArticleList = async (limit: number, offset: number) => {
         .getMany();
 }
 
+export const getArticleCount = async () => {
+    return PostgresDataSource
+        .getRepository(Article)
+        .createQueryBuilder('article')
+        .where('article.isPublish = true')
+        .getCount();
+}

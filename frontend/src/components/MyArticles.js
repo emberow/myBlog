@@ -314,8 +314,8 @@ export default function MyArticles() {
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw" , display: isEditMode ? "None" : "inline", width:"6vw"}} onClick={async ()=>{
                   try {
                     await myArticle.patchArticle({id: article.id, isPublish: (article.isPublish) ? false : true});
-                  setArticle({...article, isPublish: (article.isPublish) ? false : true});
-                  (article.isPublish) ? await message.success('unpublish successed', 1) : await message.success('publish successed', 1);
+                    setArticle({...article, isPublish: (article.isPublish) ? false : true});
+                    (article.isPublish) ? await message.success('unpublish successed', 1) : await message.success('publish successed', 1);
                   } catch (error) {
                     (article.isPublish) ? await message.error('unpublish failed', 1) : await message.error('publish failed', 1);
                   }

@@ -128,3 +128,7 @@ export const getArticleList = async (limit: number, page: number) => {
   const offset = limit * (page - 1)
   return ArticleModel.getArticleList(limit, offset);
 };
+
+export const getArticleCount = async () => {
+  return ArticleModel.getArticleCount();
+};

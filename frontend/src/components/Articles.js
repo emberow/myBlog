@@ -47,17 +47,17 @@ export default function Articles() {
                 <div style={{ padding: "1vh" }}>
                   <Row>
                     <Col span={12}>
-                      <b>{articleList[0]?.name}</b>
+                      <b>{articleList[1]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[0]?.articleFolder.userName}
+                      author: {articleList[1]?.articleFolder.userName}
                     </Col>
                     <Col span={6}>
-                      date: {articleList[0]?.updateTime?.substr(0, 10)}
+                      date: {articleList[1]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden" }}>
-                    {articleList[0]?.content}
+                    {articleList[1]?.content}
                   </div>
                 </div>
               </div>
@@ -67,17 +67,17 @@ export default function Articles() {
                 <div style={{ padding: "1vh" }}>
                   <Row>
                     <Col span={12}>
-                      <b>{articleList[0]?.name}</b>
+                      <b>{articleList[2]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[0]?.articleFolder.userName}
+                      author: {articleList[2]?.articleFolder.userName}
                     </Col>
                     <Col span={6}>
-                      date: {articleList[0]?.updateTime?.substr(0, 10)}
+                      date: {articleList[2]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden" }}>
-                    {articleList[0]?.content}
+                    {articleList[2]?.content}
                   </div>
                 </div>
               </div>
@@ -87,17 +87,17 @@ export default function Articles() {
                 <div style={{ padding: "1vh" }}>
                   <Row>
                     <Col span={12}>
-                      <b>{articleList[0]?.name}</b>
+                      <b>{articleList[3]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[0]?.articleFolder.userName}
+                      author: {articleList[3]?.articleFolder.userName}
                     </Col>
                     <Col span={6}>
-                      date: {articleList[0]?.updateTime?.substr(0, 10)}
+                      date: {articleList[3]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden" }}>
-                    {articleList[0]?.content}
+                    {articleList[3]?.content}
                   </div>
                 </div>
               </div>
@@ -107,17 +107,17 @@ export default function Articles() {
                 <div style={{ padding: "1vh" }}>
                   <Row>
                     <Col span={12}>
-                      <b>{articleList[0]?.name}</b>
+                      <b>{articleList[4]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[0]?.articleFolder.userName}
+                      author: {articleList[4]?.articleFolder.userName}
                     </Col>
                     <Col span={6}>
-                      date: {articleList[0]?.updateTime?.substr(0, 10)}
+                      date: {articleList[4]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden" }}>
-                    {articleList[0]?.content}
+                    {articleList[4]?.content}
                   </div>
                 </div>
               </div>
@@ -127,17 +127,17 @@ export default function Articles() {
                 <div style={{ padding: "1vh" }}>
                   <Row>
                     <Col span={12}>
-                      <b>{articleList[0]?.name}</b>
+                      <b>{articleList[5]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[0]?.articleFolder.userName}
+                      author: {articleList[5]?.articleFolder.userName}
                     </Col>
                     <Col span={6}>
-                      date: {articleList[0]?.updateTime?.substr(0, 10)}
+                      date: {articleList[5]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden" }}>
-                    {articleList[0]?.content}
+                    {articleList[5]?.content}
                   </div>
                 </div>
               </div>
@@ -146,7 +146,7 @@ export default function Articles() {
               <Col span={9} style={{backgroundColor: "white", borderRadius: "1vw 0 0 1vw"}} />
               <Col className="pageChange" span={2} style={{backgroundColor: "white"}}>
                 <div style={{ height: "5vh", paddingTop: "2vh", textAlign: "center"}}>
-                  <img src="./left-arrow.png" style={{ width: "2vw" }} onClick={() => {
+                  <img src="./left-arrow.png" style={{ width: "2vw", opacity: (page == 1) ? 0.3 : 1 }} onClick={() => {
                     if ((page - 1) > 0) {
                       initArticleList(page - 1, setArticleList);
                       setPage(page - 1);
@@ -159,9 +159,12 @@ export default function Articles() {
               </Col>
               <Col className="pageChange" span={2} style={{backgroundColor: "white"}}>
                 <div style={{ height: "5vh", paddingTop: "2vh", textAlign: "center"}}>
-                  <img src="./right-arrow.png" style={{ width: "2vw" }} onClick={() => {
-                    initArticleList(page + 1, setArticleList);
-                    setPage(page + 1);
+                  <img src="./right-arrow.png" style={{ width: "2vw", opacity: (Math.floor((articleList?.maximumPages - (articleList?.maximumPages % 6)) / 6) + 1 + ((articleList?.maximumPages % 6 == 0) ? -1 : 0) == page) ? 0.3 : 1 }} onClick={() => {
+                    if (Math.floor((articleList?.maximumPages - (articleList?.maximumPages % 6)) / 6) + 1 + ((articleList?.maximumPages % 6 == 0) ? -1 : 0) != page) {
+                      console.log(articleList?.maximumPages, articleList?.maximumPages % 6)
+                      initArticleList(page + 1, setArticleList);
+                      setPage(page + 1);
+                    }
                   }}/>
                 </div>
               </Col>
