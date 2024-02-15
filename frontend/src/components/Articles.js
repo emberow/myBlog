@@ -25,7 +25,7 @@ export default function Articles() {
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0vh 0.5vh 0 0.5vh", borderRadius: "1vw 1vw 0vw 0vw"}}>
               <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
                 <div style={{ padding: "1vh" }}>
-                  <Row>
+                  <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
                       <b>{articleList[0]?.name}</b>
                     </Col>
@@ -36,7 +36,7 @@ export default function Articles() {
                       date: {articleList[0]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
-                <div style={{ width: "55vw", overflow: "hidden" }}>
+                <div className="truncatedText" style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
                   {articleList[0]?.content}
                 </div>
                 </div>
@@ -45,7 +45,7 @@ export default function Articles() {
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
               <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
                 <div style={{ padding: "1vh" }}>
-                  <Row>
+                  <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
                       <b>{articleList[1]?.name}</b>
                     </Col>
@@ -56,7 +56,7 @@ export default function Articles() {
                       date: {articleList[1]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
-                  <div style={{ width: "55vw", overflow: "hidden" }}>
+                  <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
                     {articleList[1]?.content}
                   </div>
                 </div>
@@ -65,7 +65,7 @@ export default function Articles() {
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
               <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
                 <div style={{ padding: "1vh" }}>
-                  <Row>
+                  <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
                       <b>{articleList[2]?.name}</b>
                     </Col>
@@ -76,7 +76,7 @@ export default function Articles() {
                       date: {articleList[2]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
-                  <div style={{ width: "55vw", overflow: "hidden" }}>
+                  <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
                     {articleList[2]?.content}
                   </div>
                 </div>
@@ -85,7 +85,7 @@ export default function Articles() {
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
               <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
                 <div style={{ padding: "1vh" }}>
-                  <Row>
+                  <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
                       <b>{articleList[3]?.name}</b>
                     </Col>
@@ -96,7 +96,7 @@ export default function Articles() {
                       date: {articleList[3]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
-                  <div style={{ width: "55vw", overflow: "hidden" }}>
+                  <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
                     {articleList[3]?.content}
                   </div>
                 </div>
@@ -105,7 +105,7 @@ export default function Articles() {
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
               <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
                 <div style={{ padding: "1vh" }}>
-                  <Row>
+                  <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
                       <b>{articleList[4]?.name}</b>
                     </Col>
@@ -116,7 +116,7 @@ export default function Articles() {
                       date: {articleList[4]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
-                  <div style={{ width: "55vw", overflow: "hidden" }}>
+                  <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
                     {articleList[4]?.content}
                   </div>
                 </div>
@@ -125,7 +125,7 @@ export default function Articles() {
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0.5vh 0.5vh", borderRadius: "0vw 0vw 1vw 1vw"}}>
               <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
                 <div style={{ padding: "1vh" }}>
-                  <Row>
+                  <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
                       <b>{articleList[5]?.name}</b>
                     </Col>
@@ -136,7 +136,7 @@ export default function Articles() {
                       date: {articleList[5]?.updateTime?.substr(0, 10)}
                     </Col>
                   </Row>
-                  <div style={{ width: "55vw", overflow: "hidden" }}>
+                  <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
                     {articleList[5]?.content}
                   </div>
                 </div>
