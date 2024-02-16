@@ -30,10 +30,14 @@ export default function Articles() {
                       <b>{articleList[0]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[0]?.articleFolder.userName}
+                      <div style={{display: (articleList[0]?.articleFolder.userName) ? "block": "none"}}>
+                        author: {articleList[0]?.articleFolder.userName}
+                      </div>
                     </Col>
                     <Col span={6}>
-                      date: {articleList[0]?.updateTime?.substr(0, 10)}
+                      <div style={{display: (articleList[0]?.updateTime) ? "block": "none"}}>
+                        date: {articleList[0]?.updateTime?.substr(0, 10)}
+                      </div>
                     </Col>
                   </Row>
                 <div className="truncatedText" style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
@@ -50,10 +54,14 @@ export default function Articles() {
                       <b>{articleList[1]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[1]?.articleFolder.userName}
+                      <div style={{display: (articleList[1]?.articleFolder.userName) ? "block": "none"}}>
+                        author: {articleList[1]?.articleFolder.userName}
+                      </div>
                     </Col>
                     <Col span={6}>
-                      date: {articleList[1]?.updateTime?.substr(0, 10)}
+                      <div style={{display: (articleList[1]?.updateTime) ? "block": "none"}}>
+                        date: {articleList[1]?.updateTime?.substr(0, 10)}
+                      </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
@@ -70,10 +78,14 @@ export default function Articles() {
                       <b>{articleList[2]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[2]?.articleFolder.userName}
+                      <div style={{display: (articleList[2]?.articleFolder.userName) ? "block": "none"}}>
+                        author: {articleList[2]?.articleFolder.userName}
+                      </div>
                     </Col>
                     <Col span={6}>
-                      date: {articleList[2]?.updateTime?.substr(0, 10)}
+                      <div style={{display: (articleList[2]?.updateTime) ? "block": "none"}}>
+                        date: {articleList[2]?.updateTime?.substr(0, 10)}
+                      </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
@@ -90,10 +102,14 @@ export default function Articles() {
                       <b>{articleList[3]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[3]?.articleFolder.userName}
+                      <div style={{display: (articleList[3]?.articleFolder.userName) ? "block": "none"}}>
+                        author: {articleList[3]?.articleFolder.userName}
+                      </div>
                     </Col>
                     <Col span={6}>
-                      date: {articleList[3]?.updateTime?.substr(0, 10)}
+                      <div style={{display: (articleList[3]?.updateTime) ? "block": "none"}}>
+                        date: {articleList[3]?.updateTime?.substr(0, 10)}
+                      </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
@@ -110,10 +126,14 @@ export default function Articles() {
                       <b>{articleList[4]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[4]?.articleFolder.userName}
+                      <div style={{display: (articleList[4]?.articleFolder.userName) ? "block": "none"}}>
+                        author: {articleList[4]?.articleFolder.userName}
+                      </div>
                     </Col>
                     <Col span={6}>
-                      date: {articleList[4]?.updateTime?.substr(0, 10)}
+                      <div style={{display: (articleList[4]?.updateTime) ? "block": "none"}}>
+                        date: {articleList[4]?.updateTime?.substr(0, 10)}
+                      </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
@@ -130,10 +150,14 @@ export default function Articles() {
                       <b>{articleList[5]?.name}</b>
                     </Col>
                     <Col span={6}>
-                      author: {articleList[5]?.articleFolder.userName}
+                      <div style={{display: (articleList[5]?.articleFolder.userName) ? "block": "none"}}>
+                        author: {articleList[5]?.articleFolder.userName}
+                      </div>
                     </Col>
                     <Col span={6}>
-                      date: {articleList[5]?.updateTime?.substr(0, 10)}
+                      <div style={{display: (articleList[5]?.updateTime) ? "block": "none"}}>
+                        date: {articleList[5]?.updateTime?.substr(0, 10)}
+                      </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
