@@ -23,7 +23,11 @@ export default function Articles() {
         <div style={{backgroundColor: "rgb(245, 245, 245)"}}>
           <div style={{ minHeight:"100%" }}>
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0vh 0.5vh 0 0.5vh", borderRadius: "1vw 1vw 0vw 0vw"}}>
-              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor:(articleList[0]?.id) ? "pointer" : "default"}} onClick={()=>{
+                if (articleList[0]?.id) {
+                  window.location.href = "/article/" + articleList[0]?.id;
+                }
+              }}>
                 <div style={{ padding: "1vh" }}>
                   <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
@@ -47,7 +51,11 @@ export default function Articles() {
               </div>
             </div>
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
-              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor:(articleList[1]?.id) ? "pointer" : "default"}} onClick={()=>{
+                if (articleList[1]?.id) {
+                  window.location.href = "/article/" + articleList[1]?.id;
+                }
+              }}> 
                 <div style={{ padding: "1vh" }}>
                   <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
@@ -71,7 +79,11 @@ export default function Articles() {
               </div>
             </div>
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
-              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor:(articleList[2]?.id) ? "pointer" : "default"}} onClick={()=>{
+                if (articleList[2]?.id) {
+                  window.location.href = "/article/" + articleList[2]?.id;
+                }
+              }}> 
                 <div style={{ padding: "1vh" }}>
                   <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
@@ -95,7 +107,11 @@ export default function Articles() {
               </div>
             </div>
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
-              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor:(articleList[3]?.id) ? "pointer" : "default"}} onClick={()=>{
+                if (articleList[3]?.id) {
+                  window.location.href = "/article/" + articleList[3]?.id;
+                }
+              }}> 
                 <div style={{ padding: "1vh" }}>
                   <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
@@ -119,7 +135,11 @@ export default function Articles() {
               </div>
             </div>
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0 0.5vh"}}>
-              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor:(articleList[4]?.id) ? "pointer" : "default"}} onClick={()=>{
+                if (articleList[4]?.id) {
+                  window.location.href = "/article/" + articleList[4]?.id;
+                }
+              }}> 
                 <div style={{ padding: "1vh" }}>
                   <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
@@ -143,7 +163,11 @@ export default function Articles() {
               </div>
             </div>
             <div style={{ backgroundColor: "rgb(245, 245, 245)", height: "13.5vh", padding: "0.5vh 0.5vh 0.5vh 0.5vh", borderRadius: "0vw 0vw 1vw 1vw"}}>
-              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap"}}>
+              <div className="article" style={{ height: "100%", paddingTop: "0.5vh", paddingRight: "1vh", paddingLeft: "1vh", borderRadius: "1vw", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", cursor:(articleList[5]?.id) ? "pointer" : "default"}} onClick={()=>{
+                if (articleList[5]?.id) {
+                  window.location.href = "/article/" + articleList[5]?.id;
+                }
+              }}> 
                 <div style={{ padding: "1vh" }}>
                   <Row style={{paddingLeft: "2vh"}}>
                     <Col span={12}>
