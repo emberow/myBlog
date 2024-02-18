@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import './articles.css';
+import './articleList.css';
 import React, { useEffect, useState } from "react";
 import { getArticleList } from "../api/articles.js";
 

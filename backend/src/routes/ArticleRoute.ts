@@ -19,4 +19,7 @@ MyArticleRoute.route('/article')
 MyArticleRoute.route('/articleList')
     .get(MyArticleController.getArticleList)
 
+MyArticleRoute.route('/publishedArticle')
+    .get(MyArticleController.getPublishedArticle)
+
 export default MyArticleRoute;

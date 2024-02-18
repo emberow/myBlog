@@ -64,3 +64,12 @@ export const getArticleCount = async () => {
         .where('article.isPublish = true')
         .getCount();
 }
+
+export const getPublishedArticle = async (id: number) => {
+    return PostgresDataSource
+        .getRepository(Article)
+        .createQueryBuilder('article')
+        .where('article.id = :id', { id })
+        .andWhere('article.isPublish = true')
+        .getOne();
+}

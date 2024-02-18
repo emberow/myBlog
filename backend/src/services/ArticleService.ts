@@ -132,3 +132,11 @@ export const getArticleList = async (limit: number, page: number) => {
 export const getArticleCount = async () => {
   return ArticleModel.getArticleCount();
 };
+
+export const getPublishedArticle = async (id: number) => {
+  if (!id) {
+    throw new CustomError(400, 'INVALID_ID');
+  }
+
+  return ArticleModel.getPublishedArticle(Number(id));
+};

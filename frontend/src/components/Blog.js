@@ -2,8 +2,9 @@ import React from "react";
 import { Input, Layout, Col, Row, Dropdown, Button, Typography } from "antd";
 import "@fontsource/caveat";
 import MyArticles from './MyArticles.js';
-import { Route, BrowserRouter } from "react-router-dom";
-import Articles from "./Articles.js";
+import Article from './Article.js';
+import { Route } from "react-router-dom";
+import ArticleList from "./ArticleList.js";
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
@@ -79,8 +80,9 @@ export default function Blog() {
         </Row>
       </Header>
       <Content style={{ display: "grid" }}>
-        <Route path="/articleList" component={Articles} />
+        <Route path="/articleList" component={ArticleList} />
         <Route path="/myarticles" component={MyArticles} />
+        <Route path="/article/:id" component={Article} />
       </Content>
     </Layout>
   );

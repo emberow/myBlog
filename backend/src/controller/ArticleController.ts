@@ -54,8 +54,8 @@ export const getArticle = async (req: Request, res: Response, next: NextFunction
     const token = req.headers.authorization;
     const {userName} = await verifyAccount(token);
     const id: number = req.query.id as any;
-    const folderInfo = await ArticleService.getArticle(userName, id);
-    res.status(200).json({ data: folderInfo });
+    const articleInfo = await ArticleService.getArticle(userName, id);
+    res.status(200).json({ data: articleInfo });
   } catch (err) {
     next(err);
   }
@@ -104,6 +104,16 @@ export const getArticleList = async (req: Request, res: Response, next: NextFunc
     const result = await ArticleService.getArticleList(limit, page);
     const maximumPages = await ArticleService.getArticleCount();
     res.status(200).json({ data: { ...result, maximumPages } });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getPublishedArticle = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const id: number = req.query.id as any;
+    const articleInfo = await ArticleService.getPublishedArticle(id);
+    res.status(200).json({ data: articleInfo });
   } catch (err) {
     next(err);
   }
