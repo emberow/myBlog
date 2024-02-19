@@ -29,7 +29,7 @@ const logOut = () => {
 const returnDrowDownItems = () => {
   const items = [
     {
-      key: '2',
+      key: '0',
       label: (
         <a onClick={logOut}>
           <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
@@ -37,7 +37,8 @@ const returnDrowDownItems = () => {
       )
     },
   ];
-  if (window.location.pathname === '/articleList') {
+
+  if (window.location.pathname !== '/myarticles' && localStorage.getItem('accessToken')) {
     items.unshift({
       key: '1',
       label: (
@@ -46,9 +47,11 @@ const returnDrowDownItems = () => {
         </a>
       ),
     });
-  } else {
+  } 
+
+  if (window.location.pathname !== '/articleList') {
     items.unshift({
-      key: '1',
+      key: '2',
       label: (
         <a onClick={linkToArticleList}>
           <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> Article List

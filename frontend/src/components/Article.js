@@ -21,7 +21,7 @@ export default function Articles() {
 
   useEffect(() => {
     init(id, setArticle);
-  });
+  }, []);
 
   return (
     <>
