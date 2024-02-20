@@ -69,6 +69,7 @@ export const getPublishedArticle = async (id: number) => {
     return PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
+        .leftJoinAndSelect('article.articleFolder', 'folder')
         .where('article.id = :id', { id })
         .andWhere('article.isPublish = true')
         .getOne();
