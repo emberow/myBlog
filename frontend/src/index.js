@@ -21,9 +21,7 @@ root.render(
       <Route 
         path="/"
         render={() => (
-          localStorage.getItem('accessToken')
-          ? <Blog />
-          : <Redirect to="/login" />
+          <Blog />
         )}
       />
     </BrowserRouter>

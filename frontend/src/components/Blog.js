@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Layout, Col, Row, Dropdown, Button, Typography } from "antd";
 import "@fontsource/caveat";
 import MyArticles from './MyArticles.js';
@@ -23,20 +23,34 @@ const linkToArticleList = () => {
 
 const logOut = () => {
   localStorage.removeItem("accessToken");
-  window.location.href = "/login";
+  document.location.reload();
 }
 
 const returnDrowDownItems = () => {
-  const items = [
-    {
-      key: '0',
-      label: (
-        <a onClick={logOut}>
-          <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
-        </a>
-      )
-    },
-  ];
+  const items = [];
+  if (localStorage.getItem('accessToken')) {
+    items.unshift(
+      {
+        key: '0',
+        label: (
+          <a onClick={logOut}>
+            <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
+          </a>
+        )
+      },
+    );
+  } else {
+    items.unshift(
+      {
+        key: '0',
+        label: (
+          <a href="/login">
+            <img src="./login.png" alt="" style={{width: "1vw"}}/> login
+          </a>
+        )
+      },
+    );
+  }
 
   if (window.location.pathname !== '/myarticles' && localStorage.getItem('accessToken')) {
     items.unshift({
@@ -64,6 +78,7 @@ const returnDrowDownItems = () => {
 }
 
 export default function Blog() {
+  const[userName, setUserName] = useState(123);
   return (
     <Layout style={{ minHeight: "100vh", minWidth: "100vw" }}>
       <Header style={{ backgroundColor: "white" }}>
@@ -74,7 +89,10 @@ export default function Blog() {
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
             <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} />
           </Col>
-          <Col span={3} />
+          <Col span={3} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <img style={{ width:"1.5vw" }} src="../user-interface.png" />
+            <div>{userName}</div>
+          </Col>
           <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" onClick={(event)=>{console.log(event)}} arrow>
               <Button>menu</Button>
