@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Input, Layout, Col, Row, Dropdown, Button, Typography } from "antd";
 import "@fontsource/caveat";
 import MyArticles from './MyArticles.js';
 import Article from './Article.js';
 import { Route } from "react-router-dom";
 import ArticleList from "./ArticleList.js";
-import { DataContext } from "./MyContext.js";
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
@@ -24,6 +23,7 @@ const linkToArticleList = () => {
 
 const logOut = () => {
   localStorage.removeItem("accessToken");
+  localStorage.removeItem("userName");
   document.location.reload();
 }
 
@@ -79,7 +79,7 @@ const returnDrowDownItems = () => {
 }
 
 export default function Blog() {
-  const { userName } = useContext(DataContext);
+  const userName = localStorage.getItem('userName');
 
   return (
     <Layout style={{ minHeight: "100vh", minWidth: "100vw" }}>
@@ -93,7 +93,7 @@ export default function Blog() {
           </Col>
           <Col span={3} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <img style={{ width:"1.5vw" }} src="../user-interface.png" />
-            <div>{userName}</div>
+            <div>{userName ? userName : "guest"}</div>
           </Col>
           <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" onClick={(event)=>{console.log(event)}} arrow>

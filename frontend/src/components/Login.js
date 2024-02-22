@@ -1,9 +1,7 @@
 import './Login.css';
-import React, { useContext } from "react";
+import React from "react";
 import {  Input, Tabs, Form, Checkbox, Button, message } from 'antd';
 import * as account from '../api/account.js';
-import { DataContext } from "./MyContext.js";
-
 
 const apiFail = (errorInfo) => {
   console.log('Failed:', errorInfo);
@@ -14,6 +12,7 @@ const SignIn = () => {
     let token;
     try {
       token = await account.userLoginCheck(values);
+      localStorage.setItem('userName', values.userName);
       localStorage.setItem('accessToken', token);
       await message.success('login successed', 1);
       if (values.remember === true) {
@@ -165,8 +164,7 @@ const SignUp = () => {
 }
 
 export default function LoginPage() {
-  const { userName, setUserName } = useContext(DataContext);
-  setUserName(444)
+  
   return (
     <div calss="container">
       <div className="LoginForm">
