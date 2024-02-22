@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Input, Layout, Col, Row, Dropdown, Button, Typography } from "antd";
 import "@fontsource/caveat";
 import MyArticles from './MyArticles.js';
 import Article from './Article.js';
 import { Route } from "react-router-dom";
 import ArticleList from "./ArticleList.js";
+import { DataContext } from "./MyContext.js";
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
@@ -78,7 +79,8 @@ const returnDrowDownItems = () => {
 }
 
 export default function Blog() {
-  const[userName, setUserName] = useState(123);
+  const { userName } = useContext(DataContext);
+
   return (
     <Layout style={{ minHeight: "100vh", minWidth: "100vw" }}>
       <Header style={{ backgroundColor: "white" }}>

@@ -1,7 +1,8 @@
 import './Login.css';
-import React from 'react';
+import React, { useContext } from "react";
 import {  Input, Tabs, Form, Checkbox, Button, message } from 'antd';
 import * as account from '../api/account.js';
+import { DataContext } from "./MyContext.js";
 
 
 const apiFail = (errorInfo) => {
@@ -164,6 +165,8 @@ const SignUp = () => {
 }
 
 export default function LoginPage() {
+  const { userName, setUserName } = useContext(DataContext);
+  setUserName(444)
   return (
     <div calss="container">
       <div className="LoginForm">
