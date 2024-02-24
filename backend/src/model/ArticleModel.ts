@@ -46,23 +46,39 @@ export const deleteArticles = async (ids: number[]) => {
         .execute();
 }
 
-export const getArticleList = async (limit: number, offset: number) => {
-    return PostgresDataSource
+export const getArticleList = async (limit: number, offset: number, search: string) => {
+    let result = PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
         .leftJoinAndSelect('article.articleFolder', 'folder')
         .where('article.isPublish = true')
+        
+    if (search) {
+        result = result
+            .andWhere('upper(article.name) like upper(:search)', { search: `%${search}%` })
+            .orWhere('upper(article.content) like upper(:search)', { search: `%${search}%` })
+    }
+
+    result = result
         .limit(limit)
         .offset(offset)
-        .getMany();
+    
+    return result.getMany();
 }
 
-export const getArticleCount = async () => {
-    return PostgresDataSource
+export const getArticleCount = async (search: string) => {
+    let result = PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
         .where('article.isPublish = true')
-        .getCount();
+
+    if (search) {
+        result = result
+            .andWhere('upper(article.name) like upper(:search)', { search: `%${search}%` })
+            .orWhere('upper(article.content) like upper(:search)', { search: `%${search}%` })
+    }
+
+    return result.getCount();
 }
 
 export const getPublishedArticle = async (id: number) => {

@@ -124,13 +124,13 @@ export const deleteArticle = async (userName: string, id: number) => {
   await ArticleModel.deleteArticles([id]);
 };
 
-export const getArticleList = async (limit: number, page: number) => {
+export const getArticleList = async (limit: number, page: number, search: string) => {
   const offset = limit * (page - 1)
-  return ArticleModel.getArticleList(limit, offset);
+  return ArticleModel.getArticleList(limit, offset, search);
 };
 
-export const getArticleCount = async () => {
-  return ArticleModel.getArticleCount();
+export const getArticleCount = async (search: string) => {
+  return ArticleModel.getArticleCount(search);
 };
 
 export const getPublishedArticle = async (id: number) => {
