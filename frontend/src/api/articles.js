@@ -1,8 +1,12 @@
 import { GetRequest } from "../utils/request.js";
 
-export const getArticleList = async (page) => {
+export const getArticleList = async (page, search) => {
+  let url = `/api/articleList?page=${page}&limit=6`;
+  if (search) {
+    url += `&search=${search}`;
+  }
   return (await GetRequest({
-    url: `/api/articleList?page=${page}&limit=6`,
+    url: url,
   })).data.data;
 }
 

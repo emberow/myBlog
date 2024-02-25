@@ -9,7 +9,8 @@ import ArticleList from "./ArticleList.js";
 const { Header, Content } = Layout;
 const { Text } = Typography;
 
-const onSearch = () => {
+const onSearch = (value) => {
+  window.location.href = `/articleList/?search=${value}`;
   return;
 }
 
@@ -64,7 +65,7 @@ const returnDrowDownItems = () => {
     });
   } 
 
-  if (window.location.pathname !== '/articleList') {
+  if (window.location.pathname == '/myarticles') {
     items.unshift({
       key: '2',
       label: (
@@ -89,11 +90,11 @@ export default function Blog() {
             <Text style={{ fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</Text>
           </Col>
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
-            <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} />
+            <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} allowClear />
           </Col>
           <Col span={3} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <img style={{ width:"1.5vw" }} src="../user-interface.png" />
-            <div>{userName ? userName : "guest"}</div>
+            <div>&nbsp;{userName ? userName : "guest"}</div>
           </Col>
           <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" onClick={(event)=>{console.log(event)}} arrow>
@@ -103,7 +104,7 @@ export default function Blog() {
         </Row>
       </Header>
       <Content style={{ display: "grid" }}>
-        <Route path="/articleList" component={ArticleList} />
+        <Route path="/articleList/" component={ArticleList} />
         <Route path="/myarticles" component={MyArticles} />
         <Route path="/article/:id" component={Article} />
       </Content>

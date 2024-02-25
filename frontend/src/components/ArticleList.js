@@ -3,17 +3,20 @@ import './articleList.css';
 import React, { useEffect, useState } from "react";
 import { getArticleList } from "../api/articles.js";
 
-const initArticleList = async(page, setArticleList) => {
-  const result = await getArticleList(page);
+const initArticleList = async(page, setArticleList, search) => {
+  const result = await getArticleList(page, search);
   setArticleList(result);
 }
 
 export default function Articles() {
   const [page, setPage] = useState(1);
   const [articleList, setArticleList] = useState({});
+  const queryString = window.location.search;
+  const params = new URLSearchParams(queryString);
+  const search = params.get('search');
 
   useEffect(() => {
-    initArticleList(1, setArticleList);
+    initArticleList(1, setArticleList, search);
   },[]);
 
   return (
@@ -194,7 +197,7 @@ export default function Articles() {
               <Col span={9} style={{backgroundColor: "white", borderRadius: "1vw 0 0 1vw"}} />
               <Col className="pageChange" span={2} style={{backgroundColor: "white"}}>
                 <div style={{ height: "5vh", paddingTop: "2vh", textAlign: "center"}}>
-                  <img src="./left-arrow.png" style={{ width: "2vw", opacity: (page == 1) ? 0.3 : 1 }} onClick={() => {
+                  <img src="../left-arrow.png" style={{ width: "2vw", opacity: (page == 1) ? 0.3 : 1 }} onClick={() => {
                     if ((page - 1) > 0) {
                       initArticleList(page - 1, setArticleList);
                       setPage(page - 1);
@@ -207,7 +210,7 @@ export default function Articles() {
               </Col>
               <Col className="pageChange" span={2} style={{backgroundColor: "white"}}>
                 <div style={{ height: "5vh", paddingTop: "2vh", textAlign: "center"}}>
-                  <img src="./right-arrow.png" style={{ width: "2vw", opacity: (Math.floor((articleList?.maximumPages - (articleList?.maximumPages % 6)) / 6) + 1 + ((articleList?.maximumPages % 6 == 0) ? -1 : 0) == page) ? 0.3 : 1 }} onClick={() => {
+                  <img src="../right-arrow.png" style={{ width: "2vw", opacity: (Math.floor((articleList?.maximumPages - (articleList?.maximumPages % 6)) / 6) + 1 + ((articleList?.maximumPages % 6 == 0) ? -1 : 0) == page) ? 0.3 : 1 }} onClick={() => {
                     if (Math.floor((articleList?.maximumPages - (articleList?.maximumPages % 6)) / 6) + 1 + ((articleList?.maximumPages % 6 == 0) ? -1 : 0) != page) {
                       console.log(articleList?.maximumPages, articleList?.maximumPages % 6)
                       initArticleList(page + 1, setArticleList);
