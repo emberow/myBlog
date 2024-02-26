@@ -19,7 +19,7 @@ export const verifyAccount = async (userName: string, password: string) => {
         .getOne()) ? true : false;
 }
 
-export const addAccount = async (account: Iaccount) => {
+export const addAccount: (account: Iaccount) => Promise<Iaccount & Account> = async (account: Iaccount) => {
     return await PostgresDataSource
         .getRepository(Account)
         .save(account);
