@@ -1,0 +1,35 @@
+version: '1'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: blog
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 32865417
+    ports:
+      - "6432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    networks:
+      - mynetwork
+  myblog-frontend:
+    image: myblog-frontend:latest
+    ports:
+      - "8000:8000"
+  myblog-backend:
+    image: myblog-backend:latest
+    environment:
+      - DB_HOST=postgres
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
+    driver: bridge

@@ -11,7 +11,15 @@ import router from '../routes';
 import { errorHandler } from './middleware/errors';
 
 (async () => {
-    await DataSource.initialize();
+    while (true) {
+        try {
+            await DataSource.initialize();
+            break;
+        } catch (error) {
+            console.log('Failed to connect to database. Retrying in 5 seconds...');
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+        }
+    }
     const app = express();
     const corsOptions = {
         origin: '*',
