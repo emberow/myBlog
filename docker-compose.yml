@@ -17,11 +17,11 @@ services:
     networks:
       - mynetwork
   myblog-frontend:
-    image: myblog-frontend:latest
+    image: andy45630/myblog-frontend:latest
     ports:
       - "8000:8000"
   myblog-backend:
-    image: myblog-backend:latest
+    image: andy45630/myblog-backend:latest
     environment:
       - DB_HOST=postgres
     ports:
