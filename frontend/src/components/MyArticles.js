@@ -293,18 +293,17 @@ export default function MyArticles() {
         <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Row>
-              <Col span={5}>
-                <b>ArticleName: {article.name}</b>
+              <Col span={5} style={{ display: "flex", alignItems: "center" }}>
+                <img style={{ width:"1.5vw" }} src="../addArticles.png" />
+                &nbsp; {article.name}
               </Col>
-              <Col span={5}>
-                <b>Author: {article.articleFolder.userName}</b>
+              <Col span={5} style={{ display: "flex", alignItems: "center" }}>
+                <img style={{ width:"1.5vw" }} src="../user-interface.png" />
+                &nbsp;{article.articleFolder.userName}
               </Col>
-              <Col span={5}>
-                <b>
-                  UpdateTime: {
-                    article?.updateTime?.substr(0, 10)
-                  }
-                </b>
+              <Col span={5} style={{ display: "flex", alignItems: "center" }}>
+                <img style={{ width:"1.5vw" }} src="../clock.png" /> 
+                &nbsp;{article?.updateTime?.substr(0, 10)}
               </Col>
               <Col span={3} />
               <Col span={2}>

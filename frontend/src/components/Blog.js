@@ -35,8 +35,8 @@ const returnDrowDownItems = () => {
       {
         key: '0',
         label: (
-          <a onClick={logOut}>
-            <img src="./logout.png" alt="" style={{width: "1vw"}}/> logout
+          <a onClick={logOut} style={{ display: "flex", alignItems: "center" }}>
+            <img src="../logout.png" alt="" style={{width: "1vw"}}/>&nbsp;logout
           </a>
         )
       },
@@ -46,8 +46,8 @@ const returnDrowDownItems = () => {
       {
         key: '0',
         label: (
-          <a href="/login">
-            <img src="./login.png" alt="" style={{width: "1vw"}}/> login
+          <a href="/login" style={{ display: "flex", alignItems: "center" }}>
+            <img src="../login.png" alt="" style={{width: "1vw"}}/>&nbsp;login
           </a>
         )
       },
@@ -58,8 +58,8 @@ const returnDrowDownItems = () => {
     items.unshift({
       key: '1',
       label: (
-        <a onClick={linkToMyArticle}>
-          <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> My Aritcles
+        <a onClick={linkToMyArticle} style={{ display: "flex", alignItems: "center" }}>
+          <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>&nbsp;My Aritcles
         </a>
       ),
     });
@@ -69,8 +69,8 @@ const returnDrowDownItems = () => {
     items.unshift({
       key: '2',
       label: (
-        <a onClick={linkToArticleList}>
-          <img src="./addArticles.png" alt="" style={{width: "1vw"}}/> Article List
+        <a onClick={linkToArticleList} style={{ display: "flex", alignItems: "center" }}>
+          <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>&nbsp;Article List
         </a>
       ),
     });

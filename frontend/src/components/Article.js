@@ -28,28 +28,29 @@ export default function Articles() {
 
   return (
     <Layout>
-      <Header style={{ background: "white"}}>
-        <Row>
-          <Col span={5} style={{height: "10vh"}}>
-            <img src="../return.png" style={{ cursor: "pointer", alignItems: "center",justifyContent: "center", height: "50%" }} onClick={()=>{
-              history.goBack();
-            }} />
-          </Col>
-          <Col span={5}>
-            <b>ArticleName: {article.name}</b>
-          </Col>
-          <Col span={5}>
-            <b>Author: {article?.articleFolder?.userName}</b>
-          </Col>
-          <Col span={5}>
-            <b>
-              UpdateTime: {
-                article?.updateTime?.substr(0, 10)
-              }
-            </b>
-          </Col>
-        </Row>
-      </Header>
+      <div style={{ background: "rgb(245,245,245)", paddingTop: "0.5vh" }}>
+        <Header style={{ background: "white"}}>
+          <Row>
+            <Col span={5} style={{ display: "flex", alignItems: "center" }}>
+              <img src="../return.png" style={{ cursor: "pointer", height: "5vh" }} onClick={()=>{
+                history.goBack();
+              }} />
+            </Col>
+            <Col span={5} style={{ display: "flex", alignItems: "center" }}>
+              <img style={{ width:"1.5vw" }} src="../addArticles.png" />
+              &nbsp;{article.name}
+            </Col>
+            <Col span={5} style={{ display: "flex", alignItems: "center" }}>
+              <img style={{ width:"1.5vw" }} src="../user-interface.png" />
+              &nbsp;{article?.articleFolder?.userName}
+            </Col>
+            <Col span={5} style={{ display: "flex", alignItems: "center" }}>
+              <img style={{ width:"1.5vw" }} src="../clock.png" /> 
+              &nbsp;{article?.updateTime?.substr(0, 10)}
+            </Col>
+          </Row>
+        </Header>
+      </div>
       <Content  style={{ minHeight: "100%", minWidth: "100%", paddingTop: "0.5vh"}}>
         <div className="container" style={{ display: "inline" }}  data-color-mode="light">
           <MDEditor

@@ -32,18 +32,21 @@ export default function Articles() {
                 }
               }}>
                 <div style={{ padding: "1vh" }}>
-                  <Row style={{paddingLeft: "2vh"}}>
-                    <Col span={12}>
-                      <b>{articleList[0]?.name}</b>
+                  <Row style={{paddingLeft: "2vh", display: articleList[0]?.name? "flex" : "none" }}>
+                    <Col span={12} style={{ display: "flex", alignItems: "center" }}>
+                      <img style={{ width:"1.2vw" }} src="../addArticles.png" />
+                      &nbsp; {articleList[0]?.name}
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[0]?.articleFolder.userName) ? "block": "none"}}>
-                        author: {articleList[0]?.articleFolder.userName}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[0]?.articleFolder.userName) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../user-interface.png" />
+                        &nbsp;{articleList[0]?.articleFolder.userName}
                       </div>
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[0]?.updateTime) ? "block": "none"}}>
-                        date: {articleList[0]?.updateTime?.substr(0, 10)}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[0]?.updateTime) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../clock.png" /> 
+                        &nbsp;{articleList[0]?.updateTime?.substr(0, 10)}
                       </div>
                     </Col>
                   </Row>
@@ -60,18 +63,21 @@ export default function Articles() {
                 }
               }}> 
                 <div style={{ padding: "1vh" }}>
-                  <Row style={{paddingLeft: "2vh"}}>
-                    <Col span={12}>
-                      <b>{articleList[1]?.name}</b>
+                  <Row style={{paddingLeft: "2vh", display: articleList[1]?.name? "flex" : "none" }}>
+                    <Col span={12} style={{ display: "flex", alignItems: "center" }}>
+                      <img style={{ width:"1.2vw" }} src="../addArticles.png" />
+                      &nbsp; {articleList[1]?.name}
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[1]?.articleFolder.userName) ? "block": "none"}}>
-                        author: {articleList[1]?.articleFolder.userName}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[1]?.articleFolder.userName) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../user-interface.png" />
+                        &nbsp;{articleList[1]?.articleFolder.userName}
                       </div>
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[1]?.updateTime) ? "block": "none"}}>
-                        date: {articleList[1]?.updateTime?.substr(0, 10)}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[1]?.updateTime) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../clock.png" /> 
+                        &nbsp;{articleList[1]?.updateTime?.substr(0, 10)}
                       </div>
                     </Col>
                   </Row>
@@ -88,18 +94,21 @@ export default function Articles() {
                 }
               }}> 
                 <div style={{ padding: "1vh" }}>
-                  <Row style={{paddingLeft: "2vh"}}>
-                    <Col span={12}>
-                      <b>{articleList[2]?.name}</b>
+                  <Row style={{paddingLeft: "2vh", display: articleList[2]?.name? "flex" : "none" }}>
+                    <Col span={12} style={{ display: "flex", alignItems: "center" }}>
+                      <img style={{ width:"1.2vw" }} src="../addArticles.png" />
+                      &nbsp; {articleList[2]?.name}
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[2]?.articleFolder.userName) ? "block": "none"}}>
-                        author: {articleList[2]?.articleFolder.userName}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[2]?.articleFolder.userName) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../user-interface.png" />
+                        &nbsp;{articleList[2]?.articleFolder.userName}
                       </div>
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[2]?.updateTime) ? "block": "none"}}>
-                        date: {articleList[2]?.updateTime?.substr(0, 10)}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[2]?.updateTime) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../clock.png" /> 
+                        &nbsp;{articleList[2]?.updateTime?.substr(0, 10)}
                       </div>
                     </Col>
                   </Row>
@@ -116,18 +125,21 @@ export default function Articles() {
                 }
               }}> 
                 <div style={{ padding: "1vh" }}>
-                  <Row style={{paddingLeft: "2vh"}}>
-                    <Col span={12}>
-                      <b>{articleList[3]?.name}</b>
+                  <Row style={{paddingLeft: "2vh", display: articleList[3]?.name? "flex" : "none" }}>
+                    <Col span={12} style={{ display: "flex", alignItems: "center" }}>
+                      <img style={{ width:"1.2vw" }} src="../addArticles.png" />
+                      &nbsp; {articleList[3]?.name}
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[3]?.articleFolder.userName) ? "block": "none"}}>
-                        author: {articleList[3]?.articleFolder.userName}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[3]?.articleFolder.userName) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../user-interface.png" />
+                        &nbsp;{articleList[3]?.articleFolder.userName}
                       </div>
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[3]?.updateTime) ? "block": "none"}}>
-                        date: {articleList[3]?.updateTime?.substr(0, 10)}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[3]?.updateTime) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../clock.png" /> 
+                        &nbsp;{articleList[3]?.updateTime?.substr(0, 10)}
                       </div>
                     </Col>
                   </Row>
@@ -144,18 +156,21 @@ export default function Articles() {
                 }
               }}> 
                 <div style={{ padding: "1vh" }}>
-                  <Row style={{paddingLeft: "2vh"}}>
-                    <Col span={12}>
-                      <b>{articleList[4]?.name}</b>
+                  <Row style={{paddingLeft: "2vh", display: articleList[4]?.name? "flex" : "none" }}>
+                    <Col span={12} style={{ display: "flex", alignItems: "center" }}>
+                      <img style={{ width:"1.2vw" }} src="../addArticles.png" />
+                      &nbsp; {articleList[4]?.name}
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[4]?.articleFolder.userName) ? "block": "none"}}>
-                        author: {articleList[4]?.articleFolder.userName}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[4]?.articleFolder.userName) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../user-interface.png" />
+                        &nbsp;{articleList[4]?.articleFolder.userName}
                       </div>
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[4]?.updateTime) ? "block": "none"}}>
-                        date: {articleList[4]?.updateTime?.substr(0, 10)}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[4]?.updateTime) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../clock.png" /> 
+                        &nbsp;{articleList[4]?.updateTime?.substr(0, 10)}
                       </div>
                     </Col>
                   </Row>
@@ -172,18 +187,21 @@ export default function Articles() {
                 }
               }}> 
                 <div style={{ padding: "1vh" }}>
-                  <Row style={{paddingLeft: "2vh"}}>
-                    <Col span={12}>
-                      <b>{articleList[5]?.name}</b>
+                  <Row style={{paddingLeft: "2vh", display: articleList[5]?.name? "flex" : "none" }}>
+                    <Col span={12} style={{ display: "flex", alignItems: "center" }}>
+                      <img style={{ width:"1.2vw" }} src="../addArticles.png" />
+                      &nbsp; {articleList[5]?.name}
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[5]?.articleFolder.userName) ? "block": "none"}}>
-                        author: {articleList[5]?.articleFolder.userName}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[5]?.articleFolder.userName) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../user-interface.png" />
+                        &nbsp;{articleList[5]?.articleFolder.userName}
                       </div>
                     </Col>
-                    <Col span={6}>
-                      <div style={{display: (articleList[5]?.updateTime) ? "block": "none"}}>
-                        date: {articleList[5]?.updateTime?.substr(0, 10)}
+                    <Col span={6} style={{ display: "flex", alignItems: "center" }}>
+                      <div style={{display: (articleList[5]?.updateTime) ? "flex": "none"}}>
+                        <img style={{ width:"1.2vw" }} src="../clock.png" /> 
+                        &nbsp;{articleList[5]?.updateTime?.substr(0, 10)}
                       </div>
                     </Col>
                   </Row>
