@@ -47,7 +47,7 @@ export const deleteArticleFolder = async (id: number, userName: string) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
-  if (!id) {
+  if (id == null) {
     throw new CustomError(400, 'INVALID_Id');
   }
   let articles: Article[] = await ArticleModel.getArticleByFolderId(id, userName);
@@ -62,7 +62,7 @@ export const getArticle = async (userName: string, id: number) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
-  if (!id) {
+  if (id == null) {
     throw new CustomError(400, 'INVALID_ID');
   }
 
@@ -73,7 +73,7 @@ export const addArticle = async (userName: string, folderId: number, articleName
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
-  if (!folderId) {
+  if (folderId == null) {
     throw new CustomError(400, 'INVALID_FOLDERID');
   }
   if (!articleName) {
@@ -93,7 +93,7 @@ export const updateArticle = async (userName: string, id: number, name: string, 
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
-  if (!id) {
+  if (id == null) {
     throw new CustomError(400, 'INVALID_ID');
   }
  
@@ -118,7 +118,7 @@ export const deleteArticle = async (userName: string, id: number) => {
   if (!userName) {
     throw new CustomError(400, 'INVALID_USERNAME');
   }
-  if (!id) {
+  if (id == null) {
     throw new CustomError(400, 'INVALID_Id');
   }
   await ArticleModel.deleteArticles([id]);
@@ -134,7 +134,7 @@ export const getArticleCount = async (search: string) => {
 };
 
 export const getPublishedArticle = async (id: number) => {
-  if (!id) {
+  if (id == null) {
     throw new CustomError(400, 'INVALID_ID');
   }
 

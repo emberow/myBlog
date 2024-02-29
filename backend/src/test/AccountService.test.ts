@@ -18,7 +18,7 @@ describe('AccountService', () => {
         jest.spyOn(AccountModel, 'addAccount')
             .mockImplementation(() => account);
         const result = await AccountService.addAccount("userName", "password");
-        expect(result != null).toBe(true);
+        expect(result).toBe(await account);
     });
 
     it('changePassword', async () => {
@@ -28,6 +28,6 @@ describe('AccountService', () => {
         jest.spyOn(AccountModel, 'changePassword')
             .mockImplementation(() => updateResult);
         const result = await AccountService.changePassword("userName", "password", "newPassword");
-        expect(result != null).toBe(true);
+        expect(result).toBe(await updateResult);
     });
 });
