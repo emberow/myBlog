@@ -63,7 +63,7 @@ export const getArticleList = async (limit: number, offset: number, search: stri
         .limit(limit)
         .offset(offset)
     
-    return result.getMany();
+    return result.orderBy('folder.update_time', "DESC").getMany();
 }
 
 export const getArticleCount = async (search: string) => {
