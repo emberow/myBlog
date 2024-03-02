@@ -290,7 +290,7 @@ export default function MyArticles() {
         <div style={{display: (article.id != null) ? "None" : "grid", background: "white", height: "100%", width: "100%", borderRadius: "10px 0 0 0", placeItems: "center" }}>
           <img src="./box.png" alt="" style={{ width: "20vw", opacity: 0.05 }} />
         </div>
-        <Layout style={{ display: (article.id != null) ? "grid" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
+        <Layout style={{ display: (article.id != null) ? "inline" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
             <Row>
               <Col span={5} style={{ display: "flex", alignItems: "center" }}>
@@ -332,7 +332,7 @@ export default function MyArticles() {
               </Col>
             </Row>
           </Header>
-          <Content>
+          <Content style={{ height: "90%" }} >
             <div className="container" style={{ display: isEditMode ? "None" : "inline" }}  data-color-mode="light">
               <MDEditor
                 style={{ minHeight: "100%", borderRadius: "0 0 0 10px" }}
