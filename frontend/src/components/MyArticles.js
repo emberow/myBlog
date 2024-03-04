@@ -199,7 +199,6 @@ const PreviewButton = (props) => {
   let dispatch;
   let preview;
   let editorInstance;
-  const [buttonValue, setButtonValue] = useState("preview");
 
   const click = () => {
     editorInstance = props.editorRef.current;
@@ -207,13 +206,13 @@ const PreviewButton = (props) => {
       dispatch = editorInstance.dispatch;
       preview = editorInstance.preview;
     }
-    setButtonValue(preview);
     dispatch({
-      preview: preview === "edit" ? "preview" : "edit"
+      preview: props.isPreview ? "edit" : "preview"
     });
+    props.setIsPreview(!props.isPreview);
   };
   return (
-    <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: props.isEditMode ? "inline" : "None", width:"6vw"}} onClick={click}>{buttonValue}</Button>
+    <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: props.isEditMode ? "inline" : "None", width:"6vw"}} onClick={click}>{props.isPreview ? "edit" : "preview"}</Button>
   );
 };
 
@@ -238,6 +237,8 @@ export default function MyArticles() {
   const editorRef = useRef();
   const [isEditMode, setIsEditMode] = useState(false);
   const [delArticleProps, setDelArticleProps] = useState(false);
+  const [isPreview, setIsPreview] = useState(false);
+  
   const [article, setArticle] = useState({
     "id": null,
     "name": null,
@@ -307,7 +308,7 @@ export default function MyArticles() {
               </Col>
               <Col span={3} />
               <Col span={2}>
-                <PreviewButton style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} />
+                <PreviewButton style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw" }} editorRef={editorRef} isEditMode={isEditMode} isPreview={isPreview} setIsPreview={setIsPreview} />
               </Col>
               <Col span={2}>
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw" , display: isEditMode ? "None" : "inline", width:"6vw"}} onClick={async ()=>{
@@ -322,7 +323,17 @@ export default function MyArticles() {
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={()=>{saveButton(setIsEditMode, article.id, value)}}>save</Button>
               </Col>
               <Col span={2}>
-                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{setIsEditMode(true)}}>edit</Button>
+                <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "None" : "inline" , width:"6vw" }} onClick={()=>{
+                  setIsEditMode(true);
+                  setIsPreview(false); 
+                  const editorInstance = editorRef.current;
+                  if (editorInstance) {
+                    const dispatch = editorInstance.dispatch;
+                    dispatch({
+                      preview: "edit"
+                    });
+                  }
+                  }}>edit</Button>
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={async()=>{
                   setIsEditMode(false)
                   const tempArticle = await myArticle.getArticle(article.id)
