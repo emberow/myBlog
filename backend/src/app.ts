@@ -22,7 +22,7 @@ import { errorHandler } from './middleware/errors';
     }
     const app = express();
     const corsOptions = {
-        origin: '*',
+        origin: ['http://localhost:3000', 'http://emberow.com'],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,
