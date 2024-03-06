@@ -7,6 +7,6 @@ COPY ./ $APP_HOME
 
 RUN npm install --ignore-scripts
 
-EXPOSE 8000/tcp
+EXPOSE 80/tcp
 
 CMD npm run start

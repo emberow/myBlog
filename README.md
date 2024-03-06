@@ -30,7 +30,8 @@ docker-compose up
 # use node 21
 $ cd frontend
 $ npm i
-$ npm run start
+$ npm run dev:run
+# run frontend at http:localhost:8000/
 ```
 
 ### run backend
@@ -40,4 +41,5 @@ $ cd backend
 $ npm i
 $ npm run build
 $ npm run start
+# run backend at http:localhost:3000/
 ```
