@@ -21,6 +21,12 @@ root.render(
       <Route 
         path="/"
         render={() => (
+          <Redirect to="/articleList" />
+        )}
+      />
+      <Route 
+        path="/articleList"
+        render={() => (
           <Blog />
         )}
       />
