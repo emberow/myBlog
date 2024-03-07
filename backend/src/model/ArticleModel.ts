@@ -57,25 +57,28 @@ export const getArticleList = async (limit: number, offset: number, search: stri
         result = result
             .andWhere('upper(article.name) like upper(:search)', { search: `%${search}%` })
             .orWhere('upper(article.content) like upper(:search)', { search: `%${search}%` })
+            .orWhere('upper(folder.userName) like upper(:search)', { search: `%${search}%` })
     }
 
     result = result
         .limit(limit)
         .offset(offset)
     
-    return result.orderBy('folder.update_time', "DESC").getMany();
+    return result.orderBy('article.update_time', "DESC").getMany();
 }
 
 export const getArticleCount = async (search: string) => {
     let result = PostgresDataSource
         .getRepository(Article)
         .createQueryBuilder('article')
+        .leftJoinAndSelect('article.articleFolder', 'folder')
         .where('article.isPublish = true')
 
     if (search) {
         result = result
             .andWhere('upper(article.name) like upper(:search)', { search: `%${search}%` })
             .orWhere('upper(article.content) like upper(:search)', { search: `%${search}%` })
+            .orWhere('upper(folder.userName) like upper(:search)', { search: `%${search}%` })
     }
 
     return result.getCount();
