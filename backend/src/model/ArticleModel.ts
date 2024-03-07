@@ -8,6 +8,7 @@ export const getArticleByFolderId = async (folderId: number, userName: String) =
         .leftJoin('article.articleFolder', 'folder')
         .where('article.article_folder_id = :folderId', { folderId })
         .andWhere('folder.user_name = :userName', { userName })
+        .orderBy('article.update_time', "DESC")
         .getMany();
 }
 
