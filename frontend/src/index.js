@@ -14,18 +14,12 @@ root.render(
         path="/login"
         render={() => (
           localStorage.getItem('accessToken')
-          ? <Redirect to="/" />
+          ? <Redirect to="/articleList" />
           : <LoginPage />
         )}
       />
       <Route 
         path="/"
-        render={() => (
-          <Redirect to="/articleList" />
-        )}
-      />
-      <Route 
-        path="/articleList"
         render={() => (
           <Blog />
         )}

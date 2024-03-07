@@ -5,6 +5,7 @@ import MyArticles from './MyArticles.js';
 import Article from './Article.js';
 import { Route } from "react-router-dom";
 import ArticleList from "./ArticleList.js";
+import { Redirect } from "react-router-dom";
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
@@ -107,6 +108,9 @@ export default function Blog() {
         <Route path="/articleList/" component={ArticleList} />
         <Route path="/myarticles" component={MyArticles} />
         <Route path="/article/:id" component={Article} />
+        <Route exact path="/">
+          <Redirect to="/articleList/" />
+        </Route>
       </Content>
     </Layout>
   );
