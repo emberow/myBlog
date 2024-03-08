@@ -131,7 +131,7 @@ const AddArticle = (props) => {
   );
 }
 
-const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps, setIsEditMode) => {
+const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps, setIsEditMode, setTempContent) => {
 
   myArticle.getFolder().then(
     (folderList) => {
@@ -150,6 +150,7 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
                     setIsEditMode(false);
                     setArticle(tempArticle);
                     setValue(tempArticle.content);
+                    setTempContent(tempArticle.content);
                   }}>
                     <Row>
                       <Col span={20}>{article.name}</Col>
@@ -238,6 +239,7 @@ export default function MyArticles() {
   const [isEditMode, setIsEditMode] = useState(false);
   const [delArticleProps, setDelArticleProps] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
+  const [tempContent, setTempContent] = useState("");
   
   const [article, setArticle] = useState({
     "id": null,
@@ -254,8 +256,22 @@ export default function MyArticles() {
   });
   
   useEffect(() => {
-    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps, setIsEditMode);
+    getSideBarItems(setSideBarItems, setIsAddfolderModalOpen, setDelFolderModalProps, setAddArticleModalProps, setArticle, setValue, setDelArticleProps, setIsEditMode, setTempContent);
   },[]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      if (tempContent != article.content) {
+        const message = 'Changes you made may not be saved.';
+        event.returnValue = message;
+        return message;
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  },[tempContent]);
 
   return (
     <Layout style={{ minHeight: "100%", minWidth: "100%", paddingTop: "0.5vh"}}>
@@ -333,12 +349,14 @@ export default function MyArticles() {
                       preview: "edit"
                     });
                   }
+                  setTempContent(article.content);
                   }}>edit</Button>
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={async()=>{
                   setIsEditMode(false)
                   const tempArticle = await myArticle.getArticle(article.id)
                   setArticle(tempArticle);
                   setValue(tempArticle.content);
+                  setTempContent(tempArticle.content);
                 }}>cancel</Button>
               </Col>
             </Row>
@@ -360,6 +378,7 @@ export default function MyArticles() {
                 preview="edit"
                 onChange={(val) => {
                   setValue(val);
+                  setTempContent(val);
                 }}
                 commands={[...commands.getCommands()]}
                 extraCommands={[]}
