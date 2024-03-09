@@ -139,18 +139,18 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
         () => {
           let sideBarItems = [];
           sideBarItems.push(getItem(<a onClick={()=>{setIsAddfolderModalOpen(true);}} style={{ fontWeight: "bold", fontSize: "1vw"}}></a>, "folder_0", <img src="./add.png" alt="" style={{width: "1vw", left: "40%", position: "relative"}}/>))
-          folderList.map((folder)=>{
+          folderList?.map((folder)=>{
 
             // 文章
             const articleItems = []
-            folder.articles.map((article) => {
+            folder?.articles?.map((article) => {
               articleItems.push(getItem(
                   <div onClick={async() => {
                     const tempArticle = await myArticle.getArticle(article.id)
                     setIsEditMode(false);
                     setArticle(tempArticle);
-                    setValue(tempArticle.content);
-                    setTempContent(tempArticle.content);
+                    setValue(tempArticle?.content);
+                    setTempContent(tempArticle?.content);
                   }}>
                     <Row>
                       <Col span={20}>{article.name}</Col>
@@ -261,7 +261,7 @@ export default function MyArticles() {
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      if (tempContent != article.content) {
+      if (tempContent != article?.content) {
         const message = 'Changes you made may not be saved.';
         event.returnValue = message;
         return message;
@@ -349,14 +349,14 @@ export default function MyArticles() {
                       preview: "edit"
                     });
                   }
-                  setTempContent(article.content);
+                  setTempContent(article?.content);
                   }}>edit</Button>
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={async()=>{
                   setIsEditMode(false)
                   const tempArticle = await myArticle.getArticle(article.id)
                   setArticle(tempArticle);
-                  setValue(tempArticle.content);
-                  setTempContent(tempArticle.content);
+                  setValue(tempArticle?.content);
+                  setTempContent(tempArticle?.content);
                 }}>cancel</Button>
               </Col>
             </Row>

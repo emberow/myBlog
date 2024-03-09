@@ -51,7 +51,7 @@ export const deleteArticleFolder = async (id: number, userName: string) => {
     throw new CustomError(400, 'INVALID_Id');
   }
   let articles: Article[] = await ArticleModel.getArticleByFolderId(id, userName);
-  let articleIds: number[] = articles.map(item => item.id);
+  let articleIds: number[] = articles?.map(item => item.id);
   if (articleIds.length != 0) {
     await ArticleModel.deleteArticles(articleIds);
   }

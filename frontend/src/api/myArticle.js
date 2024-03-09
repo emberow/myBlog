@@ -1,5 +1,16 @@
 import { GetRequest, PostRequest, DeleteRequest, PatchRequest } from "../utils/request.js";
 import { message } from "antd";
+
+const errHandler = async (err) => {
+  if (err.response.data.message === "EXPIRED_TOKEN") {
+    await message.error('EXPIRED_TOKEN, please login', 1);
+  } else {
+    await message.error('INVALID_TOKEN, please login', 1);
+  }
+  localStorage.removeItem('accessToken');
+  window.location.href = "/articleList";
+}
+
 export const getFolder = async () => {
   try {
     return (await GetRequest({
@@ -7,11 +18,9 @@ export const getFolder = async () => {
       headers: {
         Authorization: localStorage.getItem('accessToken'),
       }
-    })).data.data;
-  } catch {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
+    }))?.data?.data;
+  } catch (err) {
+    errHandler(err);
   }
 }
 
@@ -24,10 +33,8 @@ export const addFolder = async (folderName) => {
         Authorization: localStorage.getItem('accessToken'),
       }
     }));
-  } catch {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
+  } catch (err) {
+    errHandler(err);
   }
 }
 
@@ -39,10 +46,8 @@ export const delFolder = async (folderId) => {
         Authorization: localStorage.getItem('accessToken'),
       }
     }));
-  } catch {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
+  } catch (err) {
+    errHandler(err);
   }
 }
 
@@ -58,10 +63,8 @@ export const addArticle = async (folderId, articleName) => {
         Authorization: localStorage.getItem('accessToken'),
       }
     }));
-  } catch {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
+  } catch (err) {
+    errHandler(err);
   }
 }
 
@@ -72,11 +75,9 @@ export const getArticle = async (articleId) => {
       headers: {
         Authorization: localStorage.getItem('accessToken'),
       }
-    })).data.data;
-  } catch {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
+    }))?.data?.data;
+  } catch (err) {
+    errHandler(err);
   }
 }
 
@@ -89,10 +90,8 @@ export const patchArticle = async (article) => {
         Authorization: localStorage.getItem('accessToken'),
       }
     }));
-  } catch {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
+  } catch (err) {
+    errHandler(err);
   }
 }
 
@@ -103,10 +102,8 @@ export const delArticle = async (articleId) => {
       headers: {
         Authorization: localStorage.getItem('accessToken'),
       }
-    })).data.data;
-  } catch {
-    localStorage.removeItem('accessToken');
-    await message.error('authentication failed', 1);
-    window.location.href = "/login";
+    }))?.data?.data;
+  } catch (err) {
+    errHandler(err);
   }
 }
