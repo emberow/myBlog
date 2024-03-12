@@ -261,7 +261,8 @@ export default function MyArticles() {
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
-      if (tempContent != article?.content) {
+      console.log(isEditMode);
+      if (isEditMode && tempContent != article?.content) {
         const message = 'Changes you made may not be saved.';
         event.returnValue = message;
         return message;
@@ -271,7 +272,7 @@ export default function MyArticles() {
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  },[tempContent]);
+  },[tempContent, isEditMode]);
 
   return (
     <Layout style={{ minHeight: "100%", minWidth: "100%", paddingTop: "0.5vh"}}>
