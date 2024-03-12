@@ -8,6 +8,7 @@ const errHandler = async (err) => {
     await message.error('INVALID_TOKEN, please login', 1);
   }
   localStorage.removeItem('accessToken');
+  localStorage.removeItem('userName');
   window.location.href = "/articleList";
 }
 
