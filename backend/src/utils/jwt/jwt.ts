@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { CustomError } from 'src/middleware/errors';
+import { CustomError } from '../../middleware/errors';
 
 export const signJwt = async (userName) => {
   const privateKey = process.env.JWT_PRIVATE_SECRET;
