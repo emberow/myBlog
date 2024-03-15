@@ -4,32 +4,24 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: blog
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 32865417
+      - POSTGRES_DB=blog
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=32865417
     ports:
       - "6432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 10s
-      retries: 5
-    networks:
-      - mynetwork
   myblog-frontend:
     image: andy45630/myblog-frontend:latest
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:3000
     ports:
-      - "8000:8000"
+      - "80:80"
   myblog-backend:
     image: andy45630/myblog-backend:latest
     environment:
       - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_DATABASE=blog
+      - DB_USER_NAME=postgres
+      - DB_PASSWORD=32865417
     ports:
       - "3000:3000"
-    depends_on:
-      - postgres
-    networks:
-      - mynetwork
-networks:
-  mynetwork:
-    driver: bridge
