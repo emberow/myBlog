@@ -16,12 +16,13 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "5",
     "react-scripts": "^5.0.0",
+    "serve": "^14.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env PORT=80 NODE_ENV=production GENERATE_SOURCEMAP=false react-scripts start",
-    "dev:run": "cross-env PORT=8000 NODE_ENV=development GENERATE_SOURCEMAP=false react-scripts start",
     "build": "react-scripts build",
+    "start": "cross-env PORT=80 NODE_ENV=production serve -s build",
+    "dev:run": "cross-env PORT=8000 NODE_ENV=development GENERATE_SOURCEMAP=false react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
