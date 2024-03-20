@@ -10,7 +10,7 @@ const initArticleList = async(page, setArticleList, search) => {
 
 export default function Articles() {
   const [page, setPage] = useState(1);
-  const [articleList, setArticleList] = useState({});
+  const [articleList, setArticleList] = useState({maximumPages: 0});
   const queryString = window.location.search;
   const params = new URLSearchParams(queryString);
   const search = params.get('search');
@@ -228,9 +228,8 @@ export default function Articles() {
               </Col>
               <Col className="pageChange" span={2} style={{backgroundColor: "white"}}>
                 <div style={{ height: "5vh", paddingTop: "2vh", textAlign: "center"}}>
-                  <img src="../right-arrow.png" style={{ width: "2vw", opacity: (Math.floor((articleList?.maximumPages - (articleList?.maximumPages % 6)) / 6) + 1 + ((articleList?.maximumPages % 6 == 0) ? -1 : 0) == page) ? 0.3 : 1 }} onClick={() => {
-                    if (Math.floor((articleList?.maximumPages - (articleList?.maximumPages % 6)) / 6) + 1 + ((articleList?.maximumPages % 6 == 0) ? -1 : 0) != page) {
-                      console.log(articleList?.maximumPages, articleList?.maximumPages % 6)
+                  <img src="../right-arrow.png" style={{ width: "2vw", opacity: (articleList?.maximumPages / 6 > page) ? 1 : 0.3 }} onClick={() => {
+                    if (articleList?.maximumPages / 6 > page) {
                       initArticleList(page + 1, setArticleList);
                       setPage(page + 1);
                     }
