@@ -1,0 +1,106 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: myblog
+  description: An example API for demonstration purposes
+schemes:
+  - http
+paths:
+  /api/login:
+    post:
+      tags:
+      - "login"
+      summary: Check user login and return token
+      description: Check user login and return token
+      parameters:
+        - in: body
+          name: credentials
+          description: User login credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              userName:
+                type: string
+                description: User name
+              password:
+                type: string
+                description: User password
+      responses:
+        '200':
+          description: Account verified successfully and JWT token generated
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: JWT token
+        '400':
+          description: MISSING_USERNAME or MISSING_PASSWORD
+        '401':
+          description: USERNAME_OR_PASSWORD_INCORRECT
+
+  /api/account:
+    post:
+      tags:
+      - "account"
+      summary: Create a new account
+      description: Create a new account with given user name and password
+      parameters:
+        - in: body
+          name: user
+          description: User information
+          required: true
+          schema:
+            type: object
+            properties:
+              userName:
+                type: string
+                description: User name
+              password:
+                type: string
+                description: User password
+      responses:
+        '200':
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: successed or failed
+          description: Account created successfully
+        '400':
+          description: MISSING_USERNAME or MISSING_PASSWORD or ACCOUNT_EXISTS
+    put:
+      tags:
+      - "account"
+      summary: Change account password
+      description: Change account password with new password
+      parameters:
+        - in: body
+          name: passwordChange
+          description: Account password change request
+          required: true
+          schema:
+            type: object
+            properties:
+              userName:
+                type: string
+                description: Account username
+              password:
+                type: string
+                description: Account current password
+              newPassword:
+                type: string
+                description: Account new password
+      responses:
+        '200':
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: successed or failed
+          description: Password changed successfully
+        '400':
+          description: Missing username, password, or new password or error changing password
