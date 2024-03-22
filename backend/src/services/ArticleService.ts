@@ -6,7 +6,7 @@ import * as ArticleFolderModel from "../model/ArticleFolderModel";
 
 export const getArticleFolder = async (userName: string) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   const articleFolders: ArticleFolder[] = await ArticleFolderModel.getArticleFolder(userName)
   for (const articleFolder of articleFolders) {
@@ -17,10 +17,10 @@ export const getArticleFolder = async (userName: string) => {
 
 export const addArticleFolder = async (userName: string, folderName: string) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   if (!folderName) {
-    throw new CustomError(400, 'INVALID_FOLDERNAME');
+    throw new CustomError(400, 'MISSING_FOLDERNAME');
   }
   const article = {
     name: folderName,
@@ -32,23 +32,23 @@ export const addArticleFolder = async (userName: string, folderName: string) => 
 
 export const updateArticleFolder = async (userName: string, id: number, folderName: string) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   if (!userName) {
-    throw new CustomError(400, 'INVALID_ID');
+    throw new CustomError(400, 'MISSING_ID');
   }
   if (!folderName) {
-    throw new CustomError(400, 'INVALID_FOLDERNAME');
+    throw new CustomError(400, 'MISSING_FOLDERNAME');
   }
   await ArticleFolderModel.updateArticleFolder(userName, id, folderName);
 };
 
 export const deleteArticleFolder = async (id: number, userName: string) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   if (id == null) {
-    throw new CustomError(400, 'INVALID_Id');
+    throw new CustomError(400, 'MISSING_Id');
   }
   let articles: Article[] = await ArticleModel.getArticleByFolderId(id, userName);
   let articleIds: number[] = articles?.map(item => item.id);
@@ -60,10 +60,10 @@ export const deleteArticleFolder = async (id: number, userName: string) => {
 
 export const getArticle = async (userName: string, id: number) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   if (id == null) {
-    throw new CustomError(400, 'INVALID_ID');
+    throw new CustomError(400, 'MISSING_ID');
   }
 
   return ArticleModel.getArticle(Number(id), userName);
@@ -71,7 +71,7 @@ export const getArticle = async (userName: string, id: number) => {
 
 export const addArticle = async (userName: string, folderId: number, articleName: string) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   if (folderId == null) {
     throw new CustomError(400, 'INVALID_FOLDERID');
@@ -91,10 +91,10 @@ export const addArticle = async (userName: string, folderId: number, articleName
 
 export const updateArticle = async (userName: string, id: number, name: string, content: string, isPublish: Boolean) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   if (id == null) {
-    throw new CustomError(400, 'INVALID_ID');
+    throw new CustomError(400, 'MISSING_ID');
   }
  
   let article = {updateTime: new Date()};
@@ -116,10 +116,10 @@ export const updateArticle = async (userName: string, id: number, name: string, 
 
 export const deleteArticle = async (userName: string, id: number) => {
   if (!userName) {
-    throw new CustomError(400, 'INVALID_USERNAME');
+    throw new CustomError(400, 'MISSING_USERNAME');
   }
   if (id == null) {
-    throw new CustomError(400, 'INVALID_Id');
+    throw new CustomError(400, 'MISSING_Id');
   }
   await ArticleModel.deleteArticles([id]);
 };
@@ -135,7 +135,7 @@ export const getArticleCount = async (search: string) => {
 
 export const getPublishedArticle = async (id: number) => {
   if (id == null) {
-    throw new CustomError(400, 'INVALID_ID');
+    throw new CustomError(400, 'MISSING_ID');
   }
 
   return ArticleModel.getPublishedArticle(Number(id));

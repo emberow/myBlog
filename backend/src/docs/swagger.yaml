@@ -104,3 +104,121 @@ paths:
           description: Password changed successfully
         '400':
           description: Missing username, password, or new password or error changing password
+
+  /api/folder:
+    get:
+      tags:
+      - "article folder"
+      summary: get article folder info
+      description: get article folder info
+      responses:
+        '200':
+          description: Account verified successfully and JWT token generated
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              content:
+                type: string
+              updateTime:
+                type: string
+              isPublished:
+                type: boolean
+        '400':
+          description: MISSING_USERNAME
+        '401':
+          description: INVALID_JWT_TOKEN 
+        '403':
+          description: EXPIRED_TOKEN 
+    post:
+      tags:
+      - "article folder"
+      summary: create article folder
+      description: create article folder
+      parameters:
+        - in: body
+          name: add folder
+          description: add folder
+          required: true
+          schema:
+            type: object
+            properties:
+              folderName:
+                type: string
+                description: folder name
+      responses:
+        '200':
+          description: create article folder successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_USERNAME or MISSING_FOLDERNAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+    put:
+      tags:
+      - "article folder"
+      summary: change article folder name
+      description: change article folder name
+      parameters:
+        - in: body
+          name: change article folder name
+          description: change article folder name
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: folder id
+              folderName:
+                type: string
+                description: folder name
+      responses:
+        '200':
+          description: change article folder name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID or MISSING_USERNAME or MISSING_FOLDERNAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+    delete:
+      tags:
+      - "article folder"
+      summary: delete article folder name
+      description: delete article folder name
+      parameters:
+        - name: id
+          in: query
+          description: "ID of the folder to delete."
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: delete article folder name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 

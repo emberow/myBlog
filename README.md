@@ -43,3 +43,8 @@ $ npm run build
 $ npm run start
 # run backend at http:localhost:3000/
 ```
+
+### api document
+```
+http:localhost:3000/api-docs
+```
