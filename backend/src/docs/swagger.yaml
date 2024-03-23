@@ -36,7 +36,7 @@ paths:
                 type: string
                 description: JWT token
         '400':
-          description: MISSING_USERNAME or MISSING_PASSWORD
+          description: MISSING_PASSWORD
         '401':
           description: USERNAME_OR_PASSWORD_INCORRECT
 
@@ -70,7 +70,7 @@ paths:
                 description: successed or failed
           description: Account created successfully
         '400':
-          description: MISSING_USERNAME or MISSING_PASSWORD or ACCOUNT_EXISTS
+          description: MISSING_PASSWORD or ACCOUNT_EXISTS
     put:
       tags:
       - "account"
@@ -127,8 +127,6 @@ paths:
                 type: string
               isPublished:
                 type: boolean
-        '400':
-          description: MISSING_USERNAME
         '401':
           description: INVALID_JWT_TOKEN 
         '403':
@@ -158,7 +156,7 @@ paths:
               data:
                 type: string
         '400':
-          description: MISSING_USERNAME or MISSING_FOLDERNAME
+          description: MISSING_FOLDERNAME
         '401':
           description: INVALID_JWT_TOKEN
         '403':
@@ -192,7 +190,7 @@ paths:
               data:
                 type: string
         '400':
-          description: MISSING_ID or MISSING_USERNAME or MISSING_FOLDERNAME
+          description: MISSING_ID or MISSING_FOLDERNAME
         '401':
           description: INVALID_JWT_TOKEN
         '403':
@@ -216,6 +214,191 @@ paths:
             properties:
               data:
                 type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+  /api/article:
+    get:
+      tags:
+      - "article"
+      summary: get article info
+      description: get article info
+      parameters:
+        - name: id
+          in: query
+          description: "article id"
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: get article info
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              content:
+                type: string
+              updateTime:
+                type: string
+              isPublished:
+                type: boolean
+              articleFolder:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  userName:
+                    type: string
+                  updateTime:
+                    type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN 
+        '403':
+          description: EXPIRED_TOKEN 
+    post:
+      tags:
+      - "article"
+      summary: create article
+      description: create article
+      parameters:
+        - in: body
+          name: create article
+          description: create article
+          required: true
+          schema:
+            type: object
+            properties:
+              folderId:
+                type: string
+                description: folder id
+              articleName:
+                type: string
+                description: article name
+      responses:
+        '200':
+          description: create article successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+
+        '400':
+          description: INVALID_FOLDERID or INVALID_ARTICLENAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+    put:
+      tags:
+      - "article"
+      summary: change article content
+      description: change article folder name
+      parameters:
+        - in: body
+          name: change article folder name
+          description: change article folder name
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: folder id
+              folderName:
+                type: string
+                description: folder name
+      responses:
+        '200':
+          description: change article folder name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID or MISSING_FOLDERNAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+    delete:
+      tags:
+      - "article"
+      summary: delete article name
+      description: delete article name
+      parameters:
+        - name: id
+          in: query
+          description: "delete article name"
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: delete article name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+  /api/publishedArticle:    
+    get:
+      tags:
+      - "publishedArticle"
+      summary: get published Article
+      description: get published Article
+      parameters:
+        - name: id
+          in: query
+          description: "get published Article"
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: delete article name successed
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              content:
+                type: string
+              updateTime:
+                type: string
+              isPublished:
+                type: boolean
+              articleFolder:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  userName:
+                    type: string
+                  updateTime:
+                    type: string
         '400':
           description: MISSING_ID
         '401':
