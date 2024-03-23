@@ -52,13 +52,11 @@ export const getArticleList = async (limit: number, offset: number, search: stri
         .getRepository(Article)
         .createQueryBuilder('article')
         .leftJoinAndSelect('article.articleFolder', 'folder')
-        .where('article.isPublish = true')
+        .andWhere('article.isPublish = true')
         
     if (search) {
         result = result
-            .andWhere('upper(article.name) like upper(:search)', { search: `%${search}%` })
-            .orWhere('upper(article.content) like upper(:search)', { search: `%${search}%` })
-            .orWhere('upper(folder.userName) like upper(:search)', { search: `%${search}%` })
+        .andWhere('(upper(article.name) like upper(:search) OR upper(article.content) like upper(:search) OR upper(folder.userName) like upper(:search))', { search: `%${search}%` })
     }
 
     result = result
@@ -76,10 +74,7 @@ export const getArticleCount = async (search: string) => {
         .where('article.isPublish = true')
 
     if (search) {
-        result = result
-            .andWhere('upper(article.name) like upper(:search)', { search: `%${search}%` })
-            .orWhere('upper(article.content) like upper(:search)', { search: `%${search}%` })
-            .orWhere('upper(folder.userName) like upper(:search)', { search: `%${search}%` })
+        result.andWhere('(upper(article.name) like upper(:search) OR upper(article.content) like upper(:search) OR upper(folder.userName) like upper(:search))', { search: `%${search}%` })
     }
 
     return result.getCount();
