@@ -66,7 +66,7 @@ const returnDrowDownItems = () => {
     });
   } 
 
-  if (window.location.pathname == '/myarticles') {
+  if (window.location.pathname !=('/articleList')) {
     items.unshift({
       key: '2',
       label: (
@@ -76,7 +76,7 @@ const returnDrowDownItems = () => {
       ),
     });
   }
-  
+
   return {items};
 }
 
