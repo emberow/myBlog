@@ -1,0 +1,11 @@
+.article:hover {
+    background-color: rgb(233, 244, 254);
+}
+
+.article {
+    background-color: white;
+}
+
+.pageChange:hover {
+    cursor: pointer;
+}

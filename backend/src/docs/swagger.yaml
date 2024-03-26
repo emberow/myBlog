@@ -1,0 +1,407 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: myblog
+  description: An example API for demonstration purposes
+schemes:
+  - http
+paths:
+  /api/login:
+    post:
+      tags:
+      - "login"
+      summary: Check user login and return token
+      description: Check user login and return token
+      parameters:
+        - in: body
+          name: credentials
+          description: User login credentials
+          required: true
+          schema:
+            type: object
+            properties:
+              userName:
+                type: string
+                description: User name
+              password:
+                type: string
+                description: User password
+      responses:
+        '200':
+          description: Account verified successfully and JWT token generated
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+                description: JWT token
+        '400':
+          description: MISSING_PASSWORD
+        '401':
+          description: USERNAME_OR_PASSWORD_INCORRECT
+
+  /api/account:
+    post:
+      tags:
+      - "account"
+      summary: Create a new account
+      description: Create a new account with given user name and password
+      parameters:
+        - in: body
+          name: user
+          description: User information
+          required: true
+          schema:
+            type: object
+            properties:
+              userName:
+                type: string
+                description: User name
+              password:
+                type: string
+                description: User password
+      responses:
+        '200':
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: successed or failed
+          description: Account created successfully
+        '400':
+          description: MISSING_PASSWORD or ACCOUNT_EXISTS
+    put:
+      tags:
+      - "account"
+      summary: Change account password
+      description: Change account password with new password
+      parameters:
+        - in: body
+          name: passwordChange
+          description: Account password change request
+          required: true
+          schema:
+            type: object
+            properties:
+              userName:
+                type: string
+                description: Account username
+              password:
+                type: string
+                description: Account current password
+              newPassword:
+                type: string
+                description: Account new password
+      responses:
+        '200':
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: successed or failed
+          description: Password changed successfully
+        '400':
+          description: Missing username, password, or new password or error changing password
+
+  /api/folder:
+    get:
+      tags:
+      - "article folder"
+      summary: get article folder info
+      description: get article folder info
+      responses:
+        '200':
+          description: Account verified successfully and JWT token generated
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              content:
+                type: string
+              updateTime:
+                type: string
+              isPublished:
+                type: boolean
+        '401':
+          description: INVALID_JWT_TOKEN 
+        '403':
+          description: EXPIRED_TOKEN 
+    post:
+      tags:
+      - "article folder"
+      summary: create article folder
+      description: create article folder
+      parameters:
+        - in: body
+          name: add folder
+          description: add folder
+          required: true
+          schema:
+            type: object
+            properties:
+              folderName:
+                type: string
+                description: folder name
+      responses:
+        '200':
+          description: create article folder successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_FOLDERNAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+    put:
+      tags:
+      - "article folder"
+      summary: change article folder name
+      description: change article folder name
+      parameters:
+        - in: body
+          name: change article folder name
+          description: change article folder name
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: folder id
+              folderName:
+                type: string
+                description: folder name
+      responses:
+        '200':
+          description: change article folder name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID or MISSING_FOLDERNAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+    delete:
+      tags:
+      - "article folder"
+      summary: delete article folder name
+      description: delete article folder name
+      parameters:
+        - name: id
+          in: query
+          description: "ID of the folder to delete."
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: delete article folder name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+  /api/article:
+    get:
+      tags:
+      - "article"
+      summary: get article info
+      description: get article info
+      parameters:
+        - name: id
+          in: query
+          description: "article id"
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: get article info
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              content:
+                type: string
+              updateTime:
+                type: string
+              isPublished:
+                type: boolean
+              articleFolder:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  userName:
+                    type: string
+                  updateTime:
+                    type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN 
+        '403':
+          description: EXPIRED_TOKEN 
+    post:
+      tags:
+      - "article"
+      summary: create article
+      description: create article
+      parameters:
+        - in: body
+          name: create article
+          description: create article
+          required: true
+          schema:
+            type: object
+            properties:
+              folderId:
+                type: string
+                description: folder id
+              articleName:
+                type: string
+                description: article name
+      responses:
+        '200':
+          description: create article successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+
+        '400':
+          description: INVALID_FOLDERID or INVALID_ARTICLENAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+    put:
+      tags:
+      - "article"
+      summary: change article content
+      description: change article folder name
+      parameters:
+        - in: body
+          name: change article folder name
+          description: change article folder name
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: folder id
+              folderName:
+                type: string
+                description: folder name
+      responses:
+        '200':
+          description: change article folder name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID or MISSING_FOLDERNAME
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+    delete:
+      tags:
+      - "article"
+      summary: delete article name
+      description: delete article name
+      parameters:
+        - name: id
+          in: query
+          description: "delete article name"
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: delete article name successed
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 
+
+  /api/publishedArticle:    
+    get:
+      tags:
+      - "publishedArticle"
+      summary: get published Article
+      description: get published Article
+      parameters:
+        - name: id
+          in: query
+          description: "get published Article"
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: delete article name successed
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              content:
+                type: string
+              updateTime:
+                type: string
+              isPublished:
+                type: boolean
+              articleFolder:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  userName:
+                    type: string
+                  updateTime:
+                    type: string
+        '400':
+          description: MISSING_ID
+        '401':
+          description: INVALID_JWT_TOKEN
+        '403':
+          description: EXPIRED_TOKEN 

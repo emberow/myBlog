@@ -1,0 +1,23 @@
+.ant-menu-submenu .icon {
+    display: none;
+}
+
+.ant-menu-submenu-title:hover .icon {
+    display: inline;
+}
+
+.ant-menu-item-only-child .articleIcon {
+    display: none;
+}
+
+.ant-menu-item-only-child:hover .articleIcon {
+    display: inline;
+}
+
+.ant-menu-submenu-title {
+    padding-left: 0px !important;
+}
+
+.ant-menu-item-only-child {
+    padding-left: 36px !important;
+}
