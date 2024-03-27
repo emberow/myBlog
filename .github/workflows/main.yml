@@ -2,7 +2,7 @@ name: myblog
 on:
   push:
     branches:
-      - prd
+      - develop
 
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-          
+
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
       - name: Set up Node.js
