@@ -24,11 +24,12 @@ jobs:
           node-version: '21' # 设置您想要的 Node.js 版本
 
       - name: Install dependencies
+        working-directory: ./backend
         run: |
-          cd backend
           npm install
 
       - name: Run unit tests
+        working-directory: ./backend
         run: npm run test
         
   backend-build:
@@ -43,22 +44,21 @@ jobs:
       with:
         node-version: '21'
 
-    - name: cd backend
-      run: cd backend
-
     - name: Install dependencies
+      working-directory: ./backend
       run: |
-        cd backend
         npm install
 
     - name: Build project
+      working-directory: ./backend
       run: npm run build 
 
     - name: Archive production artifact
       uses: actions/upload-artifact@v2
       with:
         name: backend-build-artifact
-        path: /out
+        working-directory: ./backend
+        path: .
 
   backend-containerize:
     runs-on: ubuntu-latest
@@ -71,8 +71,8 @@ jobs:
           path: /out
 
       - name: Build Docker image
+        working-directory: ./backend
         run: |
-          cd /out
           docker build -t ${{ secrets.DOCKER_BACKEND_IMAGE_TAG }} .
 
       - name: Login to Docker Hub
