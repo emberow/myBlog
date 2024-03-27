@@ -23,11 +23,10 @@ jobs:
         with:
           node-version: '21' # 设置您想要的 Node.js 版本
 
-      - name: cd backend
-        run: cd backend
-
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd backend
+          npm install
 
       - name: Run unit tests
         run: npm run test
@@ -48,7 +47,9 @@ jobs:
       run: cd backend
 
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd backend
+        npm install
 
     - name: Build project
       run: npm run build 
