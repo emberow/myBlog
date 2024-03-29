@@ -21,8 +21,8 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "start": "cross-env PORT=80 NODE_ENV=production serve -s build",
-    "dev:run": "cross-env PORT=8000 NODE_ENV=development GENERATE_SOURCEMAP=false react-scripts start",
+    "start": "cross-env PORT=80 serve -s build",
+    "dev:run": "cross-env PORT=8000 GENERATE_SOURCEMAP=false react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
