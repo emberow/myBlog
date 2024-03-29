@@ -66,7 +66,6 @@ jobs:
 
   frontend-build-and-containerize:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -83,7 +82,9 @@ jobs:
 
     - name: Build project
       working-directory: ./frontend
-      run: npm run build 
+      run: |
+        export CI=false
+        npm run build 
 
     - name: Build Docker image
       working-directory: ./frontend
