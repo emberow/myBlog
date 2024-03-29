@@ -59,9 +59,40 @@ jobs:
         docker build -t ${{ secrets.DOCKER_BACKEND_IMAGE_TAG }} .
 
     - name: Login to Docker Hub
-      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
 
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_BACKEND_IMAGE_TAG }}
 
+  frontend-build-and-containerize:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '21'
+
+    - name: Install dependencies
+      working-directory: ./frontend
+      run: |
+        npm install
+
+    - name: Build project
+      working-directory: ./frontend
+      run: npm run build 
+
+    - name: Build Docker image
+      working-directory: ./frontend
+      run: |
+        docker build -t ${{ secrets.DOCKER_FRONTEND_IMAGE_TAG }} .
+
+    - name: Login to Docker Hub
+      run: docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
+
+    - name: Push Docker image to Docker Hub
+      run: docker push ${{ secrets.DOCKER_FRONTEND_IMAGE_TAG }}
+    
 
