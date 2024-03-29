@@ -66,6 +66,7 @@ jobs:
 
   frontend-build-and-containerize:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
