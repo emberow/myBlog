@@ -109,7 +109,7 @@ export default function Blog() {
         <Route path="/myarticles" component={MyArticles} />
         <Route path="/article/:id" component={Article} />
         <Route exact path="/">
-          <Redirect to="/articleList/" />
+          <Redirect to="/articleList" />
         </Route>
       </Content>
     </Layout>
