@@ -11,7 +11,11 @@ const { Header, Content } = Layout;
 const { Text } = Typography;
 
 const onSearch = (value) => {
-  window.location.href = `/articleList/?search=${value}`;
+  if (!value) {
+    window.location.href = `/articleList`;
+  } else {
+    window.location.href = `/articleList/?search=${value}`;
+  }
   return;
 }
 
