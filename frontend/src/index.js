@@ -8,7 +8,6 @@ import { BrowserRouter, Redirect, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
       <Route 
         path="/login"
@@ -25,7 +24,6 @@ root.render(
         )}
       />
     </BrowserRouter>
-  </React.StrictMode>
 );
 
 reportWebVitals();
