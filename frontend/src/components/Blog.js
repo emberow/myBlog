@@ -11,7 +11,11 @@ const { Header, Content } = Layout;
 const { Text } = Typography;
 
 const onSearch = (value) => {
-  window.location.href = `/articleList/?search=${value}`;
+  if (!value) {
+    window.location.href = `/articleList`;
+  } else {
+    window.location.href = `/articleList/?search=${value}`;
+  }
   return;
 }
 
@@ -109,7 +113,7 @@ export default function Blog() {
         <Route path="/myarticles" component={MyArticles} />
         <Route path="/article/:id" component={Article} />
         <Route exact path="/">
-          <Redirect to="/articleList/" />
+          <Redirect to="/articleList" />
         </Route>
       </Content>
     </Layout>
