@@ -41,7 +41,10 @@ const returnDrowDownItems = () => {
         key: '0',
         label: (
           <a onClick={logOut} style={{ display: "flex", alignItems: "center" }}>
-            <img src="../logout.png" alt="" style={{width: "1vw"}}/>&nbsp;logout
+            <img src="../logout.png" alt="" style={{width: "1vw"}}/>
+              <div class='Chakra-Petch'>
+                &nbsp;logout
+              </div>
           </a>
         )
       },
@@ -52,7 +55,10 @@ const returnDrowDownItems = () => {
         key: '0',
         label: (
           <a href="/login" style={{ display: "flex", alignItems: "center" }}>
-            <img src="../login.png" alt="" style={{width: "1vw"}}/>&nbsp;login
+            <img src="../login.png" alt="" style={{width: "1vw"}}/>
+            <div class='Chakra-Petch'>
+              &nbsp;login
+            </div>
           </a>
         )
       },
@@ -64,7 +70,10 @@ const returnDrowDownItems = () => {
       key: '1',
       label: (
         <a onClick={linkToMyArticle} style={{ display: "flex", alignItems: "center" }}>
-          <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>&nbsp;My Aritcles
+          <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>
+          <div class='Chakra-Petch'>
+            &nbsp;My Aritcles
+          </div>
         </a>
       ),
     });
@@ -75,7 +84,10 @@ const returnDrowDownItems = () => {
       key: '2',
       label: (
         <a onClick={linkToArticleList} style={{ display: "flex", alignItems: "center" }}>
-          <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>&nbsp;Article List
+          <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>
+          <div class='Chakra-Petch'>
+            &nbsp;Article List
+          </div>
         </a>
       ),
     });
@@ -92,18 +104,22 @@ export default function Blog() {
       <Header style={{ backgroundColor: "white" }}>
         <Row style={{  height: "8vh" }}>
           <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <Text style={{ fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</Text>
+            <div class='Chakra-Petch' style={{ fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</div>
           </Col>
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
             <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} allowClear />
           </Col>
           <Col span={3} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <img style={{ width:"1.5vw" }} src="../user-interface.png" />
-            <div>&nbsp;{userName ? userName : "guest"}</div>
+            <div class='Chakra-Petch'>&nbsp;{userName ? userName : "guest"}</div>
           </Col>
           <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" onClick={(event)=>{console.log(event)}} arrow>
-              <Button>menu</Button>
+              <Button>
+                <div class='Chakra-Petch'>
+                  menu 
+                </div>
+              </Button>
             </Dropdown>
           </Col>
         </Row>

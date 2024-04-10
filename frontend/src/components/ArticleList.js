@@ -35,23 +35,31 @@ export default function Articles() {
                   <Row style={{paddingLeft: "2vh", display: articleList[0]?.name? "flex" : "none" }}>
                     <Col span={12} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.2vw" }} src="../addArticles.png" />
-                      &nbsp; {articleList[0]?.name}
+                      <div class='Chakra-Petch'>
+                        &nbsp;{articleList[0]?.name}
+                      </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[0]?.articleFolder.userName) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../user-interface.png" />
-                        &nbsp;{articleList[0]?.articleFolder.userName}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[0]?.articleFolder.userName}
+                        </div>
                       </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[0]?.updateTime) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../clock.png" /> 
-                        &nbsp;{articleList[0]?.updateTime?.substr(0, 10)}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[0]?.updateTime?.substr(0, 10)}
+                        </div>
                       </div>
                     </Col>
                   </Row>
                 <div className="truncatedText" style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
-                  {articleList[0]?.content}
+                  <div class='Chakra-Petch'>
+                    {articleList[0]?.content}
+                  </div>
                 </div>
                 </div>
               </div>
@@ -66,23 +74,31 @@ export default function Articles() {
                   <Row style={{paddingLeft: "2vh", display: articleList[1]?.name? "flex" : "none" }}>
                     <Col span={12} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.2vw" }} src="../addArticles.png" />
-                      &nbsp; {articleList[1]?.name}
+                      <div class='Chakra-Petch'>
+                        &nbsp; {articleList[1]?.name}
+                      </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[1]?.articleFolder.userName) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../user-interface.png" />
-                        &nbsp;{articleList[1]?.articleFolder.userName}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[1]?.articleFolder.userName}
+                        </div>
                       </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[1]?.updateTime) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../clock.png" /> 
-                        &nbsp;{articleList[1]?.updateTime?.substr(0, 10)}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[1]?.updateTime?.substr(0, 10)}
+                        </div>
                       </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
-                    {articleList[1]?.content}
+                    <div class='Chakra-Petch'>
+                      {articleList[1]?.content}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -97,23 +113,31 @@ export default function Articles() {
                   <Row style={{paddingLeft: "2vh", display: articleList[2]?.name? "flex" : "none" }}>
                     <Col span={12} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.2vw" }} src="../addArticles.png" />
-                      &nbsp; {articleList[2]?.name}
+                      <div class='Chakra-Petch'>
+                        &nbsp; {articleList[2]?.name}
+                      </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[2]?.articleFolder.userName) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../user-interface.png" />
-                        &nbsp;{articleList[2]?.articleFolder.userName}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[2]?.articleFolder.userName}
+                        </div>
                       </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[2]?.updateTime) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../clock.png" /> 
-                        &nbsp;{articleList[2]?.updateTime?.substr(0, 10)}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[2]?.updateTime?.substr(0, 10)}
+                        </div>
                       </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
-                    {articleList[2]?.content}
+                    <div class='Chakra-Petch'>
+                      {articleList[2]?.content}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -128,23 +152,31 @@ export default function Articles() {
                   <Row style={{paddingLeft: "2vh", display: articleList[3]?.name? "flex" : "none" }}>
                     <Col span={12} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.2vw" }} src="../addArticles.png" />
-                      &nbsp; {articleList[3]?.name}
+                      <div class='Chakra-Petch'>
+                        &nbsp; {articleList[3]?.name}
+                      </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[3]?.articleFolder.userName) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../user-interface.png" />
-                        &nbsp;{articleList[3]?.articleFolder.userName}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[3]?.articleFolder.userName}
+                        </div>
                       </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[3]?.updateTime) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../clock.png" /> 
-                        &nbsp;{articleList[3]?.updateTime?.substr(0, 10)}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[3]?.updateTime?.substr(0, 10)}
+                        </div>
                       </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
-                    {articleList[3]?.content}
+                    <div class='Chakra-Petch'>
+                      {articleList[3]?.content}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -159,23 +191,31 @@ export default function Articles() {
                   <Row style={{paddingLeft: "2vh", display: articleList[4]?.name? "flex" : "none" }}>
                     <Col span={12} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.2vw" }} src="../addArticles.png" />
-                      &nbsp; {articleList[4]?.name}
+                      <div class='Chakra-Petch'>
+                        &nbsp; {articleList[4]?.name}
+                      </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[4]?.articleFolder.userName) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../user-interface.png" />
-                        &nbsp;{articleList[4]?.articleFolder.userName}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[4]?.articleFolder.userName}
+                        </div>
                       </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[4]?.updateTime) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../clock.png" /> 
-                        &nbsp;{articleList[4]?.updateTime?.substr(0, 10)}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[4]?.updateTime?.substr(0, 10)}
+                        </div>
                       </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
-                    {articleList[4]?.content}
+                    <div class='Chakra-Petch'>
+                      {articleList[4]?.content}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -190,23 +230,31 @@ export default function Articles() {
                   <Row style={{paddingLeft: "2vh", display: articleList[5]?.name? "flex" : "none" }}>
                     <Col span={12} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.2vw" }} src="../addArticles.png" />
-                      &nbsp; {articleList[5]?.name}
+                      <div class='Chakra-Petch'>
+                        &nbsp; {articleList[5]?.name}
+                      </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[5]?.articleFolder.userName) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../user-interface.png" />
-                        &nbsp;{articleList[5]?.articleFolder.userName}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[5]?.articleFolder.userName}
+                        </div>
                       </div>
                     </Col>
                     <Col span={6} style={{ display: "flex", alignItems: "center" }}>
                       <div style={{display: (articleList[5]?.updateTime) ? "flex": "none"}}>
                         <img style={{ width:"1.2vw" }} src="../clock.png" /> 
-                        &nbsp;{articleList[5]?.updateTime?.substr(0, 10)}
+                        <div class='Chakra-Petch'>
+                          &nbsp;{articleList[5]?.updateTime?.substr(0, 10)}
+                        </div>
                       </div>
                     </Col>
                   </Row>
                   <div style={{ width: "55vw", overflow: "hidden", padding: "2vh 2vh 0 2vh" }}>
-                    {articleList[5]?.content}
+                    <div class='Chakra-Petch'>
+                      {articleList[5]?.content}
+                    </div>
                   </div>
                 </div>
               </div>

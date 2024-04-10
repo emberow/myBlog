@@ -153,7 +153,11 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
                     setTempContent(tempArticle?.content);
                   }}>
                     <Row>
-                      <Col span={20}>{article.name}</Col>
+                      <Col span={20}>
+                        <div class='Chakra-Petch'>
+                          {article.name}
+                        </div>
+                      </Col>
                       <Col span={4}>
                         <img className="articleIcon" style={{width: "0.8vw"}} src="./delete.png" alt="" onClick={()=> {
                           setDelArticleProps({ id: article.id, isModalOpen: true });
@@ -170,7 +174,9 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
               <div>
                 <Row>
                   <Col span={16}>
-                    <div>{folder.name} </div>
+                    <div class='Chakra-Petch'>
+                      {folder.name} 
+                    </div>
                   </Col>
                   <Col span={4}>
                     <img className="icon" style={{width: "0.8vw"}} onClick={()=> {
@@ -313,15 +319,21 @@ export default function MyArticles() {
             <Row>
               <Col span={5} style={{ display: "flex", alignItems: "center" }}>
                 <img style={{ width:"1.5vw" }} src="../addArticles.png" />
-                &nbsp; {article.name}
+                <div class='Chakra-Petch'>
+                  &nbsp; {article.name}
+                </div>
               </Col>
               <Col span={5} style={{ display: "flex", alignItems: "center" }}>
                 <img style={{ width:"1.5vw" }} src="../user-interface.png" />
-                &nbsp;{article.articleFolder.userName}
+                <div class='Chakra-Petch'>
+                  &nbsp;{article.articleFolder.userName}
+                </div>
               </Col>
               <Col span={5} style={{ display: "flex", alignItems: "center" }}>
                 <img style={{ width:"1.5vw" }} src="../clock.png" /> 
-                &nbsp;{article?.updateTime?.substr(0, 10)}
+                <div class='Chakra-Petch'>
+                  &nbsp;{article?.updateTime?.substr(0, 10)}
+                </div>
               </Col>
               <Col span={3} />
               <Col span={2}>
@@ -351,14 +363,22 @@ export default function MyArticles() {
                     });
                   }
                   setTempContent(article?.content);
-                  }}>edit</Button>
+                  }}>
+                    <div class='Chakra-Petch'>
+                      edit
+                    </div>
+                  </Button>
                 <Button style={{ paddingLeft: "0.5vw", paddingRight: "0.5vw", display: isEditMode ? "inline" : "None", width:"6vw"}} onClick={async()=>{
                   setIsEditMode(false)
                   const tempArticle = await myArticle.getArticle(article.id)
                   setArticle(tempArticle);
                   setValue(tempArticle?.content);
                   setTempContent(tempArticle?.content);
-                }}>cancel</Button>
+                }}>
+                  <div class='Chakra-Petch'>
+                    cancel
+                  </div>
+                </Button>
               </Col>
             </Row>
           </Header>
