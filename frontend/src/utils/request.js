@@ -1,6 +1,10 @@
 import axios from "axios";
 
-const baseURL = process.env.REACT_APP_BACKEND_URL
+let baseURL = process.env.REACT_APP_BACKEND_URL
+
+if (process.env.REACT_APP_ENV == "production") {
+  baseURL = process.env.REACT_APP_PRD_BACKEND_URL
+}
 
 export const PostRequest = axios.create({
   baseURL,
