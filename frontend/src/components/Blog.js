@@ -98,10 +98,11 @@ const returnDrowDownItems = () => {
 
 export default function Blog() {
   const userName = localStorage.getItem('userName');
+  console.log(window.location.href)
 
   return (
-    <Layout style={{ minHeight: "100vh", minWidth: "100vw" }}>
-      <Header style={{ backgroundColor: "white" }}>
+    <Layout style={{ minHeight: (window.location.pathname == '/login') ? "0vh" : "100vh", minWidth: "100vw" }}>
+      <Header style={{ backgroundColor: "white", display: (window.location.pathname == '/login') ? 'none' : 'block' }}>
         <Row style={{  height: "8vh" }}>
           <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <div class='Chakra-Petch' style={{ fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</div>
