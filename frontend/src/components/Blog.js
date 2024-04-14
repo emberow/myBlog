@@ -42,7 +42,7 @@ const returnDrowDownItems = () => {
         label: (
           <a onClick={logOut} style={{ display: "flex", alignItems: "center" }}>
             <img src="../logout.png" alt="" style={{width: "1vw"}}/>
-              <div class='Chakra-Petch'>
+              <div className='Chakra-Petch'>
                 &nbsp;logout
               </div>
           </a>
@@ -56,7 +56,7 @@ const returnDrowDownItems = () => {
         label: (
           <a href="/login" style={{ display: "flex", alignItems: "center" }}>
             <img src="../login.png" alt="" style={{width: "1vw"}}/>
-            <div class='Chakra-Petch'>
+            <div className='Chakra-Petch'>
               &nbsp;login
             </div>
           </a>
@@ -71,7 +71,7 @@ const returnDrowDownItems = () => {
       label: (
         <a onClick={linkToMyArticle} style={{ display: "flex", alignItems: "center" }}>
           <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>
-          <div class='Chakra-Petch'>
+          <div className='Chakra-Petch'>
             &nbsp;My Aritcles
           </div>
         </a>
@@ -85,7 +85,7 @@ const returnDrowDownItems = () => {
       label: (
         <a onClick={linkToArticleList} style={{ display: "flex", alignItems: "center" }}>
           <img src="../addArticles.png" alt="" style={{width: "1vw"}}/>
-          <div class='Chakra-Petch'>
+          <div className='Chakra-Petch'>
             &nbsp;Article List
           </div>
         </a>
@@ -105,19 +105,19 @@ export default function Blog() {
       <Header style={{ backgroundColor: "white", display: (window.location.pathname == '/login') ? 'none' : 'block' }}>
         <Row style={{  height: "8vh" }}>
           <Col span={4} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-            <div class='Chakra-Petch' style={{ fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</div>
+            <div className='Chakra-Petch' style={{ fontSize: "5vh", cursor: "pointer"}} onClick={linkToArticleList}>Blog</div>
           </Col>
           <Col span={16} style={{ display: "flex" , justifyContent: "center", alignItems: "center"}}>
             <Input.Search placeholder="input search text" onSearch={onSearch} style={{ width: "50vw" }} allowClear />
           </Col>
           <Col span={3} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <img style={{ width:"1.5vw" }} src="../user-interface.png" />
-            <div class='Chakra-Petch'>&nbsp;{userName ? userName : "guest"}</div>
+            <div className='Chakra-Petch'>&nbsp;{userName ? userName : "guest"}</div>
           </Col>
           <Col span={1} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Dropdown menu={returnDrowDownItems()} placement="bottomLeft" onClick={(event)=>{console.log(event)}} arrow>
               <Button>
-                <div class='Chakra-Petch'>
+                <div className='Chakra-Petch'>
                   menu 
                 </div>
               </Button>

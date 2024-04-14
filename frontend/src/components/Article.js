@@ -43,19 +43,19 @@ export default function Articles() {
                     </Col>
                     <Col span={7} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.5vw" }} src="../addArticles.png" />
-                      <div class='Chakra-Petch'>
+                      <div className='Chakra-Petch'>
                         &nbsp;{article.name}
                       </div>
                     </Col>
                     <Col span={7} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.5vw" }} src="../user-interface.png" />
-                      <div class='Chakra-Petch'>
+                      <div className='Chakra-Petch'>
                         &nbsp;{article?.articleFolder?.userName}
                       </div>
                     </Col>
                     <Col span={7} style={{ display: "flex", alignItems: "center" }}>
                       <img style={{ width:"1.5vw" }} src="../clock.png" /> 
-                      <div class='Chakra-Petch'>
+                      <div className='Chakra-Petch'>
                         &nbsp;{article?.updateTime?.substr(0, 10)}
                       </div>
                     </Col>

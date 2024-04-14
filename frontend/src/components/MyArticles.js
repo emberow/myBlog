@@ -154,7 +154,7 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
                   }}>
                     <Row>
                       <Col span={20}>
-                        <div class='Chakra-Petch'>
+                        <div className='Chakra-Petch'>
                           {article.name}
                         </div>
                       </Col>
@@ -174,7 +174,7 @@ const getSideBarItems = (setSideBarItems, setIsAddfolderModalOpen, setDelModalPr
               <div>
                 <Row>
                   <Col span={16}>
-                    <div class='Chakra-Petch'>
+                    <div className='Chakra-Petch'>
                       {folder.name} 
                     </div>
                   </Col>
@@ -319,19 +319,19 @@ export default function MyArticles() {
             <Row>
               <Col span={5} style={{ display: "flex", alignItems: "center" }}>
                 <img style={{ width:"1.5vw" }} src="../addArticles.png" />
-                <div class='Chakra-Petch'>
+                <div className='Chakra-Petch'>
                   &nbsp; {article.name}
                 </div>
               </Col>
               <Col span={5} style={{ display: "flex", alignItems: "center" }}>
                 <img style={{ width:"1.5vw" }} src="../user-interface.png" />
-                <div class='Chakra-Petch'>
+                <div className='Chakra-Petch'>
                   &nbsp;{article.articleFolder.userName}
                 </div>
               </Col>
               <Col span={5} style={{ display: "flex", alignItems: "center" }}>
                 <img style={{ width:"1.5vw" }} src="../clock.png" /> 
-                <div class='Chakra-Petch'>
+                <div className='Chakra-Petch'>
                   &nbsp;{article?.updateTime?.substr(0, 10)}
                 </div>
               </Col>
@@ -364,7 +364,7 @@ export default function MyArticles() {
                   }
                   setTempContent(article?.content);
                   }}>
-                    <div class='Chakra-Petch'>
+                    <div className='Chakra-Petch'>
                       edit
                     </div>
                   </Button>
@@ -375,7 +375,7 @@ export default function MyArticles() {
                   setValue(tempArticle?.content);
                   setTempContent(tempArticle?.content);
                 }}>
-                  <div class='Chakra-Petch'>
+                  <div className='Chakra-Petch'>
                     cancel
                   </div>
                 </Button>
