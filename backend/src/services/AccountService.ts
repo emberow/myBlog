@@ -2,6 +2,7 @@ import { signJwt } from '../utils/jwt/jwt';
 import * as AccountModel from '../model/AccountModel';
 import { Account } from '../utils/interfaces/Account';
 import { CustomError } from '../middleware/errors';
+import * as sha256 from 'sha256';
 
 export const verifyAccount = async (userName: string, password: string) => {
   if (!userName) {
@@ -12,7 +13,8 @@ export const verifyAccount = async (userName: string, password: string) => {
   }
 
   // if account and password correct, then sign jwt token.
-  if (await AccountModel.verifyAccount(userName, password)) {
+  const sha = sha256(password);
+  if (await AccountModel.verifyAccount(userName, sha)) {
     return await signJwt({ userName });
   } else {
     throw new CustomError(401, 'USERNAME_OR_PASSWORD_INCORRECT');
@@ -30,9 +32,10 @@ export const addAccount = async (userName: string, password: string) => {
     throw new CustomError(400, 'ACCOUNT_EXISTS');
   }
 
+  const sha = sha256(password);
   const account: Account = {
     userName, 
-    password,
+    password: sha,
   };
   return AccountModel.addAccount(account);
 };
@@ -48,8 +51,9 @@ export const changePassword = async (userName: string, password: string, newPass
     throw new CustomError(400, 'MISSING_NEWPASSWORD');
   }
 
+  const sha = sha256(newPassword);
   if (password !== newPassword && (await verifyAccount(userName, password))) {
-    return AccountModel.changePassword(userName, newPassword);
+    return AccountModel.changePassword(userName, sha);
   }
   throw new CustomError(400, 'CHANGE_PASSWORD_ERROR');
 };
