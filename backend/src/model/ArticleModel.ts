@@ -56,7 +56,7 @@ export const getArticleList = async (limit: number, offset: number, search: stri
         
     if (search) {
         result = result
-        .andWhere('(upper(article.name) like upper(:search) OR upper(article.content) like upper(:search) OR upper(folder.userName) like upper(:search))', { search: `%${search}%` })
+        .andWhere('article.name ilike :search OR article.content ilike :search OR folder.userName ilike :search', { search: `%${search}%` })
     }
 
     result = result
@@ -74,7 +74,7 @@ export const getArticleCount = async (search: string) => {
         .where('article.isPublish = true')
 
     if (search) {
-        result.andWhere('(upper(article.name) like upper(:search) OR upper(article.content) like upper(:search) OR upper(folder.userName) like upper(:search))', { search: `%${search}%` })
+        result.andWhere('(upper(article.name) ilike upper(:search) OR upper(article.content) ilike upper(:search) OR upper(folder.userName) ilike upper(:search))', { search: `%${search}%` })
     }
 
     return result.getCount();
