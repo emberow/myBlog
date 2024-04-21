@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "react-scripts build",
-    "start": "cross-env PORT=80 serve -s build",
+    "start": "cross-env PORT=80 REACT_APP_BACKEND_URL=http://blog.emberow.site serve -s build",
     "dev:run": "cross-env PORT=8000 GENERATE_SOURCEMAP=false react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
