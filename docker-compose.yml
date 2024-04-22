@@ -11,8 +11,6 @@ services:
       - "6432:5432"
   myblog-frontend:
     image: andy45630/myblog-frontend:latest
-    environment:
-      - REACT_APP_BACKEND_URL=http://localhost:3000
     ports:
       - "8000:80"
   myblog-backend:

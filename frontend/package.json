@@ -20,8 +20,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "build": "react-scripts build",
-    "start": "cross-env PORT=80 REACT_APP_BACKEND_URL=http://blog.emberow.site serve -s build",
+    "build": "cross-env REACT_APP_BACKEND_URL=http://blog.emberow.site:3000 react-scripts build",
+    "start": "cross-env PORT=80 serve -s build",
     "dev:run": "cross-env PORT=8000 GENERATE_SOURCEMAP=false react-scripts start",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

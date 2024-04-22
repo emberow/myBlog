@@ -20,11 +20,6 @@
 
 # quick start 
 
-## use docker-compose ( frontend、backend、postgres )
-``` bash
-docker-compose up
-```
-
 ### run frontend
 ```
 # use node 21
