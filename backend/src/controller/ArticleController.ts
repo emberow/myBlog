@@ -1,11 +1,29 @@
 import { Request, Response, NextFunction } from 'express';
 import * as ArticleService from '../services/ArticleService';
-import { verifyAccount }  from '../utils/jwt/jwt';
+import { verifyAccount } from '../utils/jwt/jwt';
+import * as Joi from 'joi';
+
+const addArticleFolderSchema = Joi.object({
+  folderName: Joi.string().required()
+}).unknown(true);
+
+const updateArticleFolderSchema = Joi.object({
+  folderName: Joi.string().required(),
+  id: Joi.number().required()
+}).unknown(true);
+
+const deleteArticleFolderSchema = Joi.object({
+  id: Joi.number().required()
+}).unknown(true);
+
+const getArticleSchema = Joi.object({
+  id: Joi.number().required()
+}).unknown(true);
 
 export const getArticleFolder = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization;
-    const {userName} = await verifyAccount(token);
+    const { userName } = await verifyAccount(token);
     const folderInfo = await ArticleService.getArticleFolder(userName);
     res.status(200).json({ data: folderInfo });
   } catch (err) {
@@ -15,9 +33,13 @@ export const getArticleFolder = async (req: Request, res: Response, next: NextFu
 
 export const addArticleFolder = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { error } = addArticleFolderSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
     const token = req.headers.authorization;
-    const {userName} = await verifyAccount(token);
-    const {folderName} = req.body;
+    const { userName } = await verifyAccount(token);
+    const { folderName } = req.body;
     await ArticleService.addArticleFolder(userName, folderName);
     res.status(200).json({ data: "OK" });
   } catch (err) {
@@ -27,9 +49,13 @@ export const addArticleFolder = async (req: Request, res: Response, next: NextFu
 
 export const updateArticleFolder = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { error } = updateArticleFolderSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
     const token = req.headers.authorization;
-    const {userName} = await verifyAccount(token);
-    const {folderName, id} = req.body;
+    const { userName } = await verifyAccount(token);
+    const { folderName, id } = req.body;
     await ArticleService.updateArticleFolder(userName, id, folderName);
     res.status(200).json({ data: "OK" });
   } catch (err) {
@@ -39,8 +65,12 @@ export const updateArticleFolder = async (req: Request, res: Response, next: Nex
 
 export const deleteArticleFolder = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { error } = deleteArticleFolderSchema.validate(req.query);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
     const token = req.headers.authorization;
-    const {userName} = await verifyAccount(token);
+    const { userName } = await verifyAccount(token);
     const id: number = req.query.id as any;
     await ArticleService.deleteArticleFolder(id, userName);
     res.status(200).json({ data: "OK" });
@@ -51,8 +81,12 @@ export const deleteArticleFolder = async (req: Request, res: Response, next: Nex
 
 export const getArticle = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const { error } = getArticleSchema.validate(req.query);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
     const token = req.headers.authorization;
-    const {userName} = await verifyAccount(token);
+    const { userName } = await verifyAccount(token);
     const id: number = req.query.id as any;
     const articleInfo = await ArticleService.getArticle(userName, id);
     res.status(200).json({ data: articleInfo });
