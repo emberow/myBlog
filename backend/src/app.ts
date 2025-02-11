@@ -22,7 +22,12 @@ import { errorHandler } from './middleware/errors';
     }
     const app = express();
     const corsOptions = {
-        origin: ['http://localhost:8000', 'http://blog.emberow.site'],
+        origin: [
+            'http://localhost',
+            'http://localhost:8000',
+            'http://blog.emberow.site',
+            'http://blog.emberow.online',
+        ],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         allowedHeaders: ['Content-Type', 'Authorization'],
         credentials: true,
