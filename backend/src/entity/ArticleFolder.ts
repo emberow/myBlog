@@ -8,7 +8,7 @@ export class ArticleFolder {
   @PrimaryGeneratedColumn('increment')
   public id: number;
 
-  @OneToMany(() => Article, (article) => article.id)
+  @OneToMany(() => Article, (article) => article.articleFolder, { cascade: true })
   public articles: Article[];
 
   @Column()

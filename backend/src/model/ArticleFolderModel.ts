@@ -5,8 +5,10 @@ export const getArticleFolder = async (userName) => {
     return PostgresDataSource
         .getRepository(ArticleFolder)
         .createQueryBuilder('articleFolder')
-        .where('user_name = :userName', { userName })
-        .orderBy('articleFolder.update_time', "DESC")
+        .leftJoinAndSelect('articleFolder.articles', 'article')
+        .where('articleFolder.userName = :userName', { userName })
+        .orderBy('articleFolder.updateTime', 'DESC')
+        .addOrderBy('article.updateTime', 'DESC')
         .getMany();
 }
 

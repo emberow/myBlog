@@ -17,8 +17,8 @@ export class Article {
   @Column({ type: 'timestamptz' , default: 'NOW()'})
   public updateTime: Date;
 
-  @ManyToOne(() => ArticleFolder, (ArticleFolder) => ArticleFolder.id)
-  public articleFolder: ArticleFolder
+  @ManyToOne(() => ArticleFolder, (folder) => folder.articles)
+  public articleFolder: ArticleFolder;
 
   @Column({nullable: true})
   public isPublish: Boolean;
