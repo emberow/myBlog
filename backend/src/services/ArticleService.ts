@@ -81,10 +81,11 @@ export const addArticle = async (userName: string, folderId: number, articleName
   }
   const article = {
     name: articleName,
-    is_publish: false,
+    isPublish: false,
     articleFolder: {
       id: folderId,
-    }
+    },
+    updateTime: new Date(),
   }
   return ArticleModel.addArticle(article);
 };
