@@ -5,6 +5,7 @@ import * as myArticle from "../api/myArticle.js";
 import "./MyArticleStyle.css";
 import { Content, Header } from "antd/es/layout/layout.js";
 import MDEditor, { EditorContext, commands }  from '@uiw/react-md-editor';
+import GameOfLife from './LifeGame.js';
 
 const { Sider } = Layout;
 
@@ -312,7 +313,8 @@ export default function MyArticles() {
       </Sider>
       <Content style={{ paddingLeft: "0.5vh" }}>
         <div style={{display: (article.id != null) ? "None" : "grid", background: "white", height: "100%", width: "100%", borderRadius: "10px 0 0 0", placeItems: "center" }}>
-          <img src="./box.png" alt="" style={{ width: "20vw", opacity: 0.05 }} />
+          {/* <img src="./box.png" alt="" style={{ width: "20vw", opacity: 0.05 }} /> */}
+          <GameOfLife/>
         </div>
         <Layout style={{ display: (article.id != null) ? "inline" : "None", height: "100%", gridTemplateRows: "10% 90%"}}>
           <Header style={{ background: "white", borderRadius: "10px 0 0 0" }}>
