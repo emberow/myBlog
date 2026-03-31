@@ -1,5 +1,6 @@
 import { Article } from "../entity/Article";
 import PostgresDataSource from "../config/database";
+import { Brackets } from "typeorm";
 
 export const getArticleByFolderId = async (folderId: number, userName: String) => {
     return PostgresDataSource
@@ -55,8 +56,13 @@ export const getArticleList = async (limit: number, offset: number, search: stri
         .andWhere('article.isPublish = true')
         
     if (search) {
-        result = result
-        .andWhere('article.name ilike :search OR article.content ilike :search OR folder.userName ilike :search', { search: `%${search}%` })
+        result = result.andWhere(
+            new Brackets((qb) => {
+                qb.where('article.name ilike :search', { search: `%${search}%` })
+                .orWhere('article.content ilike :search', { search: `%${search}%` })
+                .orWhere('folder.userName ilike :search', { search: `%${search}%` });
+            }),
+        );
     }
 
     result = result
